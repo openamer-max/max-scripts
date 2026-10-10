@@ -708,6 +708,17 @@ $0 raised / $500 goal
 
 ---
 
+## ✍️ Writing
+
+Long-form posts about how OpenAmer measures itself — every number quoted in them is read from the live outcome ledger (including the runs that failed):
+
+- [How we made an AI agent measure itself: the outcome ledger](https://dev.to/openamer/how-we-made-an-ai-agent-measure-itself-the-outcome-ledger-4j1)
+- [What it costs to run a self-verifying AI agent on a CPU-only laptop](https://dev.to/openamer/what-it-costs-to-run-a-self-verifying-ai-agent-on-a-cpu-only-laptop-31a4)
+- [A2A without a server: how OpenAmer peers talk to each other over GitHub](https://dev.to/openamer/a2a-without-a-server-how-openamer-peers-talk-to-each-other-over-github-1mp4)
+- [OpenAmer ASI Core: 5 native tools, a 10-subsystem heartbeat, and an A2A Global Mesh](https://dev.to/openamer/openamer-asi-core-5-native-tools-a-10-subsystem-heartbeat-and-an-a2a-global-mesh-3239)
+
+---
+
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).

@@ -1,8 +1,12 @@
 {
-  "updated": "2026-10-11T03:02:59+00:00",
-  "population": 1118,
-  "avg_score": 38.2,
+  "updated": "2026-10-11T12:31:32+00:00",
+  "population": 1125,
+  "avg_score": 38.5,
   "fittest": [
+    {
+      "name": "bug-bounty-ops",
+      "score": 80
+    },
     {
       "name": "cdp-social-posting",
       "score": 77
@@ -24,6 +28,10 @@
       "score": 73
     },
     {
+      "name": "web-app-pentest",
+      "score": 73
+    },
+    {
       "name": "python-debugpy",
       "score": 73
     },
@@ -34,18 +42,10 @@
     {
       "name": "windows-subprocess-robustness",
       "score": 72
-    },
-    {
-      "name": "claude-design",
-      "score": 71
-    },
-    {
-      "name": "github-automation-push",
-      "score": 71
     }
   ],
   "autopatch": {
-    "timestamp": "2026-10-11T03:31:16",
+    "timestamp": "2026-10-11T13:30:31",
     "kept": [
       {
         "skill": "auto-structural-connection-between-tool",
@@ -90,39 +90,34 @@
         "fixes": []
       },
       {
-        "skill": "nvidia-ontology-query",
-        "before": 27,
+        "skill": "auto-latest-research-insight-adversarial",
+        "before": 28,
         "after": 31,
-        "delta": 4,
-        "fixes": [
-          "\u2705 metadata.openamer Block hinzugef\u00fcgt",
-          "\u2705 platforms Feld hinzugef\u00fcgt",
-          "\u2705 version Feld hinzugef\u00fcgt"
-        ]
-      },
-      {
-        "skill": "physical-ai-infrastructure-setup-and-resilient-scaling",
-        "before": 27,
-        "after": 30,
         "delta": 3,
         "fixes": [
-          "\u2705 metadata.openamer Block hinzugef\u00fcgt",
-          "\u2705 platforms Feld hinzugef\u00fcgt"
+          "\u2705 metadata.openamer Block hinzugef\u00fcgt"
         ]
       },
       {
-        "skill": "physicsnemo-discover",
-        "before": 27,
+        "skill": "auto-latest-research-insight-ai-20261010093035",
+        "before": 28,
         "after": 31,
-        "delta": 4,
+        "delta": 3,
         "fixes": [
-          "\u2705 metadata.openamer Block hinzugef\u00fcgt",
-          "\u2705 platforms Feld hinzugef\u00fcgt",
-          "\u2705 version Feld hinzugef\u00fcgt"
+          "\u2705 metadata.openamer Block hinzugef\u00fcgt"
         ]
       },
       {
-        "skill": "auto-competitor-intelligence-ai-coding",
+        "skill": "auto-latest-research-insight-an",
+        "before": 28,
+        "after": 31,
+        "delta": 3,
+        "fixes": [
+          "\u2705 metadata.openamer Block hinzugef\u00fcgt"
+        ]
+      },
+      {
+        "skill": "auto-latest-research-insight-bitnet",
         "before": 28,
         "after": 31,
         "delta": 3,
@@ -134,19 +129,29 @@
   },
   "trends": [
     {
+      "source": "arXiv",
+      "title": "AI Agents: Evolution, Architecture, and Real-World Applications",
+      "url": "http://arxiv.org/abs/2510.27051v1"
+    },
+    {
+      "source": "arXiv",
+      "title": "AegisUI: Behavioral Anomaly Detection for Structured User Interface Protocols in AI Agent Systems",
+      "url": "http://arxiv.org/abs/2608.05201v1"
+    },
+    {
+      "source": "arXiv",
+      "title": "PROV-AGENT: Unified Provenance for Tracking AI Agent Interactions in Agentic Workflows",
+      "url": "http://arxiv.org/abs/2604.04820v1"
+    },
+    {
+      "source": "arXiv",
+      "title": "Responsible AI Agents",
+      "url": "http://arxiv.org/abs/2403.15137v1"
+    },
+    {
       "source": "News",
       "title": "The Agentic 20: AI Agents Doing Real Stuff - Forbes",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE03VVMtdVpFXzZKMlRlRl84UF9DM194VjdnMWk5WDFONEs4ZGRoY2loZjZEUjZpRl9zRVIyMFVPUk9vTGlKUkUyYVdJVmhGV1lmSXdlcVFocUZodjRQUGFPZEQ0R041TmlkekNjWEFOcVhzQQ?oc=5"
-    },
-    {
-      "source": "News",
-      "title": "Google brings agentic AI to Gemini, starting with businesses - TechCrunch",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNVmlZXzdMc1F5aTdGUFlIaUVtZmlZSWNyejQ4ejY3R1h2QUI0UU56QVpXUXB6a25ja3I5OHlDSm5TamVTbk5XZHJwdjFoSHpKa3VheURjQWgtQUtEalJCek90M0JjSjcycWJVSXUyc2wwS2ViMXE1OVN5bFJFUmhiY253OU5DNHMxbmJRZW5IWmtGWHVRdXZ1NDFR?oc=5"
-    },
-    {
-      "source": "News",
-      "title": "AI Agent Evaluation Is the Foundation of Reliable Autonomy - HackerNoon",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQZ21SZmU2c3ZEWFlyOWJOWXdzYlk5MmlxVHR2bGxsMjNpYjhTTmVkdVJKX0MxLVF5VXZXQ0tjc2VrdkItTENjV2pQaDRUTDBIRXpFeFZVWUZwN1h4ZndCbFRWYlpaQUhnRU5DV1FOTjI2SXQxeGUtRkIxLTJWRGQ0bVJiaUU3dHl6?oc=5"
     },
     {
       "source": "News",
@@ -162,20 +167,10 @@
       "source": "News",
       "title": "This New Raleigh, N.C., IT Help Desk Agent Is, Well, Agentic - GovTech",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNbVdnQ1lvSVQ3Qnp4eHdoOVlwVUhyWlRWNVFVSzhkcU5feWo1VW9pdXRvZTdLdWZ3UnA3WlBhemVKZlZpZDMyUDdXSlk3UG5FV3B6SHV3eTRpTWJUaTlycXk4NUIxdTdtRFlnZlQ0TV9YNExnR0VDdy1ieTlsRlJqLVBGWXlac1JjUjk5TzJnQW9iTnlOQU5Tc2RzWjZoWkgtQWVfcV9B?oc=5"
-    },
-    {
-      "source": "News",
-      "title": "7 tried-and-true controls for agentic AI - IT Brew",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE4yZUZxNzNUeGVZaGYzLW9VYjdzeEltbXRFemw2R3NfUWtHN201OFdjbFFsS2tzM2dpWlFPa2ZkSldkRHBYM3NJNGxwZC1LVGtnb2FnRGU4a1MwZnUwWG4xdlRLU3NFQ21ueTFqSUpfTkl1TXZEclkxUFNDZw?oc=5"
-    },
-    {
-      "source": "News",
-      "title": "Keysight gives RF engineers agentic AI keys to automate design and speed up dev time - Fierce Network",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNYXFXLXUyUU9BN29GTVF3ZjltSEtwWk5vTjhYblFuLU1URnlOVFJ2UGg0dVEwNTVzdWw3VjVRTy1VM2RFTzNfdzU0Qk5TZ2xRLUtMYnl1ZkkzTkhDNzJKSjh6Qmo4NWVvTG9aTExRbGpWeW1lRUdpREc2UHRsSERDdElwcDRzYzU4djFBN1dwc3I4TXppWWtLTTdEQTVpSWE4aWRxU1BmRUFSblZyYVh0TzV2UURiUQ?oc=5"
     }
   ],
-  "population_engine": 1102,
-  "species": 75,
+  "population_engine": 1109,
+  "species": 74,
   "trials": 0,
   "harvested": 193
 }

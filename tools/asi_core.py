@@ -275,7 +275,8 @@ class ASICore:
             cmd.extend(args)
 
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
+            result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8",
+                                     errors="replace", timeout=120, stdin=subprocess.DEVNULL)
             return {
                 "success": result.returncode == 0,
                 "stdout": result.stdout[-2000:] if result.stdout else "",

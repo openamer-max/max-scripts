@@ -170,7 +170,12 @@ def main() -> int:
             continue
 
         for py_file in dirpath.rglob("*.py"):
-            rel = str(py_file.relative_to(repo_root))
+            # Normalise to forward slashes: on Windows str(Path) yields
+            # "plugins\security-guidance\patterns.py", so the KNOWN_SAFE entries
+            # below (written with "/") never matched and the exempt file was
+            # scanned anyway — five false positives on the one platform whose
+            # footguns this guard exists to catch.
+            rel = py_file.relative_to(repo_root).as_posix()
 
             # Skip known-safe files.
             if rel in KNOWN_SAFE:
@@ -200,7 +205,10 @@ def main() -> int:
         seen_roots.add(resolved)
 
         for py_file in resolved.rglob("*.py"):
-            rel = str(py_file)
+            # as_posix() for the same reason as the repo scan above: on Windows
+            # str(Path) yields backslashes, so `"/tests/" in rel` never matched and
+            # a plugin root's own test files were scanned as product code.
+            rel = py_file.as_posix()
             if py_file.name in ("conftest.py",) or "/tests/" in rel:
                 continue
 
@@ -224,4 +232,16 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    # The test-suite runner spawns this under a hermetic env (``env -i`` with
+    # LANG=C.UTF-8), where Windows still encodes stdout with the legacy console
+    # codepage. Printing the ✅ success line then raised
+    #   UnicodeEncodeError: 'charmap' codec can't encode character '\u2705'
+    # and the guard exited 1 on an otherwise clean tree — a clean run reporting
+    # itself as a failure. Pin the streams to UTF-8 with a lossy fallback so the
+    # report can never masquerade as a violation.
+    for _stream in (sys.stdout, sys.stderr):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):
+            pass
     sys.exit(main())

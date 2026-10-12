@@ -68,6 +68,13 @@ class GatewayKanbanWatchersMixin:
         dispatcher respawned a crashed task). All SQLite work runs in a thread;
         one tick's failure never stops the next.
         """
+        # Escape hatch: disable without editing YAML (mirrors the dispatcher).
+        # Checked BEFORE the config load, so a gateway with dispatch turned off
+        # cannot stay in the board-polling loop.
+        env_override = os.environ.get("OPENAMER_KANBAN_DISPATCH_IN_GATEWAY", "").strip().lower()
+        if env_override in {"0", "false", "no", "off"}:
+            logger.info("kanban notifier: disabled via OPENAMER_KANBAN_DISPATCH_IN_GATEWAY env")
+            return
         try:
             from openamer_cli.config import load_config as _load_config
 
@@ -76,6 +83,14 @@ class GatewayKanbanWatchersMixin:
         except Exception as exc:
             logger.warning("kanban notifier: cannot load config (%s); continuing enabled", exc)
             kanban_cfg = {}
+        # docs/kanban/multi-gateway.md: dispatch_in_gateway gates BOTH the
+        # dispatcher and the notifier, so exactly one process opens per-board
+        # DBs. Without this, non-dispatch gateways keep polling every board
+        # (WAL -shm reader contention, multiplied fds) — the failure that doc
+        # exists to prevent. notify_in_gateway remains as a finer switch.
+        if not kanban_cfg.get("dispatch_in_gateway", True):
+            logger.info("kanban notifier: disabled via config kanban.dispatch_in_gateway=false")
+            return
         if not kanban_cfg.get("notify_in_gateway", True):
             logger.info("kanban notifier: disabled via config kanban.notify_in_gateway=false")
             return

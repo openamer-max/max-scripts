@@ -32,9 +32,34 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-REPO = Path(os.environ.get("OPENAMER_REPO", str(Path.home() / "openamer-repo")))
+def _resolve_repo_root() -> Path:
+    """The checkout this script lives in — not one guessed from ``$HOME``.
+
+    The script ships inside the repo at ``scripts/test-suite-watchdog.py``, so
+    its own location is the only answer that holds everywhere. Deriving it
+    from ``$HOME`` (``~/openamer-repo``) was right on one developer box and
+    wrong everywhere else: on CI ``$HOME`` is ``/home/runner`` while the
+    checkout is ``/home/runner/work/openamer/openamer``, so ``PYTHON`` and
+    ``RUNNER`` pointed at a directory that does not exist and every scheduled
+    run alerted ``runner or venv python missing`` instead of watching the
+    suite. ``OPENAMER_REPO`` still wins when it is set.
+    """
+    env = os.environ.get("OPENAMER_REPO", "").strip()
+    if env:
+        return Path(env)
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "scripts" / "run_tests.sh").exists() and (parent / "tests").is_dir():
+            return parent
+    return Path.home() / "openamer-repo"
+
+
+REPO = _resolve_repo_root()
+# The install home is ``%LOCALAPPDATA%/openamer-laptop`` on Windows and
+# ``~/.openamer-laptop`` elsewhere; spelling the Windows layout on Linux put
+# the state and log files under a ``~/AppData`` that is never created.
 HOME = Path(
-    os.environ.get("OPENAMER_HOME", str(Path.home() / "AppData" / "Local" / "openamer-laptop"))
+    os.environ.get("OPENAMER_HOME")
+    or str(Path.home() / "AppData" / "Local" / "openamer-laptop" if os.name == "nt" else Path.home() / ".openamer-laptop")
 )
 # Repo-local venv: the canonical runner needs a python with the project deps,
 # and this is the one that ships with the checkout.

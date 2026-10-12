@@ -38,7 +38,29 @@ HOME = Path(
 )
 # Repo-local venv: the canonical runner needs a python with the project deps,
 # and this is the one that ships with the checkout.
-PYTHON = REPO / ".venv" / "Scripts" / "python.exe"
+
+
+def _venv_python(repo: Path) -> Path:
+    """The project venv's interpreter, in whichever layout this platform uses.
+
+    ``uv sync`` / ``python -m venv`` put it in ``Scripts/python.exe`` on Windows
+    and ``bin/python`` on POSIX. Hardcoding the Windows spelling made ``main()``
+    conclude the venv was missing on Linux and macOS, so the watchdog printed
+    "runner or venv python missing" and exited 1 on every single run instead of
+    watching the suite. CI installs with ``uv sync`` into ``.venv/bin/python``,
+    so this is the layout the runner actually runs under there.
+    """
+    for parts in (("Scripts", "python.exe"), ("bin", "python")):
+        cand = repo / ".venv" / Path(*parts)
+        if cand.exists():
+            return cand
+    # Not created yet: fall back to this platform's own spelling so the alert
+    # names the path a human would find.
+    sub = Path("Scripts", "python.exe") if os.name == "nt" else Path("bin", "python")
+    return repo / ".venv" / sub
+
+
+PYTHON = _venv_python(REPO)
 RUNNER = REPO / "scripts" / "run_tests.sh"
 
 

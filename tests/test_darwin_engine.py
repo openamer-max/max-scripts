@@ -135,8 +135,11 @@ def test_run_skill_check_expands_env_var_block(tmp_path, monkeypatch):
     d = skills / "envvar-skill"
     d.mkdir(parents=True)
     body = "# envvar-skill" + NL + NL + "## Verification" + NL + NL + "```bash" + NL
-    body += ("python " + DQ + "$OPENAMER_HOME" + BS + "scripts" + BS
-             + "probe.py" + DQ + NL + "```" + NL)
+    # Forward slashes on purpose: bash on Windows accepts them and POSIX requires
+    # them. A literal backslash produced the filename "home\scripts\probe.py" on
+    # Linux -- one string, not a path -- so python exited 2 with "can't open file"
+    # and this end-to-end assertion failed for a quoting reason, not an engine one.
+    body += ("python " + DQ + "$OPENAMER_HOME" + "/scripts/probe.py" + DQ + NL + "```" + NL)
     (d / "SKILL.md").write_text(body, encoding="utf-8")
 
     monkeypatch.setattr(darwin, "SKILLS_DIR", skills)

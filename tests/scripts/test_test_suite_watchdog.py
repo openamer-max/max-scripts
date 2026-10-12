@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -63,6 +64,43 @@ LIVE_GREEN = """
 [100.0% |  2145/~45517 | ✓2145 | ✗ 0] ✓ tests\agent\test_deepseek_anthropic_thinking.py (9✓, 27.1s)
 
 === Summary: 1 files, 13 tests passed, 0 failed (100% complete) in 4.0s (32 workers) ==="""
+
+
+# --- property 0: the venv interpreter is found on every platform -------------
+# Regression: the watchdog hardcoded `.venv/Scripts/python.exe`, so on Linux and
+# macOS — where `uv sync` creates `.venv/bin/python` — main() decided the venv was
+# missing and printed "runner or venv python missing" on every run. The nightly
+# job was dead there: it alerted instead of watching the suite.
+
+def test_venv_python_resolves_either_venv_layout(wd, tmp_path):
+    posix = tmp_path / "posix"
+    (posix / ".venv" / "bin").mkdir(parents=True)
+    (posix / ".venv" / "bin" / "python").write_text("", encoding="utf-8")
+
+    windows = tmp_path / "windows"
+    (windows / ".venv" / "Scripts").mkdir(parents=True)
+    (windows / ".venv" / "Scripts" / "python.exe").write_text("", encoding="utf-8")
+
+    assert wd._venv_python(posix) == posix / ".venv" / "bin" / "python"
+    assert wd._venv_python(windows) == windows / ".venv" / "Scripts" / "python.exe"
+
+
+def test_venv_python_falls_back_to_the_platform_spelling(wd, tmp_path):
+    """With no venv yet, the alert names the path a human would actually find."""
+    empty = tmp_path / "empty"
+    empty.mkdir()
+
+    found = wd._venv_python(empty)
+
+    expected = ("Scripts", "python.exe") if os.name == "nt" else ("bin", "python")
+    assert found == empty / ".venv" / Path(*expected)
+    assert not found.exists()
+
+
+def test_module_python_constant_points_at_a_real_interpreter(wd):
+    """The import-time constant must resolve, or main() alerts on every run."""
+    assert wd.PYTHON.exists(), f"watchdog venv python not resolved: {wd.PYTHON}"
+    assert wd.RUNNER.exists(), f"watchdog runner not resolved: {wd.RUNNER}"
 
 
 # --- property 1: the summary parser -----------------------------------------

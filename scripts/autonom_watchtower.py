@@ -33,9 +33,27 @@ from pathlib import Path
 
 HOME = Path.home()
 OPENAMER = Path(os.environ.get("OPENAMER_HOME", str(Path.home() / "AppData" / "Local" / "openamer")))
-REPO = Path(r"C:\Users\damir\openamer-repo")
+# The checkout this instance runs from. Never hardcode an absolute user path here:
+# this file ships in the repo, so a baked-in "C:\Users\damir\..." made every other
+# machine report "a2a-worker.yml missing" for a workflow present in *its* clone.
+REPO = Path(os.environ.get("OPENAMER_REPO") or Path(__file__).resolve().parents[1])
 CHROME_PROFILE = OPENAMER / "chrome-profile"
 STATE = OPENAMER / "autonom-state.json"
+
+
+def _install_python() -> Path | None:
+    """The install venv's interpreter, whichever layout this platform uses.
+
+    ``venv/Scripts/python.exe`` is the Windows spelling only; on Linux and macOS the
+    interpreter is ``venv/bin/python``. Hardcoding it meant the dashboard could never
+    be started there — the watchtower reported :9119 down and then failed to recover.
+    """
+    venv = OPENAMER / "openamer-agent" / "venv"
+    for parts in (("Scripts", "python.exe"), ("bin", "python")):
+        cand = venv / Path(*parts)
+        if cand.exists():
+            return cand
+    return None
 
 
 def _http(port, path="/", timeout=4):
@@ -115,8 +133,8 @@ def _dashboard_serve_alive() -> bool:
 def _start_dashboard_serve() -> bool:
     """Start `serve --host 127.0.0.1 --port 9119` so the dashboard frontend never
     hits ERR_CONNECTION_REFUSED. Uses the managed venv python, no new window."""
-    py = OPENAMER / "openamer-agent" / "venv" / "Scripts" / "python.exe"
-    if not py.exists():
+    py = _install_python()
+    if py is None:
         return False
     try:
         subprocess.Popen(

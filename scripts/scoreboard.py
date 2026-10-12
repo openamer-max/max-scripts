@@ -30,7 +30,11 @@ import os
 import urllib.request
 from pathlib import Path
 
-HOME = Path(os.environ.get("OPENAMER_HOME", Path.home() / "AppData/Local/openamer-laptop"))
+_HERE = Path(__file__).resolve()
+# The tree this script ships in: ``<root>/scripts/scoreboard.py`` -> ``<root>``. It
+# always carries ``tools/`` and ``skills/``, so it is a valid root on every platform.
+_CHECKOUT = _HERE.parents[1]
+HOME = Path(os.environ.get("OPENAMER_HOME") or _CHECKOUT)
 REPO = HOME / "openamer-agent"
 GITHUB = "https://api.github.com/repos/{}"
 
@@ -84,8 +88,14 @@ def _tool_roots():
     REPO then returned (None, None), which the report rendered as a bare `None`
     under a header that claims "grep-verified" - a fabricated-looking row. Fall
     back to the machine's git working copy so the figure is real or absent.
+
+    The last candidate is the checkout this script ships in. Without it every
+    root was a Windows-only path, so on Linux and macOS the probe returned
+    (None, None) and the scoreboard published capability rows with no value at
+    all -- which the anti-fabrication guard in tests/scripts/test_scoreboard.py
+    correctly rejects (Linux CI, 2026-10-12).
     """
-    return [REPO, Path.home() / "openamer-repo"]
+    return [REPO, Path.home() / "openamer-repo", _CHECKOUT]
 
 
 def registry_tool_count():
@@ -160,12 +170,13 @@ def _home_roots():
 
     Same failure class as _tool_roots(): a stale OPENAMER_HOME silently yields
     0 skills / {} cron, rendered as if it had been measured. Try the configured
-    home, then this machine's real install before giving up.
+    home, then this machine's real install, then the checkout this script ships
+    in (the only candidate that exists on a non-Windows host) before giving up.
     """
     roots = [HOME]
-    fallback = Path.home() / "AppData/Local/openamer-laptop"
-    if fallback not in roots:
-        roots.append(fallback)
+    for fallback in (Path.home() / "AppData/Local/openamer-laptop", _CHECKOUT):
+        if fallback not in roots:
+            roots.append(fallback)
     return roots
 
 

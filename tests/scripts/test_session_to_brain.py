@@ -72,3 +72,37 @@ def test_dry_run_does_not_write(tmp_path, monkeypatch):
     rc = stb.main()
     assert rc == 0
     assert not ds.exists()  # dry-run must not write
+
+
+# ── self-heal: reap watchers an older (leaky) build left behind ───────────────
+#
+# `spawn()` used to guard with a pid that was already dead on the next call, so
+# every CLI invocation started another `--watch` (measured: 245 on one machine).
+# Those leftovers each run `openamer a2a brain collect` from the install venv and
+# keep `venv/Scripts/openamer.exe` locked, which is what made every desktop update
+# abort. Stopping the leak is not enough — an install already in that state must
+# heal itself, so the watcher that legitimately owns the lock reaps the rest.
+
+
+def test_reap_targets_keeps_self_and_ancestors():
+    """Never reap ourselves, nor the CLI that spawned us."""
+    # 100 = us, spawned by 50, spawned by 10 (the CLI); 200/300 are leftovers.
+    pairs = [(100, 50), (50, 10), (10, 1), (200, 10), (300, 1)]
+    targets = stb._reap_targets(100, pairs)
+
+    assert 100 not in targets  # self
+    assert 50 not in targets   # spawner
+    assert 10 not in targets   # spawner's spawner
+    assert sorted(targets) == [200, 300]
+
+
+def test_reap_targets_keeps_only_other_watchers():
+    """A lone watcher has nothing to reap."""
+    assert stb._reap_targets(7, [(7, 1)]) == []
+
+
+def test_reap_targets_survives_parent_cycle():
+    """A corrupt/cyclic parent map must not hang the walk."""
+    # 100 -> 50 -> 100 (cycle)
+    targets = stb._reap_targets(100, [(100, 50), (50, 100), (200, 50)])
+    assert targets == [200]

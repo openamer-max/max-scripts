@@ -274,6 +274,90 @@ def _watch_singleton_lock():
         return None
 
 
+def _reap_targets(me: int, pairs: list[tuple[int, int]]) -> list[int]:
+    """Watcher pids to reap: every one except ``me`` and ``me``'s ancestor chain.
+
+    Pure (no processes touched) so the policy is directly testable. We skip the
+    ancestor chain because the watcher was spawned by a CLI — killing that CLI
+    mid-startup would be user-visible; it exits on its own.
+    """
+    parents = dict(pairs)
+    ancestors: set[int] = set()
+    cursor = parents.get(me)
+    steps = 0
+
+    while cursor and cursor > 0 and steps < 64:
+        ancestors.add(cursor)
+        cursor = parents.get(cursor)
+        steps += 1
+
+    return [pid for pid, _pp in pairs if pid != me and pid not in ancestors]
+
+
+def _reap_duplicate_watchers() -> int:
+    """Kill every OTHER ``session_to_brain.py --watch`` process. Returns the count.
+
+    The single-flight lock (above) stops NEW duplicates, but installs that ran an
+    older build already accumulated them — the old ``spawn()`` guarded with a pid
+    that was dead on the next call, so it started a watcher per CLI invocation
+    (measured on a real machine: 245). Those leftovers keep running forever, each
+    firing ``openamer a2a brain collect`` from the install venv, which holds
+    ``venv/Scripts/openamer.exe`` open often enough that the desktop's 15 s update
+    hand-off never sees a free window and aborts every time. Shipping "don't leak
+    again" alone does not heal an install already in that state.
+
+    So the watcher that LEGITIMATELY owns the lock (we only call this after
+    winning it) reaps the leftovers once at startup: a broken install heals
+    itself on the next CLI run, with no user action. Self and our ancestor chain
+    are skipped — this process was spawned by a CLI that must survive.
+    """
+    import os as _os
+    import subprocess as _sp
+
+    if _os.name != "nt":
+        return 0
+
+    me = _os.getpid()
+    script = (
+        "$me=$PID;"
+        "Get-CimInstance Win32_Process |"
+        " Where-Object { $_.CommandLine -match 'session_to_brain\\.py\\s+--watch'"
+        " -and $_.ProcessId -ne $me } |"
+        " ForEach-Object { '{0}|{1}' -f $_.ProcessId, $_.ParentProcessId }"
+    )
+
+    try:
+        out = _sp.run(
+            ["powershell", "-NoProfile", "-NonInteractive", "-Command", script],
+            capture_output=True,
+            text=True,
+            timeout=20,
+        ).stdout
+    except Exception:
+        return 0
+
+    pairs: list[tuple[int, int]] = []
+    for line in (out or "").splitlines():
+        if "|" in line:
+            left, right = line.split("|", 1)
+            try:
+                pairs.append((int(left), int(right)))
+            except ValueError:
+                continue
+
+    killed = 0
+
+    for pid in _reap_targets(me, pairs):
+        try:
+            _sp.run(["taskkill", "/PID", str(pid), "/T", "/F"],
+                    capture_output=True, timeout=10)
+            killed += 1
+        except Exception:
+            pass
+
+    return killed
+
+
 def _watch_loop() -> int:
     """Watch mode: poll the DB every 60 seconds and export new sessions.
 
@@ -290,6 +374,12 @@ def _watch_loop() -> int:
     if _lock is None:
         print("  [watch] another session-to-brain watcher is already running — exiting")
         return 0
+
+    # We own the lock, so we are the one legitimate watcher: reap any leftovers
+    # an older (leaky) build left behind, so a stuck install heals itself.
+    reaped = _reap_duplicate_watchers()
+    if reaped:
+        print(f"  [watch] reaped {reaped} duplicate watcher(s) left by an older build")
 
     print("▶ session-to-brain watch mode: polling DB every 60s")
     print("  ├─ writes rich-format trajectories to ~/.openamer/trajectories/")

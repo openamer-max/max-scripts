@@ -3043,16 +3043,16 @@ def write_txn(conn: sqlite3.Connection, *, allow_nested: bool = False):
                 "the outer transaction commits)."
             )
         savepoint = f"openamer_nested_{secrets.token_hex(8)}"
-        conn.execute(f"SAVEPOINT {savepoint}")
+        conn.execute(f"SAVEPOINT {savepoint}")  # noqa:SEC savepoint name is secrets.token_hex(8), not user input (SQLite takes no bind param here)
         try:
             yield conn
         except Exception:
             with contextlib.suppress(sqlite3.OperationalError):
-                conn.execute(f"ROLLBACK TO {savepoint}")
-                conn.execute(f"RELEASE {savepoint}")
+                conn.execute(f"ROLLBACK TO {savepoint}")  # noqa:SEC savepoint name is secrets.token_hex(8), not user input (SQLite takes no bind param here)
+                conn.execute(f"RELEASE {savepoint}")  # noqa:SEC savepoint name is secrets.token_hex(8), not user input (SQLite takes no bind param here)
             raise
         else:
-            conn.execute(f"RELEASE {savepoint}")
+            conn.execute(f"RELEASE {savepoint}")  # noqa:SEC savepoint name is secrets.token_hex(8), not user input (SQLite takes no bind param here)
         return
 
     _execute_boundary_with_retry(conn, "BEGIN IMMEDIATE")

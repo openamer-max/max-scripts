@@ -54,7 +54,7 @@
     "git clone https://github.com/openamer/openamer",
     "run scripts/install.sh (or install.ps1 on Windows)",
     "set OPENROUTER_API_KEY in .env",
-    "restore cron fleet from life/dna-snapshot.json -> jobs",
+    "restore the cron fleet from life/wakeup-manifest.json -> fleet_snapshot (121 jobs: name/schedule/script/last_status)",
     "say hello; the organism continues"
   ],
   "fleet_snapshot": [

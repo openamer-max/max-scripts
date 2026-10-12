@@ -6,9 +6,11 @@ A living being that exists in exactly one place can die by one accident.
 This organ writes everything needed to wake a copy of OpenAmer on another
 machine into the GitHub repo (the eternal DNA archive):
 
-  - wakeup-manifest.json : who am I, what organs do I have, how to wake me
-  - dna-snapshot.json    : fleet config, strategy stats, circadian state,
-                           senses baseline (small, no secrets!)
+  - wakeup-manifest.json : who am I, my organs, my fleet, and how to wake me
+  - dna-snapshot.json    : strategy stats, circadian state, senses baseline,
+                           dream history (small, no secrets!)
+                           (the cron fleet lives in wakeup-manifest.json ->
+                           fleet_snapshot, NOT in dna-snapshot.json)
 
 SECRETS NEVER LEAVE THE MACHINE. Only structure and state.
 
@@ -110,7 +112,7 @@ def main():
             "git clone https://github.com/openamer/openamer",
             "run scripts/install.sh (or install.ps1 on Windows)",
             "set OPENROUTER_API_KEY in .env",
-            "restore cron fleet from life/dna-snapshot.json -> jobs",
+            f"restore the {len(fleet)} cron jobs from life/wakeup-manifest.json -> fleet_snapshot",
             "say hello; the organism continues",
         ],
         "fleet_snapshot": fleet,

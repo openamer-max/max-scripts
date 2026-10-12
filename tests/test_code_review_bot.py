@@ -32,9 +32,9 @@ SAMPLE_DIFF_CLEAN = """\
 +++ b/foo.py
 @@ -1,3 +1,4 @@
  def hello():
--    print("old")
-+    print("new")
-+    return True
+-    return "old"
++    label = "new"
++    return label
 """
 
 SAMPLE_DIFF_WITH_SECRETS = """\

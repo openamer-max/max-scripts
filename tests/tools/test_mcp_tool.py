@@ -1816,14 +1816,19 @@ class TestBuildSafeEnv:
         with patch.dict("os.environ", fake_env, clear=True):
             result = _build_safe_env(None)
 
-        assert result["ProgramFiles"] == r"C:\Program Files"
-        assert result["ProgramData"] == r"C:\ProgramData"
-        assert result["ProgramW6432"] == r"C:\Program Files"
-        assert result["LOCALAPPDATA"].endswith("Local")
-        assert result["APPDATA"].endswith("Roaming")
-        assert result["USERPROFILE"] == r"C:\Users\alice"
-        assert "GITHUB_TOKEN" not in result
-        assert "OPENAI_API_KEY" not in result
+        # ``os.environ`` is case-insensitive on Windows and upper-cases the keys it
+        # stores, so the same patch yields "PROGRAMFILES" there and "ProgramFiles" on
+        # Linux. Read the result case-insensitively: the contract is that these
+        # location vars survive and the secrets do not — not one spelling of the key.
+        upper = {k.upper(): v for k, v in result.items()}
+        assert upper["PROGRAMFILES"] == r"C:\Program Files"
+        assert upper["PROGRAMDATA"] == r"C:\ProgramData"
+        assert upper["PROGRAMW6432"] == r"C:\Program Files"
+        assert upper["LOCALAPPDATA"].endswith("Local")
+        assert upper["APPDATA"].endswith("Roaming")
+        assert upper["USERPROFILE"] == r"C:\Users\alice"
+        assert "GITHUB_TOKEN" not in upper
+        assert "OPENAI_API_KEY" not in upper
 
 
 # ---------------------------------------------------------------------------

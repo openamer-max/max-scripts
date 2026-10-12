@@ -73,7 +73,11 @@ class SwarmResult:
     agent_name: str
     result: str
     confidence: float = 0.0
-    duration_ms: int = 0
+    # Wall-clock milliseconds the agent took to respond. A float, not an int:
+    # truncating to whole milliseconds reports 0 for anything faster than 1 ms
+    # (every mocked/fast agent), which makes "the timer ran" indistinguishable
+    # from "nothing was measured".
+    duration_ms: float = 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -111,7 +115,7 @@ def _invoke_agent(
     """Call a single agent and wrap its output in a ``SwarmResult``."""
     start = time.perf_counter()
     result_text = _fake_invoke_agent(agent_name, task, timeout)
-    elapsed_ms = int((time.perf_counter() - start) * 1000)
+    elapsed_ms = round((time.perf_counter() - start) * 1000, 3)
     confidence = _estimate_confidence(result_text)
     return SwarmResult(
         agent_name=agent_name,

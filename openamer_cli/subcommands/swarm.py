@@ -199,18 +199,18 @@ def _cmd_run(args) -> int:
         result = run_swarm_debate(args.task, agent_names, args.rounds)
         print(result.result)
         print()
-        print(f"   ⏱  Duration: {result.duration_ms} ms")
+        print(f"   ⏱  Duration: {result.duration_ms:.0f} ms")
         print(f"   📊 Confidence: {result.confidence:.0%}")
     elif strategy == "hierarchical":
         result = run_swarm_hierarchical(args.task, config)
         print(result.result)
         print()
-        print(f"   ⏱  Duration: {result.duration_ms} ms")
+        print(f"   ⏱  Duration: {result.duration_ms:.0f} ms")
         print(f"   📊 Confidence: {result.confidence:.0%}")
     else:
         results = run_swarm_parallel(args.task, agent_names, config)
         for r in results:
-            print(f"── {r.agent_name} (conf: {r.confidence:.0%}, {r.duration_ms}ms) ──")
+            print(f"── {r.agent_name} (conf: {r.confidence:.0%}, {r.duration_ms:.0f}ms) ──")
             print(r.result)
             print()
         avg_conf = (

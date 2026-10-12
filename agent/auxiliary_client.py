@@ -610,10 +610,23 @@ _PROVIDERS_WITHOUT_VISION: frozenset = frozenset({
 # OpenRouter app attribution headers (base — always sent).
 # `X-Title` is the canonical attribution header OpenRouter's dashboard
 # reads; the previous `X-OpenRouter-Title` label was not recognized there.
+#
+# Sourced from the one attribution module rather than restated here. This dict
+# used to hardcode four categories ("cli-agent,ide-extension,personal-agent,
+# cloud-agent") while ``openamer_cli.openrouter_attribution`` documents that
+# OpenRouter accepts at most two per request and drops the excess WITHOUT an
+# error — so auxiliary requests advertised two categories that never landed, the
+# exact silent-drop the module's comment warns about.
+from openamer_cli.openrouter_attribution import (  # noqa: E402
+    OPENROUTER_APP_CATEGORIES,
+    OPENROUTER_APP_TITLE,
+    OPENROUTER_APP_URL,
+)
+
 _OR_HEADERS_BASE = {
-    "HTTP-Referer": "https://github.com/openamer/openamer",
-    "X-Title": "OpenAmer Agent",
-    "X-OpenRouter-Categories": "cli-agent,ide-extension,personal-agent,cloud-agent",
+    "HTTP-Referer": OPENROUTER_APP_URL,
+    "X-Title": OPENROUTER_APP_TITLE,
+    "X-OpenRouter-Categories": OPENROUTER_APP_CATEGORIES,
 }
 
 # Truthy values for boolean env-var parsing.

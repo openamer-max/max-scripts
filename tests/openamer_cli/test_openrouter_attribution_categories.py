@@ -25,23 +25,23 @@ from openamer_cli.openrouter_attribution import (
 _AUX_CLIENT_SOURCE = Path(__file__).resolve().parents[2] / "agent" / "auxiliary_client.py"
 
 
-def _aux_client_categories() -> str | None:
-    """Read the auxiliary client's category string *without importing it*.
+def _aux_client_category_expression() -> str | None:
+    """Read what the auxiliary client binds ``X-OpenRouter-Categories`` to.
 
-    ``agent.auxiliary_client`` pulls in ``openamer_cli.config`` → ``yaml`` at
-    import time. The canonical per-file-isolated runner (``scripts/run_tests.sh``)
-    uses a scrubbed environment where that chain is not guaranteed, so importing
-    it here turns a contract check into a collection error. Reading the constant
-    off the source keeps the drift check and drops the fragile dependency.
+    Scraped rather than imported on purpose: ``agent.auxiliary_client`` pulls in
+    ``openamer_cli.config`` → ``yaml`` at import time. The canonical
+    per-file-isolated runner (``scripts/run_tests.sh``) uses a scrubbed
+    environment where that chain is not guaranteed, so importing it here turns a
+    contract check into a collection error.
     """
     try:
         source = _AUX_CLIENT_SOURCE.read_text(encoding="utf-8")
     except OSError:  # pragma: no cover - source always present in a checkout
         return None
     match = re.search(
-        r'"X-OpenRouter-Categories"\s*:\s*"([^"]+)"', source
+        r'"X-OpenRouter-Categories"\s*:\s*([^,\n}]+)', source
     )
-    return match.group(1) if match else None
+    return match.group(1).strip() if match else None
 
 # Recognised categories, per https://openrouter.ai/docs/app-attribution —
 # "Category groups" (Coding / Creative / Productivity / Entertainment hold the
@@ -122,12 +122,20 @@ def test_headers_carry_referer_and_title() -> None:
 def test_auxiliary_client_agrees_with_module() -> None:
     """Both call paths must advertise the same, valid category set.
 
-    They are patched by different mechanisms (SDK default_headers vs. the
-    auxiliary client's own dict), so they drift independently.
+    They are wired by different mechanisms (SDK default_headers vs. the auxiliary
+    client's own dict), so they drift independently — and they did: the auxiliary
+    dict hardcoded four categories while the module documents that OpenRouter keeps
+    only two per request and drops the remainder silently, so two of them never
+    landed. The auxiliary client now derives the header from the shared constant;
+    this asserts the binding (it may not restate a literal) and that the shared
+    value is one OpenRouter actually recognises.
     """
-    raw = _aux_client_categories()
-    assert raw, "agent/auxiliary_client.py must declare X-OpenRouter-Categories"
-    aux = _categories(raw)
+    expr = _aux_client_category_expression()
+    assert expr, "agent/auxiliary_client.py must declare X-OpenRouter-Categories"
+    assert expr == "OPENROUTER_APP_CATEGORIES", (
+        "the auxiliary client must derive the header from OPENROUTER_APP_CATEGORIES "
+        f"rather than restate it (found {expr!r})"
+    )
+    aux = _categories(OPENROUTER_APP_CATEGORIES)
     unknown = [c for c in aux if c not in RECOGNISED_CATEGORIES]
-    assert not unknown, f"auxiliary_client sends unrecognised categories: {unknown}"
-    assert set(aux) == set(_categories(OPENROUTER_APP_CATEGORIES))
+    assert not unknown, f"module advertises unrecognised categories: {unknown}"

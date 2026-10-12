@@ -40,15 +40,55 @@ def _is_registry_register_call(node: ast.AST) -> bool:
     )
 
 
-def _module_registers_tools(module_path: Path) -> bool:
-    """Return True when the module contains a top-level ``registry.register(...)`` call.
+# Module-level compound statements whose bodies still execute at import time.
+# A registration wrapped in one of these IS a registrant; one inside a ``def`` or
+# ``class`` body is not (that is a helper someone may never call).
+_MODULE_BODY_CONTAINERS = tuple(
+    c
+    for c in (
+        ast.For,
+        ast.AsyncFor,
+        ast.If,
+        ast.With,
+        ast.AsyncWith,
+        ast.Try,
+        getattr(ast, "TryStar", None),
+    )
+    if c is not None
+)
 
-    Only inspects module-body statements so that helper modules which happen
-    to call ``registry.register()`` inside a function are not picked up.
+
+def _module_body_registers(stmts: list) -> bool:
+    """True when any statement reachable at import time registers a tool."""
+    for stmt in stmts:
+        if _is_registry_register_call(stmt):
+            return True
+        if isinstance(stmt, _MODULE_BODY_CONTAINERS):
+            blocks = [getattr(stmt, "body", []), getattr(stmt, "orelse", []) or []]
+            blocks.append(getattr(stmt, "finalbody", []) or [])
+            blocks.extend(h.body for h in getattr(stmt, "handlers", []) or [])
+            if any(_module_body_registers(b) for b in blocks):
+                return True
+    return False
+
+
+def _module_registers_tools(module_path: Path) -> bool:
+    """Return True when the module registers a tool at import time.
+
+    Inspects module-body statements — and the bodies of module-level ``for`` /
+    ``if`` / ``with`` / ``try`` blocks, which also run at import time — so that
+    helper modules which happen to call ``registry.register()`` *inside a
+    function* are not picked up.
+
+    Registering in a loop counts and must be detected: ``tools/xai_video_tools.py``
+    registers its two tools from a module-level ``for`` over a table, so a check
+    that only looked for a bare ``registry.register(...)`` expression statement
+    returned False, the module was never imported, and both tools were silently
+    unreachable from the model.
 
     A cheap text prefilter avoids the ``ast.parse`` cost for files that do not
     mention both ``registry`` and ``register`` — a necessary condition for a
-    top-level ``registry.register()`` call to exist.
+    registration call to exist.
     """
     try:
         source = module_path.read_text(encoding="utf-8")
@@ -61,7 +101,7 @@ def _module_registers_tools(module_path: Path) -> bool:
     except SyntaxError:
         return False
 
-    return any(_is_registry_register_call(stmt) for stmt in tree.body)
+    return _module_body_registers(tree.body)
 
 
 def discover_builtin_tools(tools_dir: Optional[Path] = None) -> List[str]:

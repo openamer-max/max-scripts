@@ -197,7 +197,13 @@ def test_bash_is_not_the_windowsapps_wsl_shim(wd):
     bash that can, and must never settle for WindowsApps.
     """
     if wd.os.name != "nt":
-        assert wd.BASH == "bash"  # POSIX: plain bash reads POSIX paths
+        # POSIX: the WindowsApps shim is a Windows-only hazard, and any bash on
+        # PATH reads POSIX paths. `_posix_bash()` resolves through `git --exec-path`
+        # first, so it legitimately returns "/usr/bin/bash" here rather than the
+        # bare name. Assert the invariant (not the shim, and usable) instead of one
+        # spelling of it — this file is meant to run on the Linux CI runner.
+        assert "WindowsApps" not in wd.BASH, wd.BASH
+        assert wd.BASH == "bash" or Path(wd.BASH).exists(), f"BASH is not usable: {wd.BASH}"
         return
 
     assert wd.BASH != "bash", "resolved to the bare name instead of a real binary"

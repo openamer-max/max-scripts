@@ -94,8 +94,13 @@ def _tool_names(home):
     time a tool is added.
     """
     try:
-        src = open(os.path.join(home, "scripts", "training", "tool_server.py"),
-                   encoding="utf-8").read()
+        # Read via a `with` block: open(...).read() leaves the handle to the
+        # garbage collector, and on Windows an unclosed handle keeps the file
+        # locked against writers. encoding= stays on the same line as open() so
+        # the windows-footgun checker can see it (it scans line by line).
+        tool_server_path = os.path.join(home, "scripts", "training", "tool_server.py")
+        with open(tool_server_path, encoding="utf-8") as _fh:
+            src = _fh.read()
         import re
         m = re.search(r"TOOLS\s*=\s*\[(.*?)\n\]", src, re.S)
         if m:

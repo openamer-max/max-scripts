@@ -610,6 +610,13 @@ class Heartbeat:
             # Dormant: report nothing owned, run nothing. Ownership is named in
             # the marker, never implied by a code change.
             for sub in self.subsystems.values():
+                if sub.native:
+                    # A native subsystem has no cron job to hand off, so there is
+                    # nothing for the ownership marker to gate. Clearing it here
+                    # would silently stop the one loop that is native by design —
+                    # and it is unreachable from the guarded loop below because
+                    # this branch returns early. Keep the declared script list.
+                    continue
                 sub.scripts = []
                 sub.script_cadence = {}
             return

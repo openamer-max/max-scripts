@@ -60,3 +60,29 @@ def test_native_subsystems_keep_their_scripts():
     """_reconcile_scripts must skip native subsystems (no jobs.json to derive from)."""
     src = inspect.getsource(Heartbeat._reconcile_scripts)
     assert "sub.native" in src, "reconciliation ignores the native flag"
+
+
+def test_native_subsystems_survive_the_dormant_path(monkeypatch):
+    """With ownership OFF, a native subsystem must keep its script.
+
+    This is the state every FRESH install boots in: ``_owned_ids()`` returns None
+    until an ownership marker exists. The dormant branch used to empty the script
+    list for *every* subsystem — native ones included — and ``return``ed before
+    the ``if sub.native: continue`` guard below it could ever run. The heartbeat
+    then reported a registered cognition subsystem that could not execute, so the
+    integrated cycle silently never ran on a default install.
+
+    Forced explicitly (\u201cno marker\u201d) so the assertion does not depend on whether
+    the machine running the tests happens to have an ownership marker.
+    """
+    from tools.asi import heartbeat as hbmod
+
+    monkeypatch.setattr(hbmod, "_owned_ids", lambda: None)
+
+    hb = Heartbeat()
+    sub = hb.subsystems["cognition"]
+
+    assert sub.native is True
+    assert "cognition_cycle.py" in sub.scripts, (
+        "the dormant path emptied a native subsystem's scripts"
+    )

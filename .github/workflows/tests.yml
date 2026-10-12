@@ -111,9 +111,17 @@ jobs:
         # which runs LPT distribution once and passes the file list to each
         # matrix job via --files. Previously each job re-discovered files and
         # re-ran LPT independently — redundant N times.
+        # The per-file cap is measured from process spawn, so it has to cover the
+        # file's module-level imports too. A heavy SDK import alone can eat it:
+        # `import lark_oapi` measured 149 s cold / 60 s warm, and with the 300 s
+        # default tests/gateway/test_feishu.py got through only 8 of its 214 tests
+        # before being SIGKILL'd and reported as "no tests ran" -- while every test
+        # that did run passed (that slice's summary read 5623 passed, 0 failed).
+        # tests/docker/ already raises the same cap to 600 s for the same reason
+        # (.github/workflows/docker.yml). 900 s still bounds a genuinely hung file.
         run: |
           source .venv/bin/activate
-          scripts/run_tests.sh --files '${{ matrix.slice.files }}'
+          scripts/run_tests.sh --files '${{ matrix.slice.files }}' --file-timeout 900
         env:
           # Ensure tests don't accidentally call real APIs
           OPENROUTER_API_KEY: ""

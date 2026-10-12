@@ -56,8 +56,17 @@ def _run_gateway_import(openamer_home: Path, initial_env: dict[str, str]) -> dic
     )
     env = dict(initial_env)
     env["OPENAMER_HOME"] = str(openamer_home)
-    # Keep PATH / PYTHONPATH so venv imports resolve.
-    for k in ("PATH", "PYTHONPATH", "VIRTUAL_ENV", "HOME"):
+    # Keep the interpreter's own environment alive: PATH/PYTHONPATH so venv
+    # imports resolve, and the platform variables the interpreter itself needs.
+    # On Windows a whitelist without SYSTEMROOT cannot even import the stdlib
+    # asyncio -- gateway/run.py -> gateway/session.py -> `import asyncio` dies with
+    # `NameError: name 'base_events' is not defined` inside asyncio/__init__.py -- and
+    # one without USERPROFILE (or HOMEDRIVE+HOMEPATH) cannot answer Path.home()
+    # (`RuntimeError: Could not determine home directory`). Either way every case in
+    # this file fails on Windows while passing on Linux CI, where none of these are
+    # consulted. `HOME` alone is not a substitute: Windows does not read it.
+    for k in ("PATH", "PYTHONPATH", "VIRTUAL_ENV", "HOME",
+              "SYSTEMROOT", "SystemRoot", "USERPROFILE", "HOMEDRIVE", "HOMEPATH"):
         if k in os.environ and k not in env:
             env[k] = os.environ[k]
 

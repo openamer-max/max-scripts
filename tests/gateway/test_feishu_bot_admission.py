@@ -49,8 +49,15 @@ def test_feishu_load_settings_allow_bots_defaults_to_none(monkeypatch):
     assert settings.allow_bots == "none"
 
 
-def test_feishu_load_settings_ignores_extra_allow_bots(monkeypatch):
-    # extra is ignored — env is single source of truth (yaml is bridged to env).
+def test_feishu_load_settings_reads_extra_when_env_is_unset(monkeypatch):
+    """Per-profile YAML (``extra``) supplies the value when the env var is unset.
+
+    Precedence is the shared one (``gateway/platforms/_shared.py::extra_or_secret``):
+    explicit env -> the profile's YAML ``config.extra[key]`` -> default. Under
+    multiplex a secondary profile's env bridge is skipped, so ``extra`` is the ONLY
+    way its YAML reaches the adapter (#86905) — an "extra is ignored" contract would
+    silently drop every per-profile setting.
+    """
     from plugins.platforms.feishu.adapter import FeishuAdapter
 
     monkeypatch.setenv("FEISHU_APP_ID", "cli_test")
@@ -58,7 +65,19 @@ def test_feishu_load_settings_ignores_extra_allow_bots(monkeypatch):
     monkeypatch.delenv("FEISHU_ALLOW_BOTS", raising=False)
 
     settings = FeishuAdapter._load_settings(extra={"allow_bots": "all"})
-    assert settings.allow_bots == "none"
+    assert settings.allow_bots == "all"
+
+
+def test_feishu_load_settings_env_beats_extra_allow_bots(monkeypatch):
+    """An explicit FEISHU_ALLOW_BOTS still wins over YAML (documented precedence)."""
+    from plugins.platforms.feishu.adapter import FeishuAdapter
+
+    monkeypatch.setenv("FEISHU_APP_ID", "cli_test")
+    monkeypatch.setenv("FEISHU_APP_SECRET", "secret_test")
+    monkeypatch.setenv("FEISHU_ALLOW_BOTS", "mentions")
+
+    settings = FeishuAdapter._load_settings(extra={"allow_bots": "all"})
+    assert settings.allow_bots == "mentions"
 
 
 def test_feishu_load_settings_falls_back_to_env_when_extra_missing(monkeypatch):

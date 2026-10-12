@@ -237,8 +237,21 @@ def _watch_singleton_lock():
     try:
         home.mkdir(parents=True, exist_ok=True)
     except Exception:
-        return None
-    lock_path = home / "session_to_brain.watch.lock"
+        pass
+    # The lock path MUST NOT depend on OPENAMER_HOME. The env var is not set in
+    # every spawn context (a watcher started from a shell without it locks
+    # ~/.openamer/session_to_brain.watch.lock, one started with it locks
+    # $OPENAMER_HOME/…), so two watchers each "win" their own singleton and then
+    # BOTH run `openamer a2a brain collect` — which locks the install venv shim
+    # (venv/Scripts/openamer.exe) often enough that the desktop's 15 s update
+    # hand-off never sees a free window and aborts every single time.
+    # Anchor it to the machine/user temp dir instead: exactly one watcher per
+    # user, whatever the environment.
+    try:
+        import tempfile as _tempfile
+        lock_path = _Path(_tempfile.gettempdir()) / "openamer-session-to-brain-watch.lock"
+    except Exception:
+        lock_path = home / "session_to_brain.watch.lock"
     try:
         fh = open(lock_path, "a+", encoding="utf-8")
         if _os.name == "nt":

@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-11T01:41:19.125380+00:00",
+  "updated": "2026-10-12T01:41:12.401318+00:00",
   "skills_dir": "C:\\Users\\damir\\AppData\\Local\\openamer-laptop\\skills",
-  "total": 1102,
+  "total": 1116,
   "skills": {
     "auto-competitor-intelligence-ai-coding": {
       "declared": true,
@@ -343,6 +343,16 @@
       "score": 1.0,
       "reason": "verification section declares no command"
     },
+    "auto-internet-learning-metas-new": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "verification section declares no command"
+    },
     "auto-internet-learning-mit-researchers": {
       "declared": true,
       "executed": false,
@@ -354,6 +364,16 @@
       "reason": "verification section declares no command"
     },
     "auto-internet-learning-openai-and": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "verification section declares no command"
+    },
+    "auto-internet-learning-openai-hacked": {
       "declared": true,
       "executed": false,
       "allowed": false,
@@ -574,6 +594,16 @@
       "reason": "verification section declares no command"
     },
     "auto-latest-research-insight-chameleon": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "verification section declares no command"
+    },
+    "auto-latest-research-insight-cultural": {
       "declared": true,
       "executed": false,
       "allowed": false,
@@ -2303,27 +2333,7 @@
       "score": 1.0,
       "reason": "verification section declares no command"
     },
-    "auto-internet-learning-metas-new": {
-      "declared": true,
-      "executed": false,
-      "allowed": false,
-      "command": null,
-      "returncode": null,
-      "passed": null,
-      "score": 1.0,
-      "reason": "verification section declares no command"
-    },
-    "auto-internet-learning-openai-hacked": {
-      "declared": true,
-      "executed": false,
-      "allowed": false,
-      "command": null,
-      "returncode": null,
-      "passed": null,
-      "score": 1.0,
-      "reason": "verification section declares no command"
-    },
-    "auto-latest-research-insight-cultural": {
+    "auto-internet-learning-google-to": {
       "declared": true,
       "executed": false,
       "allowed": false,
@@ -3843,6 +3853,16 @@
       "score": 1.0,
       "reason": "no verification section"
     },
+    "cpanel-deploy-via-session": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "curl -s -o /dev/null -w \"%{http_code}\\n\" https://<domain>/<file>",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "cron-autotest-run-cron-entry": {
       "declared": false,
       "executed": false,
@@ -3913,6 +3933,26 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "decouple-git-bash-from-legacy-home": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "cygpath -w /",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
+    "domain-to-github-pages": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "curl -s -o /dev/null -w \"http  %{http_code}\\n\" http://example.com     # expect 301 -> https",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "external-link-audit": {
       "declared": true,
       "executed": false,
@@ -3948,6 +3988,16 @@
       "executed": false,
       "allowed": false,
       "command": "https://www.paypal.com/ncp/payment/BUTTON_ID",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
+    "gateway-restart-kills-cron-jobs": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "system_vitals",
       "returncode": null,
       "passed": null,
       "score": 1.0,
@@ -3993,6 +4043,16 @@
       "score": 1.0,
       "reason": "ran"
     },
+    "live-site-audit": {
+      "declared": false,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "no verification section"
+    },
     "multi-copy-artifact-sync": {
       "declared": false,
       "executed": false,
@@ -4002,6 +4062,26 @@
       "passed": null,
       "score": 1.0,
       "reason": "no verification section"
+    },
+    "native-heartbeat-organ": {
+      "declared": false,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "no verification section"
+    },
+    "openamer-install-home-resolution": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "verification section declares no command"
     },
     "openamer-multi-surface": {
       "declared": false,
@@ -9703,6 +9783,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "bug-bounty-ops": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "scripts/scope_proxy.py",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "bug-bounty-recon": {
       "declared": false,
       "executed": false,
@@ -9754,6 +9844,16 @@
       "reason": "no verification section"
     },
     "vulnerability-scanning": {
+      "declared": false,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "no verification section"
+    },
+    "web-app-pentest": {
       "declared": false,
       "executed": false,
       "allowed": false,
@@ -10168,6 +10268,16 @@
       "executed": false,
       "allowed": false,
       "command": "typeof paypal !== 'undefined'                          // → true",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
+    "install-scoped-home-resolution": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "install.ps1",
       "returncode": null,
       "passed": null,
       "score": 1.0,
@@ -10613,6 +10723,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "windows-text-encoding-safety": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "cd \"$OPENAMER_HOME\" && python scripts/domain_mastery.py; echo \"RC=$?\"",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "ab-test-engine": {
       "declared": false,
       "executed": false,
@@ -10923,6 +11043,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "system-vitals": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "openamer plugins list",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "task-queue": {
       "declared": true,
       "executed": false,
@@ -10944,6 +11074,16 @@
       "reason": "no verification section"
     },
     "webhook-engine": {
+      "declared": false,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "no verification section"
+    },
+    "windows-home-clutter-triage": {
       "declared": false,
       "executed": false,
       "allowed": false,

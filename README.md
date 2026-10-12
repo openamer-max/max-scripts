@@ -719,6 +719,9 @@ Long-form posts about how OpenAmer measures itself — every number quoted in th
 - [One heartbeat, not 84 cron jobs: the scheduler at the core of a self-hosted agent](https://dev.to/openamer/one-heartbeat-not-84-cron-jobs-the-scheduler-at-the-core-of-a-self-hosted-agent-2i6l)
 - [Driving a real desktop without a VM, a sandbox, or stealing your cursor](https://dev.to/openamer/driving-a-real-desktop-without-a-vm-a-sandbox-or-stealing-your-cursor-4e7o)
 - [Run a self-verifying desktop AI agent on your own machine: a 10-minute quickstart](https://dev.to/openamer/run-a-self-verifying-desktop-ai-agent-on-your-own-machine-a-10-minute-quickstart-358p)
+- [Most of our agent's runs fail. The ledger records every one of them.](https://dev.to/openamer/most-of-our-agents-runs-fail-the-ledger-records-every-one-of-them-3hlg)
+- [A2A without a server: how OpenAmer peers talk to each other over GitHub](https://dev.to/openamer/a2a-without-a-server-how-openamer-peers-talk-to-each-other-over-github-n62)
+- [We read all 1,186 failed agent runs. Half failed on the same thing.](https://dev.to/openamer/we-read-all-1186-failed-agent-runs-half-failed-on-the-same-thing-j3b)
 
 ---
 

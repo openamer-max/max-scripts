@@ -85,8 +85,15 @@ def test_fallback_home_resolves_without_a_windows_appdir(tmp_path, monkeypatch):
 
     mod = _load_fresh(monkeypatch, None)
 
-    assert "AppData" not in mod.HOME.parts, (
-        f"fallback home {mod.HOME} is a Windows-only path on a host without "
+    # The Windows-only default under the *fake* home is what must not be adopted.
+    # Asserting `"AppData" not in mod.HOME.parts` was too broad a proxy: the shipped
+    # install legitimately lives under %LOCALAPPDATA%/openamer-laptop, so the fallback
+    # onto that checkout also contains "AppData" and the assertion failed whenever the
+    # suite ran from the install instead of from a git clone. Compare against the
+    # actual wrong answer the docstring describes.
+    phantom = fake_home / "AppData" / "Local" / "openamer"
+    assert mod.HOME != phantom, (
+        f"fallback home {mod.HOME} is the Windows-only default on a host without "
         f"~/AppData/Local")
     assert mod.HOME.exists(), f"fallback home {mod.HOME} does not exist"
     assert mod._is_install_root(mod.HOME), (

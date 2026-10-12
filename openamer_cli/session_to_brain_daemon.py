@@ -64,6 +64,64 @@ def _acquire_spawn_lock() -> Path | None:
         return None
 
 
+def _watcher_lock_path() -> Path:
+    """The singleton lock the ``--watch`` loop itself holds.
+
+    Must match ``_watch_singleton_lock()`` in ``scripts/session_to_brain.py``
+    byte for byte in WHERE it points: a machine/user-scoped temp path, NOT
+    ``$OPENAMER_HOME`` (which is unset in some spawn contexts, so a HOME-scoped
+    lock lets two "singletons" coexist and multiply watchers). Keep the two
+    definitions in sync.
+    """
+    import tempfile
+
+    return Path(tempfile.gettempdir()) / "openamer-session-to-brain-watch.lock"
+
+
+def _watcher_running() -> bool:
+    """True iff a ``--watch`` loop currently owns the singleton lock.
+
+    Replaces a PID-file liveness check that never worked: ``spawn()`` recorded
+    the pid of the *launcher* process (``sys.executable`` is a uv trampoline on
+    Windows that exits as soon as the real interpreter is up), so the recorded
+    pid was dead on the very next call and EVERY ``openamer`` invocation started
+    another doomed watcher. Probing the same OS-level lock the watcher holds is
+    exact and survives the trampoline, crashes and pid reuse.
+    """
+    lock_path = _watcher_lock_path()
+
+    try:
+        fh = open(lock_path, "a+", encoding="utf-8")
+    except OSError:
+        return False
+
+    try:
+        if os.name == "nt":
+            import msvcrt
+
+            fh.seek(0)
+            try:
+                msvcrt.locking(fh.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError:
+                return True  # held by a live watcher
+            msvcrt.locking(fh.fileno(), msvcrt.LK_UNLCK, 1)
+            return False
+        else:
+            import fcntl
+
+            try:
+                fcntl.flock(fh.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except OSError:
+                return True
+            fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+            return False
+    finally:
+        try:
+            fh.close()
+        except Exception:
+            pass
+
+
 def spawn() -> None:
     """Start the session-to-brain background daemon if it isn't already running.
 
@@ -74,28 +132,9 @@ def spawn() -> None:
     """
     pid_file = _pid_file()
 
-    # Check if already running.
-    if pid_file.exists():
-        try:
-            old_pid = int(pid_file.read_text(encoding="utf-8").strip())
-            # On Windows os.kill with signal 0 raises SystemError.
-            # Use tasklist to check if the process exists.
-            if os.name == "nt":
-                r = subprocess.run(
-                    ["tasklist", "/FI", f"PID eq {old_pid}", "/NH"],
-                    capture_output=True, text=False, timeout=5,
-                )
-                # text=False -> bytes; check robustly, tolerate non-UTF-8
-                # Windows codepages (bytes 0x80+) and empty output.
-                out = (r.stdout or b"").decode("utf-8", errors="replace")
-                if str(old_pid) in out:
-                    return  # already running
-            else:
-                os.kill(old_pid, 0)  # windows-footgun: ok (POSIX branch)
-                return  # already running
-        except (ValueError, OSError, ProcessLookupError, subprocess.TimeoutExpired):
-            # Stale pid file — remove and restart.
-            pid_file.unlink(missing_ok=True)
+    # Already running? Ask the watcher's OWN lock, not a pid we guessed.
+    if _watcher_running():
+        return
 
     # Serialize concurrent spawns (a lost race would start duplicate daemons).
     lock_file = _acquire_spawn_lock()

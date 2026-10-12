@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-11T14:30:49.112486+00:00",
+  "updated": "2026-10-12T16:27:19.022731+00:00",
   "skills_dir": "C:\\Users\\damir\\AppData\\Local\\openamer-laptop\\skills",
-  "total": 1113,
+  "total": 1119,
   "skills": {
     "auto-competitor-intelligence-ai-coding": {
       "refs": 0,
@@ -2364,6 +2364,12 @@
       "score": 1.0,
       "missing": []
     },
+    "decouple-git-bash-from-legacy-home": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
     "domain-to-github-pages": {
       "refs": 0,
       "ok": 0,
@@ -2431,12 +2437,18 @@
       "missing": []
     },
     "multi-copy-artifact-sync": {
-      "refs": 4,
-      "ok": 3,
-      "score": 0.75,
+      "refs": 5,
+      "ok": 4,
+      "score": 0.8,
       "missing": [
         "tmp_probe.py"
       ]
+    },
+    "native-heartbeat-organ": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
     },
     "openamer-install-home-resolution": {
       "refs": 0,
@@ -2541,8 +2553,8 @@
       "missing": []
     },
     "github-api-automation": {
-      "refs": 1,
-      "ok": 1,
+      "refs": 2,
+      "ok": 2,
       "score": 1.0,
       "missing": []
     },
@@ -5920,8 +5932,8 @@
       "missing": []
     },
     "bounty-report-craft": {
-      "refs": 2,
-      "ok": 2,
+      "refs": 3,
+      "ok": 3,
       "score": 1.0,
       "missing": []
     },
@@ -6171,9 +6183,15 @@
       "score": 1.0,
       "missing": []
     },
-    "introspection": {
+    "handling-declined-requests": {
       "refs": 0,
       "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
+    "introspection": {
+      "refs": 1,
+      "ok": 1,
       "score": 1.0,
       "missing": []
     },
@@ -6365,8 +6383,8 @@
       ]
     },
     "false-verdict-detection": {
-      "refs": 1,
-      "ok": 1,
+      "refs": 2,
+      "ok": 2,
       "score": 1.0,
       "missing": []
     },
@@ -6383,8 +6401,8 @@
       "missing": []
     },
     "github-ci-debugging": {
-      "refs": 3,
-      "ok": 3,
+      "refs": 4,
+      "ok": 4,
       "score": 1.0,
       "missing": []
     },
@@ -6699,6 +6717,12 @@
       "score": 1.0,
       "missing": []
     },
+    "windows-test-portability": {
+      "refs": 1,
+      "ok": 1,
+      "score": 1.0,
+      "missing": []
+    },
     "windows-text-encoding-safety": {
       "refs": 1,
       "ok": 1,
@@ -6870,6 +6894,12 @@
       "score": 1.0,
       "missing": []
     },
+    "skill-library-maintenance": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
     "smart-cache": {
       "refs": 1,
       "ok": 1,
@@ -6915,6 +6945,12 @@
     "webhook-engine": {
       "refs": 1,
       "ok": 1,
+      "score": 1.0,
+      "missing": []
+    },
+    "windows-home-clutter-triage": {
+      "refs": 0,
+      "ok": 0,
       "score": 1.0,
       "missing": []
     },

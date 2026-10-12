@@ -151,6 +151,11 @@ if manifest.exists():
     mf = json.loads(manifest.read_text(encoding="utf-8"))
     check("manifest has wake instructions",
           len(mf.get("how_to_wake", [])) >= 3)
+    # The runbook must name where the fleet actually lives. It used to send a
+    # fresh machine to dna-snapshot.json -> "jobs", a key that file has never
+    # had (its keys are circadian/strategies/senses/dreams).
+    check("wake runbook points at the fleet's real home",
+          any("fleet_snapshot" in s for s in mf.get("how_to_wake", [])))
 
 # 6. LEARNED ORGANS: systemic, curriculum, scorecard
 for organ in ("systemic.py", "curriculum.py", "scorecard.py"):

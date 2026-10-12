@@ -265,6 +265,12 @@ def _github_api_get(url: str, token: str) -> Any:
             ],
             capture_output=True,
             text=True,
+            # Pin UTF-8: text=True alone decodes with the locale codec, and
+            # under LANG=C.UTF-8 on Windows that is cp1252 — a diff containing
+            # an em-dash or umlaut then kills the reader thread with
+            # UnicodeDecodeError and leaves result.stdout=None.
+            encoding="utf-8",
+            errors="replace",
             timeout=30,
         )
         if result.returncode != 0:
@@ -293,6 +299,12 @@ def _github_api_post(url: str, token: str, data: dict) -> Any:
             ],
             capture_output=True,
             text=True,
+            # Pin UTF-8: text=True alone decodes with the locale codec, and
+            # under LANG=C.UTF-8 on Windows that is cp1252 — a diff containing
+            # an em-dash or umlaut then kills the reader thread with
+            # UnicodeDecodeError and leaves result.stdout=None.
+            encoding="utf-8",
+            errors="replace",
             timeout=30,
         )
         return result.stdout
@@ -346,6 +358,12 @@ class CodeReviewBot:
                 ],
                 capture_output=True,
                 text=True,
+                # Pin UTF-8: text=True alone decodes with the locale codec, and
+                # under LANG=C.UTF-8 on Windows that is cp1252 — a diff containing
+                # an em-dash or umlaut then kills the reader thread with
+                # UnicodeDecodeError and leaves result.stdout=None.
+                encoding="utf-8",
+                errors="replace",
                 timeout=30,
             )
             if result.returncode != 0:
@@ -596,7 +614,19 @@ class CodeReviewBot:
                 )
 
             if pr_number and repo_full:
-                return self.review_pr(pr_number, repo_full)
+                try:
+                    return self.review_pr(pr_number, repo_full)
+                except RuntimeError as exc:
+                    # A missing/expired GITHUB_TOKEN (or any GitHub API hiccup) must
+                    # not crash the CI step: report the failed review instead.
+                    # Direct callers of review_pr() still get the exception, and a
+                    # bad token stays visible in the summary rather than silent.
+                    return ReviewResult(
+                        summary="Code review skipped — GitHub API unavailable: {0}".format(exc),
+                        score=0,
+                        comments=[],
+                        issues=["github-api-error"],
+                    )
 
         if is_ci or event_path:
             try:
@@ -604,6 +634,12 @@ class CodeReviewBot:
                     ["git", "diff", "HEAD~1", "--"],
                     capture_output=True,
                     text=True,
+                    # Pin UTF-8: text=True alone decodes with the locale codec, and
+                    # under LANG=C.UTF-8 on Windows that is cp1252 — a diff containing
+                    # an em-dash or umlaut then kills the reader thread with
+                    # UnicodeDecodeError and leaves result.stdout=None.
+                    encoding="utf-8",
+                    errors="replace",
                     timeout=30,
                 )
                 if result.returncode == 0 and result.stdout.strip():

@@ -72,9 +72,20 @@ def _resolve_openamer_home(default: Path) -> Path:
     instead of the real home (183 skills). A mis-set OPENAMER_HOME pointing at a
     scratch dir is likewise rejected via the install-root markers.
     """
+    home = Path.home()
     local = default.parent
-    candidates = [local / "openamer-laptop", local / "openamer"]
-    picked = next((c for c in candidates if (c / "skills").is_dir()), default)
+    # The Windows layout comes first (the real install on a Windows host), then the
+    # portable POSIX location and finally the checkout, which IS a valid home (it
+    # ships skills/ and cron/). Stopping at the two AppData paths made every sibling
+    # resolve "$HOME/AppData/Local/openamer" -- a directory nothing creates on Linux
+    # or macOS -- so the swarm operated outside the install AND disagreed with
+    # darwin_engine about where HOME is (Linux CI, 2026-10-12). Keep this chain in
+    # step with darwin_engine._default_home().
+    candidates = [local / "openamer-laptop", local / "openamer",
+                  home / ".openamer", Path(__file__).resolve().parents[1]]
+    picked = next((c for c in candidates if _is_install_root(c)), None)
+    if picked is None:
+        picked = next((c for c in candidates if (c / "skills").is_dir()), default)
 
     raw = os.environ.get("OPENAMER_HOME")
     if not raw:

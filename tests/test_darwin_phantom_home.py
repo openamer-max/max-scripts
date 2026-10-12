@@ -197,6 +197,15 @@ def test_nonempty_marker_file_still_counts(tmp_path):
 
 def test_live_vaultfinal_shape_falls_back_to_real_install(tmp_path, monkeypatch):
     """End-to-end on the exact live scratch shape: adopt the real install."""
+    # Isolate $HOME first. The default chain ends at ``~/.openamer``, and on the CI
+    # runner an earlier test in the same slice had already created that tree with a
+    # two-skill population — so the fallback resolved the residue instead of the
+    # checkout and this assertion measured runner state, not the fallback logic.
+    fake_home = tmp_path / "runner"
+    fake_home.mkdir()
+    monkeypatch.setenv("HOME", str(fake_home))
+    monkeypatch.setenv("USERPROFILE", str(fake_home))
+
     scratch = tmp_path / "vaultfinal"
     (scratch / "cron").mkdir(parents=True)
     (scratch / "cron" / "executions.db").write_bytes(b"")   # 0 bytes, as live

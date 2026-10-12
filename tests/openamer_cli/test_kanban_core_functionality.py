@@ -596,7 +596,10 @@ def test_notify_claim_is_single_owner_and_rewindable(kanban_home):
             chat_id="123",
             kinds=["completed", "blocked"],
         )
-        assert old_cursor == 0
+        # New subs start caught up -- kanban_db_notify.add_notify_sub sets
+        # last_event_id = MAX(task_events.id) so a boot never replays history --
+        # and create_task already wrote event #1, so the cursor starts at 1.
+        assert old_cursor == 1
         assert claimed_cursor > old_cursor
         assert [ev.kind for ev in events] == ["completed"]
 
@@ -1278,8 +1281,17 @@ def test_migration_renames_legacy_event_kinds(tmp_path, monkeypatch):
 
 def test_list_profiles_on_disk(tmp_path, monkeypatch):
     """list_profiles_on_disk returns the implicit default profile plus
-    named profiles under ~/.openamer/profiles/ that contain a config.yaml."""
-    monkeypatch.setattr(Path, "home", lambda: tmp_path)
+    named profiles under <root>/profiles/ that contain a config.yaml."""
+    import openamer_constants
+
+    # The platform default is %LOCALAPPDATA%/openamer on Windows but ~/.openamer
+    # on POSIX, so patching Path.home only steered it on POSIX: on Windows the
+    # module still read the developer's real profile dir and the test saw
+    # ["default"]. Pin the default so the assertion means one thing everywhere.
+    monkeypatch.setattr(
+        openamer_constants, "_get_platform_default_openamer_home",
+        lambda: tmp_path / ".openamer",
+    )
     monkeypatch.delenv("OPENAMER_HOME", raising=False)
     profiles = tmp_path / ".openamer" / "profiles"
     profiles.mkdir(parents=True)

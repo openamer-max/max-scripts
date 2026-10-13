@@ -30,7 +30,10 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
+import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
@@ -85,42 +88,78 @@ class SwarmResult:
 # ---------------------------------------------------------------------------
 
 
-def _fake_invoke_agent(agent_name: str, task: str, timeout: int) -> str:
-    """Simulate invoking a single agent with ``delegate_task``.
+def _openamer_python() -> str:
+    """Interpreter for child agent runs: the install's venv, else the current one."""
+    home = os.environ.get("OPENAMER_HOME", "")
+    candidate = Path(home) / "openamer-agent" / "venv" / "Scripts" / "python.exe"
+    if candidate.is_file():
+        return str(candidate)
+    return sys.executable
 
-    In a real deployment the runtime calls ``openamer_cli``'s delegation
-    machinery (``delegate_task``).  Here we stub the call so the CLI
-    commands are functional out of the box.
+
+def _invoke_agent_real(agent_name: str, task: str, timeout: int) -> str:
+    """Run ONE real agent turn and return its answer.
+
+    Spawned as a subprocess (``python -m openamer_cli.main -z <prompt> --yolo``)
+    because the in-process delegation API (``tools.delegate_tool.delegate_task``)
+    requires a *parent agent context* that the swarm CLI does not have. The
+    previous implementation imported a non-existent ``openamer_cli.hitl.delegate_task``,
+    swallowed the ImportError, and then returned a canned paragraph for every
+    agent -- in 0 ms, with a hardcoded ~66% confidence, which made a swarm run
+    look successful while no agent had run at all. That fabricated-findings path
+    is gone on purpose.
+
+    Raises RuntimeError when the agent produces nothing, so the caller can report
+    an explicit failure instead of inventing a result.
     """
-    _ = timeout  # reserved for future real-timeout enforcement
-    try:
-        from openamer_cli.hitl import delegate_task  # noqa: F811
-
-        return delegate_task(prompt=f"[{agent_name}] {task}")
-    except ImportError:
-        pass
-    except Exception:
-        pass
-    # Fallback: synthetic response so the command never hangs
-    return (
-        f"[{agent_name} analyzed the task: {task[:120]}…]\n"
-        f"Findings: the request requires {agent_name} expertise. "
-        f"Key recommendation: proceed with standard best practices."
+    home = os.environ.get("OPENAMER_HOME") or os.getcwd()
+    env = dict(os.environ, OPENAMER_HOME=home, PYTHONIOENCODING="utf-8")
+    proc = subprocess.run(
+        [
+            _openamer_python(), "-m", "openamer_cli.main",
+            "-z", f"[{agent_name}] {task}", "--yolo",
+        ],
+        cwd=home, env=env, capture_output=True, text=True,
+        encoding="utf-8", errors="replace", timeout=timeout,
+    )
+    out = (proc.stdout or "").strip()
+    if out:
+        return out
+    err = (proc.stderr or "").strip()[-300:]
+    raise RuntimeError(
+        f"Agent {agent_name!r} lieferte keine Ausgabe (exit {proc.returncode}): {err}"
     )
 
 
 def _invoke_agent(
     agent_name: str, task: str, timeout: int = 120
 ) -> SwarmResult:
-    """Call a single agent and wrap its output in a ``SwarmResult``."""
+    """Run one real agent and wrap its output in a ``SwarmResult``.
+
+    A failed agent yields an explicit UNAVAILABLE marker with confidence 0.0 --
+    never a plausible-sounding paragraph. A fabricated finding is worse than a
+    visible failure, because it survives into the aggregate answer.
+    """
     start = time.perf_counter()
-    result_text = _fake_invoke_agent(agent_name, task, timeout)
+    try:
+        result_text = _invoke_agent_real(agent_name, task, timeout)
+    except Exception as exc:  # noqa: BLE001 - surfacing the failure is the point
+        elapsed_ms = round((time.perf_counter() - start) * 1000, 3)
+        return SwarmResult(
+            agent_name=agent_name,
+            result=(
+                f"DELEGATION UNAVAILABLE ({type(exc).__name__}: {exc}) - kein Agent "
+                f"ist gelaufen. Diese Zeile ist keine Antwort und darf nicht als "
+                f"Ergebnis verwendet werden."
+            ),
+            confidence=0.0,
+            duration_ms=elapsed_ms,
+        )
     elapsed_ms = round((time.perf_counter() - start) * 1000, 3)
-    confidence = _estimate_confidence(result_text)
     return SwarmResult(
         agent_name=agent_name,
         result=result_text,
-        confidence=confidence,
+        confidence=_estimate_confidence(result_text),
         duration_ms=elapsed_ms,
     )
 
@@ -158,9 +197,17 @@ def run_swarm_parallel(
     """
     if not agents:
         raise ValueError("At least one agent is required")
+    selected = list(agents[: config.max_agents])
     results: list[SwarmResult] = []
-    for agent in agents[: config.max_agents]:
-        results.append(_invoke_agent(agent, task, config.timeout))
+    # Real fan-out: the agents run concurrently. The previous version looped over
+    # them sequentially, so "parallel" was a label rather than a property.
+    with ThreadPoolExecutor(max_workers=max(1, len(selected))) as pool:
+        futures = [
+            pool.submit(_invoke_agent, agent, task, config.timeout)
+            for agent in selected
+        ]
+        for future in futures:
+            results.append(future.result())
     return results
 
 

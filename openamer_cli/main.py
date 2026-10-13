@@ -11116,23 +11116,36 @@ def _detect_venv_python_processes(
 
     skip: set[int] = set(exclude_pids or set())
     skip.add(os.getpid())
+    # Walk ancestors one hop at a time. psutil.Process().parents() is
+    # all-or-nothing: on Windows it raises for a parent outside our session
+    # (AccessDenied), which would throw away the ENTIRE skip set and leave the
+    # invoking shell — whose command line contains the venv path because it
+    # launched `venv\Scripts\python.exe -m openamer_cli.main update` — to be
+    # reported as a holder. Measured 2026-10-13.
     try:
-        for anc in psutil.Process().parents():
+        cur = psutil.Process()
+        for _ in range(8):
+            try:
+                par = cur.parent()
+            except Exception:
+                break
+            if par is None or int(par.pid) in skip or int(par.pid) <= 0:
+                break
+            try:
+                anc_cmd = " ".join(par.cmdline() or []).lower()
+            except Exception:
+                anc_cmd = ""
             # The Desktop app's serve backend (`-m openamer_cli.main serve`)
             # and desktop shim (`openamer.exe desktop`) are real lock-holders
             # even when they happen to be ancestors — e.g. an `openamer update`
             # launched from a terminal the app itself spawned. Skipping them
             # here is exactly the gap that let a running Desktop app sail
             # through the guard and strand the venv on a locked openamer.exe.
-            # Only skip ancestors that are part of the update invocation
-            # itself (the `openamer update` shim and its shell).
-            try:
-                anc_cmd = " ".join(anc.cmdline() or []).lower()
-            except Exception:
-                anc_cmd = ""
+            # Stop instead of skipping, so they stay in the candidate set.
             if "serve" in anc_cmd or "desktop" in anc_cmd:
-                continue
-            skip.add(int(anc.pid))
+                break
+            skip.add(int(par.pid))
+            cur = par
     except Exception:
         pass
 
@@ -11166,9 +11179,18 @@ def _detect_venv_python_processes(
         # files. Catch those by what they're running: a cmdline that references
         # this venv's path, or a `-m openamer_cli.main ...` invocation tied to
         # this install (install root in the cmdline or as the working dir).
-        if not is_holder and venv_prefix in cmdline_low:
+        #
+        # Only a Python interpreter can hold a .pyd/extension lock, so the text
+        # fallbacks must not fire for anything else. Without this gate every
+        # shell that merely *mentions* the path counts as a holder — including
+        # the one that launched `openamer update` itself, whose command line
+        # contains `venv\Scripts\python.exe -m openamer_cli.main update`
+        # (measured 2026-10-13: the refusal listed two `bash.exe` processes and
+        # made the update impossible from a shell).
+        is_python_image = "python" in str(info.get("name") or "").lower()
+        if not is_holder and is_python_image and venv_prefix in cmdline_low:
             is_holder = True
-        if not is_holder and "openamer_cli.main" in cmdline_low:
+        if not is_holder and is_python_image and "openamer_cli.main" in cmdline_low:
             if root_prefix in cmdline_low or cwd_low.startswith(root_prefix):
                 is_holder = True
         if not is_holder:

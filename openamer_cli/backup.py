@@ -253,19 +253,57 @@ def _should_skip_backup_file(abs_path: Path, rel_path: Path, out_path: Path) -> 
 # SQLite safe copy
 # ---------------------------------------------------------------------------
 
-def _safe_copy_db(src: Path, dst: Path) -> bool:
+# Upper bound for a single SQLite safe copy. ``Connection.backup()`` restarts the
+# copy from the beginning whenever the source database is written to, and retries
+# while the source holds a write lock, so a database under continuous write load
+# can keep it looping instead of finishing — which is why the API has a ``sleep``
+# parameter at all. Measured 2026-10-13 on a live install: ``openamer update
+# --force`` printed "◆ Creating pre-update backup..." and then made no progress
+# for 25 minutes (0 I/O over a 30 s window) on a 1.9 GB state.db that 60+ cron
+# agents write to continuously, until the process had to be killed. A bounded
+# failure is correct here — every caller already treats a failed copy as "skip
+# this file and continue the update".
+_SAFE_COPY_DEADLINE_S = 180.0
+
+
+class _SafeCopyDeadlineExceeded(Exception):
+    """Raised from the backup progress callback to stop an over-long copy."""
+
+
+def _safe_copy_db(
+    src: Path, dst: Path, *, deadline_s: Optional[float] = _SAFE_COPY_DEADLINE_S
+) -> bool:
     """Copy a SQLite database safely using the backup() API.
 
     Handles WAL mode — produces a consistent snapshot even while
     the DB is being written to. Fail closed if a consistent snapshot cannot
     be created: copying only the live main file can omit committed WAL data.
+
+    The copy is bounded by *deadline_s* (``None`` disables the bound): see
+    :data:`_SAFE_COPY_DEADLINE_S` for why an unbounded ``Connection.backup()``
+    is a hang, not a slow copy.
     """
     conn = None
     backup_conn = None
+    started = time.monotonic()
     try:
-        conn = sqlite3.connect(f"file:{src}?mode=ro", uri=True)
-        backup_conn = sqlite3.connect(str(dst))
-        conn.backup(backup_conn)
+        # ``timeout`` bounds how long sqlite waits on a locked file.
+        conn = sqlite3.connect(f"file:{src}?mode=ro", uri=True, timeout=5.0)
+        backup_conn = sqlite3.connect(str(dst), timeout=5.0)
+
+        def _progress(_status: int, _remaining: int, _total: int) -> int:
+            # Raise instead of returning non-zero: CPython ignores the return
+            # value of the progress callback (measured on 3.11 — a forced
+            # 98-step copy kept running to completion with the callback
+            # returning 1 from step 5 on), while an exception propagates and
+            # stops the copy immediately.
+            if deadline_s is not None and (time.monotonic() - started) >= deadline_s:
+                raise _SafeCopyDeadlineExceeded(
+                    f"SQLite safe copy exceeded {deadline_s:.0f}s for {src.name}"
+                )
+            return 0
+
+        conn.backup(backup_conn, progress=_progress, sleep=0.05)
         return True
     except Exception as exc:
         logger.warning("SQLite safe copy failed for %s: %s", src, exc)

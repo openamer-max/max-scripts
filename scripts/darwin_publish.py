@@ -21,8 +21,68 @@ import sys
 from pathlib import Path
 
 REPO = Path(r"C:\Users\damir\openamer-repo")
-SKILLS_DIR = Path(os.path.join(os.environ.get("OPENAMER_HOME", str(Path.home() / "AppData" / "Local" / "openamer")), "skills"))
-VALIDATOR_LOG = Path(os.path.join(os.environ.get("OPENAMER_HOME", str(Path.home() / "AppData" / "Local" / "openamer")), "logs", "skill-validator-latest.json"))
+_HOME_MARKERS = ("config.yaml", ".env", "cron", "memories", "openamer-agent")
+
+
+def _resolve_home(default: Path) -> Path:
+    """Resolve OPENAMER_HOME robustly across shells (single source: darwin_engine).
+
+    Never trust a bare ``os.environ["OPENAMER_HOME"]``: on 2026-10-13 this cron
+    died with FileNotFoundError because the terminal env snapshot carried a
+    stale ``OPENAMER_HOME=C:/Users/damir/AppData/Local/Temp/rt_test/home`` -- a
+    scratch tree that no longer exists. Normalise MSYS drive forms (git-bash
+    exports ``/c/Users/...``, which native Python reads as relative and expands
+    to a phantom ``C:/c/...``), reject doubled-drive artefacts, and only accept
+    a candidate that is a real install root.
+    """
+    local = default.parent
+    candidates = [local / "openamer-laptop", local / "openamer"]
+    picked = next((c for c in candidates if (c / "skills").is_dir()), default)
+
+    raw = os.environ.get("OPENAMER_HOME")
+    if not raw:
+        return picked
+    norm = raw.replace("\\", "/")
+    cand = None
+    if len(norm) >= 3 and norm[0] == "/" and norm[1].isalpha() and norm[2] == "/":
+        cand = Path(norm[1].upper() + ":/" + norm[3:])
+    else:
+        p = Path(raw)
+        if p.is_absolute():
+            cand = p
+    if cand is None or not cand.exists():
+        return picked
+    parts = cand.parts
+    drive = parts[0].rstrip("/").rstrip("\\")
+    if len(drive) == 2 and drive[1] == ":" and len(parts) >= 2:
+        head = parts[1].strip("/").strip("\\").lower()
+        if head and head == drive[0].lower():
+            return picked
+    if any((cand / m).exists() for m in _HOME_MARKERS):
+        return cand
+    print(f"[darwin-publish] WARNING: OPENAMER_HOME={cand} exists but is not an "
+          f"OpenAmer install root; falling back to {picked}.", file=sys.stderr)
+    return picked
+
+
+def _find_validator_log(home: Path) -> Path:
+    """Locate logs/skill-validator-latest.json, preferring a real install."""
+    tried = []
+    local = Path.home() / "AppData" / "Local"
+    for cand in (home, local / "openamer-laptop", local / "openamer",
+                 Path(os.environ.get("OPENAMER_HOME", "") or home)):
+        if not cand:
+            continue
+        log = Path(cand) / "logs" / "skill-validator-latest.json"
+        if log.is_file():
+            return log
+        tried.append(str(log))
+    raise FileNotFoundError(
+        "skill-validator-latest.json not found; tried: " + "; ".join(tried))
+
+
+SKILLS_DIR = _resolve_home(Path.home() / "AppData" / "Local" / "openamer") / "skills"
+VALIDATOR_LOG = _find_validator_log(SKILLS_DIR.parent)
 AUTOpatch_JSON = REPO / "reports" / "darwin-autopatch.json"
 TRENDS_MD = REPO / "reports" / "trend-scout-latest.md"
 OUT_STATIC = REPO / "website" / "static" / "darwin" / "darwin-status.json"
@@ -42,7 +102,7 @@ def validator_stats() -> tuple[int, float, list[dict]]:
 def engine_status() -> dict:
     out = {}
     try:
-        r = subprocess.run(["python", str(REPO / "scripts" / "darwin_engine.py"), "--status"],
+        r = subprocess.run([sys.executable, str(REPO / "scripts" / "darwin_engine.py"), "--status"],
                            capture_output=True, text=True, encoding="utf-8",
                            errors="replace", timeout=60, cwd=str(REPO))
         for line in r.stdout.splitlines():
@@ -84,7 +144,7 @@ def trends(limit: int = 8) -> list[dict]:
 def main() -> int:
     population, avg, fittest = validator_stats()
     status = {
-        "updated": subprocess.run(["python", "-c", "from datetime import datetime,timezone;print(datetime.now(timezone.utc).isoformat(timespec='seconds'))"],
+        "updated": subprocess.run([sys.executable, "-c", "from datetime import datetime,timezone;print(datetime.now(timezone.utc).isoformat(timespec='seconds'))"],
                                   capture_output=True, text=True).stdout.strip(),
         "population": population,
         "avg_score": avg,

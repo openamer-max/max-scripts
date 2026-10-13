@@ -224,6 +224,11 @@ def _cmd_run(args) -> int:
 
 def _cmd_create(args, store) -> int:
     """Save a new swarm configuration."""
+    # Local import, like the other handlers in this file: without it this function
+    # raised "NameError: name 'SwarmConfig' is not defined", which is why
+    # `swarm create` never saved anything and `swarm list` was always empty.
+    from openamer_cli.swarm_orchestrator import SwarmConfig
+
     strategy_map = {
         "parallel": "fan-out",
         "hierarchical": "hierarchical",

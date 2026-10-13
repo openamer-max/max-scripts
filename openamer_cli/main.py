@@ -9117,6 +9117,25 @@ def _run_quarantined_install(
     failed: list[Path] = []
     if scripts_dir is not None:
         moved, failed = _quarantine_running_openamer_exe(scripts_dir)
+        # A failed quarantine of the *interpreter* must not abort the update.
+        # pip/uv never rewrite python.exe/pythonw.exe, and this install path now
+        # ends in an unconditional _ensure_venv_interpreter_present() (including
+        # the abort path above), so a live agent or supervisor holding
+        # `venv\Scripts\python.exe` is not a reason to refuse. On a busy install
+        # (supervisor + gateway + dozens of cron agents) such a holder exists
+        # permanently, which made `openamer update` impossible without --force —
+        # measured 2026-10-13: every refusal listed interpreter holders only,
+        # and the listed PIDs were descendants of the update itself.
+        # The launcher shims still block as before: *those* are what pip rewrites,
+        # and losing them takes `openamer` off PATH.
+        if failed and {p.name.lower() for p in failed} <= {"python.exe", "pythonw.exe"}:
+            print(
+                f"  ⚠ Could not quarantine {', '.join(sorted(p.name for p in failed))} — a live "
+                "process holds the interpreter.\n"
+                "    Continuing: the installer does not rewrite it, and the post-install step\n"
+                "    guarantees the venv keeps an interpreter."
+            )
+            failed = []
         if failed:
             # Aborting must leave the venv exactly as we found it: the quarantine
             # already renamed files (the venv interpreter included) out of the way,
@@ -11977,6 +11996,23 @@ def _cmd_update_impl(args, gateway_mode: bool):
         scripts_dir = _venv_scripts_dir()
         if scripts_dir is not None:
             concurrent = _detect_concurrent_openamer_instances(scripts_dir)
+            # Interpreter holders (python.exe/pythonw.exe) no longer gate the
+            # update: they hold nothing the installer rewrites, the quarantine
+            # tolerates them, and every abort path now leaves the venv intact.
+            # Only the *launcher* shims (openamer*.exe, the OpenAmer Desktop exe)
+            # still block — those are what pip rewrites, and losing them takes
+            # `openamer` off PATH. Without this split the gate can never pass on
+            # an install with a resident supervisor/agent pool, which is what made
+            # `openamer update` impossible without --force (measured 2026-10-13).
+            if concurrent and not any(
+                (name or "").lower() not in {"python.exe", "pythonw.exe"}
+                for _, name in concurrent
+            ):
+                print(
+                    f"  ⚠ {len(concurrent)} process(es) hold the venv interpreter, "
+                    "not the launcher shims — continuing."
+                )
+                concurrent = []
             if concurrent:
                 if getattr(args, "auto_kill", False):
                     _managed = _desktop_managed_pids()

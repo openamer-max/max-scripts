@@ -862,7 +862,13 @@ def _reauth_oauth_server(name: str, server_config: dict) -> bool:
             _success("Authenticated (server reported no tools)")
         return True
     except Exception as exc:
-        _error(f"Authentication failed: {exc}")
+        # Never print a bare "Authentication failed: " -- an empty str(exc) is
+        # common for SDK OAuth errors, so the operator gets no reason at all.
+        # Observed live 2026-10-13 on `mcp login linear`: the flow re-issued a new
+        # authorize URL after each attempt and finally failed with an empty
+        # message, which made the failure undiagnosable. Name the type at least.
+        reason = str(exc).strip() or "(the OAuth flow raised no message)"
+        _error(f"Authentication failed: {type(exc).__name__}: {reason}")
         return False
 
 

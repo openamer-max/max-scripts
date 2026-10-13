@@ -2296,7 +2296,14 @@ class MCPServerTask:
         finally:
             for t in (shutdown_task, reconnect_task):
                 if not t.done():
-                    t.cancel()
+                    try:
+                        t.cancel()
+                    except RuntimeError:
+                        # On a closed loop cancel() schedules its callback on that
+                        # loop and raises instead of cancelling -- observed as
+                        # "RuntimeError: Event loop is closed" escaping teardown
+                        # during `mcp login` (2026-10-13). Nothing left to cancel.
+                        continue
                     try:
                         await t
                     except (asyncio.CancelledError, Exception):
@@ -2340,7 +2347,14 @@ class MCPServerTask:
         finally:
             for t in (shutdown_task, reconnect_task):
                 if not t.done():
-                    t.cancel()
+                    try:
+                        t.cancel()
+                    except RuntimeError:
+                        # On a closed loop cancel() schedules its callback on that
+                        # loop and raises instead of cancelling -- observed as
+                        # "RuntimeError: Event loop is closed" escaping teardown
+                        # during `mcp login` (2026-10-13). Nothing left to cancel.
+                        continue
                     try:
                         await t
                     except (asyncio.CancelledError, Exception):

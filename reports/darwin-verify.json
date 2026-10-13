@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-12T01:41:12.401318+00:00",
+  "updated": "2026-10-13T01:41:13.902319+00:00",
   "skills_dir": "C:\\Users\\damir\\AppData\\Local\\openamer-laptop\\skills",
-  "total": 1116,
+  "total": 1127,
   "skills": {
     "auto-competitor-intelligence-ai-coding": {
       "declared": true,
@@ -3163,6 +3163,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "darwin-harvested-browser-scripts": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "python -c \"import sys; print('darwin-species-ok')\"",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "darwin-harvested-c-users-damir-openamer-repo-openamer-cli": {
       "declared": true,
       "executed": false,
@@ -3303,6 +3313,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "darwin-harvested-mainwt": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "python -c \"import sys; print('darwin-species-ok')\"",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "darwin-harvested-memory-darwin-status-latest-json": {
       "declared": true,
       "executed": false,
@@ -3363,6 +3383,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "darwin-harvested-openamer-cli": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "python -c \"import sys; print('darwin-species-ok')\"",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "darwin-harvested-openamer-repo-cron-autotest-wrapper-": {
       "declared": true,
       "executed": false,
@@ -3404,6 +3434,16 @@
       "reason": "not-allowlisted"
     },
     "darwin-harvested-python-exe-no-such-file-or-directory": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "python -c \"import sys; print('darwin-species-ok')\"",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
+    "darwin-harvested-relative-to-the-ncurrent-drive": {
       "declared": true,
       "executed": false,
       "allowed": false,
@@ -3583,6 +3623,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "darwin-harvested-tmp-nist-f-r-den-windows-interpreter": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "python -c \"import sys; print('darwin-species-ok')\"",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
     "darwin-harvested-tmp-om-base-no-such-file-or-director": {
       "declared": true,
       "executed": false,
@@ -3614,6 +3664,16 @@
       "reason": "not-allowlisted"
     },
     "darwin-harvested-tmp-verify-comment-5749873455-py": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "python -c \"import sys; print('darwin-species-ok')\"",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
+    "darwin-harvested-tools-code-kernel-py": {
       "declared": true,
       "executed": false,
       "allowed": false,
@@ -4064,6 +4124,16 @@
       "reason": "no verification section"
     },
     "native-heartbeat-organ": {
+      "declared": false,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "no verification section"
+    },
+    "openamer-forced-update-venv-repair": {
       "declared": false,
       "executed": false,
       "allowed": false,
@@ -9873,6 +9943,16 @@
       "score": 1.0,
       "reason": "no verification section"
     },
+    "handling-declined-requests": {
+      "declared": false,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "no verification section"
+    },
     "introspection": {
       "declared": true,
       "executed": false,
@@ -10473,6 +10553,16 @@
       "score": 1.0,
       "reason": "not-allowlisted"
     },
+    "remote-state-verification": {
+      "declared": false,
+      "executed": false,
+      "allowed": false,
+      "command": null,
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "no verification section"
+    },
     "requesting-code-review": {
       "declared": false,
       "executed": false,
@@ -10718,6 +10808,16 @@
       "executed": false,
       "allowed": false,
       "command": "EnumWindows",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
+    },
+    "windows-test-portability": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "test_feishu.py",
       "returncode": null,
       "passed": null,
       "score": 1.0,
@@ -11002,6 +11102,16 @@
       "passed": null,
       "score": 1.0,
       "reason": "no verification section"
+    },
+    "skill-library-maintenance": {
+      "declared": true,
+      "executed": false,
+      "allowed": false,
+      "command": "success: true",
+      "returncode": null,
+      "passed": null,
+      "score": 1.0,
+      "reason": "not-allowlisted"
     },
     "smart-cache": {
       "declared": false,

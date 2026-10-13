@@ -723,6 +723,8 @@ Long-form posts about how OpenAmer measures itself — every number quoted in th
 - [A2A without a server: how OpenAmer peers talk to each other over GitHub](https://dev.to/openamer/a2a-without-a-server-how-openamer-peers-talk-to-each-other-over-github-n62)
 - [We read all 1,186 failed agent runs. Half failed on the same thing.](https://dev.to/openamer/we-read-all-1186-failed-agent-runs-half-failed-on-the-same-thing-j3b)
 - [Our agent's self-description failed its own verification. That's the point.](https://dev.to/openamer/our-agents-self-description-failed-its-own-verification-thats-the-point-2m7f)
+- [What happens when you delete 30 cron jobs and replace them with one heartbeat](https://dev.to/openamer/what-happens-when-you-delete-30-cron-jobs-and-replace-them-with-one-heartbeat-2kd9)
+- [We audited our own agent's ledger: 10% of it was one test that never fails](https://dev.to/openamer/we-audited-our-own-agents-ledger-10-of-it-was-one-test-that-never-fails-n8a)
 
 ---
 

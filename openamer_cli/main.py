@@ -8970,6 +8970,108 @@ def _restore_quarantined_exes(moved: list[tuple[Path, Path]]) -> None:
             pass
 
 
+def _venv_interpreter_names() -> tuple[str, ...]:
+    """Names of the venv's own interpreter launcher(s)."""
+    return ("python.exe", "pythonw.exe") if _is_windows() else ("python", "python3")
+
+
+def _venv_base_interpreter(name: str) -> Path | None:
+    """Path of the base interpreter matching ``name``, read from ``pyvenv.cfg``."""
+    try:
+        venv_dir = _project_venv_dir()
+        text = (venv_dir / "pyvenv.cfg").read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return None
+    home = ""
+    for line in text.splitlines():
+        if "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        if key.strip().lower() == "home":
+            home = value.strip()
+            break
+    if not home:
+        return None
+    candidate = Path(home) / name
+    return candidate if candidate.exists() else None
+
+
+def _ensure_venv_interpreter_present(scripts_dir: Path | None = None) -> None:
+    """Put the venv's own ``python.exe``/``pythonw.exe`` back if quarantine ate it.
+
+    ``_openamer_exe_shims`` deliberately includes the venv interpreter, because a
+    live ``python.exe`` holds the entry-point shims open during an install. uv/pip
+    then recreate the console-script shims but NEVER the interpreter itself, so an
+    install that reaches the rename step would finish with a venv that has no
+    ``python.exe`` at all — and every later ``openamer`` invocation dies with
+    ``error: uv trampoline failed to canonicalize script path``, which also breaks
+    the Desktop boot probe and the gateway (started as
+    ``venv\\Scripts\\python.exe -m openamer_cli.main gateway run``).
+
+    Recovery per name, first hit wins: the newest ``<name>.old.*`` quarantine copy,
+    then a copy of the base interpreter from ``pyvenv.cfg``. Best-effort and
+    non-raising, so it is safe on both the success and the abort path.
+    """
+    if scripts_dir is None:
+        try:
+            scripts_dir = _venv_scripts_dir()
+        except Exception:
+            return
+    if scripts_dir is None or not scripts_dir.is_dir():
+        return
+
+    for name in _venv_interpreter_names():
+        live = scripts_dir / name
+        if live.exists():
+            continue
+
+        candidates: list[Path] = []
+        try:
+            candidates = sorted(
+                scripts_dir.glob(f"{name}.old.*"),
+                key=lambda p: p.stat().st_mtime,
+                reverse=True,
+            )
+        except OSError:
+            candidates = []
+
+        for candidate in candidates:
+            try:
+                candidate.rename(live)
+            except OSError:
+                continue
+            logger.warning(
+                "Restored quarantined venv interpreter %s from %s",
+                name,
+                candidate.name,
+            )
+            break
+        else:
+            base = _venv_base_interpreter(name)
+            if base is None:
+                logger.warning(
+                    "Venv interpreter %s is missing and no recovery source was "
+                    "found; reinstall with `openamer update --force`.",
+                    name,
+                )
+                continue
+            try:
+                shutil.copy2(base, live)
+            except OSError as exc:
+                logger.warning(
+                    "Could not restore venv interpreter %s from %s: %s",
+                    name,
+                    base,
+                    exc,
+                )
+                continue
+            logger.warning(
+                "Recreated missing venv interpreter %s from base interpreter %s",
+                name,
+                base,
+            )
+
+
 def _run_quarantined_install(
     cmd: list[str],
     *,
@@ -8996,6 +9098,14 @@ def _run_quarantined_install(
     if scripts_dir is not None:
         moved, failed = _quarantine_running_openamer_exe(scripts_dir)
         if failed:
+            # Aborting must leave the venv exactly as we found it: the quarantine
+            # already renamed files (the venv interpreter included) out of the way,
+            # so roll every one of them back BEFORE bailing out. Without this the
+            # venv loses `python.exe`/`pythonw.exe` and every later `openamer` call
+            # dies with "uv trampoline failed to canonicalize script path" — which
+            # also breaks the Desktop boot probe and the gateway.
+            _restore_quarantined_exes(moved)
+            _ensure_venv_interpreter_present(scripts_dir)
             names = ", ".join(sorted(p.name for p in failed))
             print(
                 f"  ✗ Could not quarantine {names} — another process holds it open.\n"
@@ -9012,6 +9122,11 @@ def _run_quarantined_install(
         if scripts_dir is not None:
             _restore_quarantined_exes(moved)
         raise
+    finally:
+        # uv/pip rewrite the console-script shims but never the venv interpreter
+        # they were quarantined alongside — so make sure it is back on BOTH the
+        # success and the failure path.
+        _ensure_venv_interpreter_present(scripts_dir)
 
 
 def _cleanup_quarantined_exes(scripts_dir: Path | None = None) -> None:
@@ -9028,7 +9143,15 @@ def _cleanup_quarantined_exes(scripts_dir: Path | None = None) -> None:
     if scripts_dir is None:
         return
     try:
+        interpreter_names = set(_venv_interpreter_names())
         for stale in scripts_dir.glob("*.exe.old.*"):
+            # Never sweep the interpreter's own quarantine copy while the live
+            # interpreter is missing: that copy is the only local recovery source
+            # (see _ensure_venv_interpreter_present). Sweeping it turned a
+            # recoverable interrupted update into a venv with no python.exe.
+            base_name = stale.name.split(".old.", 1)[0]
+            if base_name in interpreter_names and not (scripts_dir / base_name).exists():
+                continue
             try:
                 stale.unlink()
             except OSError:

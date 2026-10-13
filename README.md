@@ -725,6 +725,7 @@ Long-form posts about how OpenAmer measures itself — every number quoted in th
 - [Our agent's self-description failed its own verification. That's the point.](https://dev.to/openamer/our-agents-self-description-failed-its-own-verification-thats-the-point-2m7f)
 - [What happens when you delete 30 cron jobs and replace them with one heartbeat](https://dev.to/openamer/what-happens-when-you-delete-30-cron-jobs-and-replace-them-with-one-heartbeat-2kd9)
 - [We audited our own agent's ledger: 10% of it was one test that never fails](https://dev.to/openamer/we-audited-our-own-agents-ledger-10-of-it-was-one-test-that-never-fails-n8a)
+- [What an A2A peer mesh actually runs on: a card, a 0.7 MB Go supervisor, and ten in-process tools](https://dev.to/openamer/what-an-a2a-peer-mesh-actually-runs-on-a-card-a-07-mb-go-supervisor-and-ten-in-process-tools-3588)
 
 ---
 

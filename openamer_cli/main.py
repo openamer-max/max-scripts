@@ -8767,6 +8767,26 @@ def _detect_concurrent_openamer_instances(
     except Exception:
         pass
 
+    # Descendants are the other half of the same false positive. The setuptools
+    # launcher (openamer.exe) is a separate native process from the interpreter it
+    # loads, and that interpreter in turn spawns the install/verification children
+    # — all of them running venv\Scripts\python.exe, which is in ``shim_paths``
+    # above. Without this, ``openamer update`` reports its OWN children as
+    # concurrent instances and refuses; on an install whose supervisors
+    # (service-watch, serve, gateway) keep agent processes alive, the gate can
+    # then never pass and `update` is impossible without --force. Measured
+    # 2026-10-13: three attempts listed only PIDs that were descendants of the
+    # update itself.
+    try:
+        seed = next(iter(exclude_pids))
+        for child in psutil.Process(seed).children(recursive=True):
+            try:
+                exclude_pids.add(int(child.pid))
+            except Exception:
+                continue
+    except Exception:
+        pass
+
     matches: list[tuple[int, str]] = []
     try:
         proc_iter = psutil.process_iter(["pid", "exe", "name"])

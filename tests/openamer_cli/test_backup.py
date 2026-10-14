@@ -1430,6 +1430,45 @@ class TestSafeCopyDb:
         conn.close()
         assert rows == [("wal-test",)]
 
+    def test_deadline_aborts_instead_of_hanging(self, tmp_path):
+        """A copy that cannot finish must fail bounded, never hang the update.
+
+        ``Connection.backup()`` restarts and retries while the source database
+        is written to, so a copy can outlive any useful budget (a live install
+        made no progress for 25 minutes in the pre-update backup). ``deadline_s=0``
+        trips on the first progress callback — the same path a real timeout
+        takes, since CPython ignores the callback's return value and only the
+        exception stops the copy.
+        """
+        from openamer_cli.backup import _safe_copy_db
+
+        src = tmp_path / "busy.db"
+        dst = tmp_path / "copy.db"
+        conn = sqlite3.connect(str(src))
+        conn.execute("CREATE TABLE t (x INTEGER)")
+        conn.executemany("INSERT INTO t VALUES (?)", [(i,) for i in range(5000)])
+        conn.commit()
+        conn.close()
+
+        assert _safe_copy_db(src, dst, deadline_s=0.0) is False
+        # The return value is the contract the callers act on: False = "skip
+        # this file". Removing the destination is their job — on Windows the
+        # still-open backup handle blocks deletion until they close it, and
+        # every caller stages the copy in a NamedTemporaryFile it unlinks in a
+        # finally block.
+
+    def test_explicit_no_deadline_still_copies(self, tmp_path):
+        """deadline_s=None keeps the old unbounded behaviour for callers that want it."""
+        from openamer_cli.backup import _safe_copy_db
+
+        src = tmp_path / "ok.db"
+        dst = tmp_path / "copy.db"
+        with sqlite3.connect(str(src)) as conn:
+            conn.execute("CREATE TABLE t (x INTEGER)")
+            conn.execute("INSERT INTO t VALUES (7)")
+
+        assert _safe_copy_db(src, dst, deadline_s=None) is True
+
 
 
     def test_is_zeroed_sqlite_file_detects_nul_header(self, tmp_path):

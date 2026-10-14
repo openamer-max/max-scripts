@@ -8767,6 +8767,26 @@ def _detect_concurrent_openamer_instances(
     except Exception:
         pass
 
+    # Descendants are the other half of the same false positive. The setuptools
+    # launcher (openamer.exe) is a separate native process from the interpreter it
+    # loads, and that interpreter in turn spawns the install/verification children
+    # — all of them running venv\Scripts\python.exe, which is in ``shim_paths``
+    # above. Without this, ``openamer update`` reports its OWN children as
+    # concurrent instances and refuses; on an install whose supervisors
+    # (service-watch, serve, gateway) keep agent processes alive, the gate can
+    # then never pass and `update` is impossible without --force. Measured
+    # 2026-10-13: three attempts listed only PIDs that were descendants of the
+    # update itself.
+    try:
+        seed = next(iter(exclude_pids))
+        for child in psutil.Process(seed).children(recursive=True):
+            try:
+                exclude_pids.add(int(child.pid))
+            except Exception:
+                continue
+    except Exception:
+        pass
+
     matches: list[tuple[int, str]] = []
     try:
         proc_iter = psutil.process_iter(["pid", "exe", "name"])
@@ -9097,6 +9117,25 @@ def _run_quarantined_install(
     failed: list[Path] = []
     if scripts_dir is not None:
         moved, failed = _quarantine_running_openamer_exe(scripts_dir)
+        # A failed quarantine of the *interpreter* must not abort the update.
+        # pip/uv never rewrite python.exe/pythonw.exe, and this install path now
+        # ends in an unconditional _ensure_venv_interpreter_present() (including
+        # the abort path above), so a live agent or supervisor holding
+        # `venv\Scripts\python.exe` is not a reason to refuse. On a busy install
+        # (supervisor + gateway + dozens of cron agents) such a holder exists
+        # permanently, which made `openamer update` impossible without --force —
+        # measured 2026-10-13: every refusal listed interpreter holders only,
+        # and the listed PIDs were descendants of the update itself.
+        # The launcher shims still block as before: *those* are what pip rewrites,
+        # and losing them takes `openamer` off PATH.
+        if failed and {p.name.lower() for p in failed} <= {"python.exe", "pythonw.exe"}:
+            print(
+                f"  ⚠ Could not quarantine {', '.join(sorted(p.name for p in failed))} — a live "
+                "process holds the interpreter.\n"
+                "    Continuing: the installer does not rewrite it, and the post-install step\n"
+                "    guarantees the venv keeps an interpreter."
+            )
+            failed = []
         if failed:
             # Aborting must leave the venv exactly as we found it: the quarantine
             # already renamed files (the venv interpreter included) out of the way,
@@ -11077,23 +11116,36 @@ def _detect_venv_python_processes(
 
     skip: set[int] = set(exclude_pids or set())
     skip.add(os.getpid())
+    # Walk ancestors one hop at a time. psutil.Process().parents() is
+    # all-or-nothing: on Windows it raises for a parent outside our session
+    # (AccessDenied), which would throw away the ENTIRE skip set and leave the
+    # invoking shell — whose command line contains the venv path because it
+    # launched `venv\Scripts\python.exe -m openamer_cli.main update` — to be
+    # reported as a holder. Measured 2026-10-13.
     try:
-        for anc in psutil.Process().parents():
+        cur = psutil.Process()
+        for _ in range(8):
+            try:
+                par = cur.parent()
+            except Exception:
+                break
+            if par is None or int(par.pid) in skip or int(par.pid) <= 0:
+                break
+            try:
+                anc_cmd = " ".join(par.cmdline() or []).lower()
+            except Exception:
+                anc_cmd = ""
             # The Desktop app's serve backend (`-m openamer_cli.main serve`)
             # and desktop shim (`openamer.exe desktop`) are real lock-holders
             # even when they happen to be ancestors — e.g. an `openamer update`
             # launched from a terminal the app itself spawned. Skipping them
             # here is exactly the gap that let a running Desktop app sail
             # through the guard and strand the venv on a locked openamer.exe.
-            # Only skip ancestors that are part of the update invocation
-            # itself (the `openamer update` shim and its shell).
-            try:
-                anc_cmd = " ".join(anc.cmdline() or []).lower()
-            except Exception:
-                anc_cmd = ""
+            # Stop instead of skipping, so they stay in the candidate set.
             if "serve" in anc_cmd or "desktop" in anc_cmd:
-                continue
-            skip.add(int(anc.pid))
+                break
+            skip.add(int(par.pid))
+            cur = par
     except Exception:
         pass
 
@@ -11127,9 +11179,18 @@ def _detect_venv_python_processes(
         # files. Catch those by what they're running: a cmdline that references
         # this venv's path, or a `-m openamer_cli.main ...` invocation tied to
         # this install (install root in the cmdline or as the working dir).
-        if not is_holder and venv_prefix in cmdline_low:
+        #
+        # Only a Python interpreter can hold a .pyd/extension lock, so the text
+        # fallbacks must not fire for anything else. Without this gate every
+        # shell that merely *mentions* the path counts as a holder — including
+        # the one that launched `openamer update` itself, whose command line
+        # contains `venv\Scripts\python.exe -m openamer_cli.main update`
+        # (measured 2026-10-13: the refusal listed two `bash.exe` processes and
+        # made the update impossible from a shell).
+        is_python_image = "python" in str(info.get("name") or "").lower()
+        if not is_holder and is_python_image and venv_prefix in cmdline_low:
             is_holder = True
-        if not is_holder and "openamer_cli.main" in cmdline_low:
+        if not is_holder and is_python_image and "openamer_cli.main" in cmdline_low:
             if root_prefix in cmdline_low or cwd_low.startswith(root_prefix):
                 is_holder = True
         if not is_holder:
@@ -11957,6 +12018,23 @@ def _cmd_update_impl(args, gateway_mode: bool):
         scripts_dir = _venv_scripts_dir()
         if scripts_dir is not None:
             concurrent = _detect_concurrent_openamer_instances(scripts_dir)
+            # Interpreter holders (python.exe/pythonw.exe) no longer gate the
+            # update: they hold nothing the installer rewrites, the quarantine
+            # tolerates them, and every abort path now leaves the venv intact.
+            # Only the *launcher* shims (openamer*.exe, the OpenAmer Desktop exe)
+            # still block — those are what pip rewrites, and losing them takes
+            # `openamer` off PATH. Without this split the gate can never pass on
+            # an install with a resident supervisor/agent pool, which is what made
+            # `openamer update` impossible without --force (measured 2026-10-13).
+            if concurrent and not any(
+                (name or "").lower() not in {"python.exe", "pythonw.exe"}
+                for _, name in concurrent
+            ):
+                print(
+                    f"  ⚠ {len(concurrent)} process(es) hold the venv interpreter, "
+                    "not the launcher shims — continuing."
+                )
+                concurrent = []
             if concurrent:
                 if getattr(args, "auto_kill", False):
                     _managed = _desktop_managed_pids()

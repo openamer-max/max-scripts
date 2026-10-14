@@ -187,13 +187,80 @@ def test_detect_venv_python_excludes_self_and_ancestors(_winp, tmp_path):
     venv_py = str(tmp_path / "venv" / "Scripts" / "python.exe")
     parent = MagicMock()
     parent.pid = 555
+    parent.cmdline.return_value = ["python.exe", "-m", "openamer_cli.main", "update"]
+    parent.parent.return_value = None  # top of the walk
     me = MagicMock()
-    me.parents.return_value = [parent]
+    me.parent.return_value = parent
     fake_psutil = types.SimpleNamespace(
         process_iter=lambda attrs: iter(
             [
                 _proc(_os.getpid(), venv_py, "python.exe"),
                 _proc(555, venv_py, "openamer.exe"),
+            ]
+        ),
+        Process=lambda *a, **k: me,
+    )
+    with patch.object(cli_main, "PROJECT_ROOT", tmp_path), patch.dict(
+        sys.modules, {"psutil": fake_psutil}
+    ):
+        assert cli_main._detect_venv_python_processes() == []
+
+
+@patch.object(cli_main, "_is_windows", return_value=True)
+def test_detect_venv_python_keeps_ancestors_when_the_walk_raises(_winp, tmp_path):
+    """A psutil error part-way up the chain must not cost us the ancestors
+    we already reached — otherwise the invoking shell gets reported as a
+    .pyd holder and the update is impossible from a shell."""
+    import os as _os
+
+    venv_py = str(tmp_path / "venv" / "Scripts" / "python.exe")
+    parent = MagicMock()
+    parent.pid = 555
+    parent.cmdline.return_value = ["bash.exe", "-c", "cd openamer-agent && venv/Scripts/python.exe"]
+    parent.parent.side_effect = Exception("AccessDenied")  # walk dies here
+    me = MagicMock()
+    me.parent.return_value = parent
+    fake_psutil = types.SimpleNamespace(
+        process_iter=lambda attrs: iter(
+            [
+                _proc(555, "C:\\Windows\\System32\\bash.exe", "bash.exe", ["bash.exe"]),
+                _proc(556, venv_py, "python.exe", ["python.exe", "-m", "openamer_cli.main", "serve"]),
+            ]
+        ),
+        Process=lambda *a, **k: me,
+    )
+    with patch.object(cli_main, "PROJECT_ROOT", tmp_path), patch.dict(
+        sys.modules, {"psutil": fake_psutil}
+    ):
+        matches = cli_main._detect_venv_python_processes()
+
+    assert [m[0] for m in matches] == [556]
+
+
+@patch.object(cli_main, "_is_windows", return_value=True)
+def test_detect_venv_python_ignores_shells_that_merely_mention_the_path(_winp, tmp_path):
+    """Only a Python interpreter can hold a .pyd lock. The text fallback used to
+    flag any process whose command line contained the venv path — including the
+    shell that launched `openamer update` itself."""
+    import os as _os
+
+    venv_py = str(tmp_path / "venv" / "Scripts" / "python.exe")
+    me = MagicMock()
+    me.parent.return_value = None
+    fake_psutil = types.SimpleNamespace(
+        process_iter=lambda attrs: iter(
+            [
+                _proc(
+                    601,
+                    "C:\\Program Files\\Git\\bin\\bash.exe",
+                    "bash.exe",
+                    [
+                        "bash.exe",
+                        "-c",
+                        f'cd "{_os.path.dirname(venv_py)}" && venv/Scripts/python.exe -m openamer_cli.main update',
+                    ],
+                ),
+                _proc(602, "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "powershell.exe", ["powershell.exe", venv_py]),
             ]
         ),
         Process=lambda *a, **k: me,

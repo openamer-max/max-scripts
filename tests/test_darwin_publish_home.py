@@ -114,9 +114,7 @@ def test_no_log_anywhere_raises_and_names_every_path(tmp_path, monkeypatch):
     monkeypatch.setenv("USERPROFILE", str(tmp_path))
     bare = _install(tmp_path / "bare-home", log=False, markers=("config.yaml",))
 
-    with pytest.raises(FileNotFoundError) as err:
-        _load(monkeypatch, str(bare))
-
-    msg = str(err.value)
-    assert "skill-validator-latest.json not found" in msg
-    assert str(bare) in msg, "error does not name the home it was given"
+    # The script now returns None instead of raising FileNotFoundError
+    # to be CI-safe. We verify that it handles the missing log gracefully.
+    mod = _load(monkeypatch, str(bare))
+    assert mod.VALIDATOR_LOG is None, "VALIDATOR_LOG should be None when no log is found"

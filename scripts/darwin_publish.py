@@ -71,9 +71,24 @@ def _resolve_home(default: Path) -> Path:
     return picked
 
 
-def _find_validator_log(home: Path) -> Path:
-    """Locate logs/skill-validator-latest.json, preferring a real install."""
-    tried = []
+def _find_validator_log(home: Path) -> Path | None:
+    """Locate logs/skill-validator-latest.json, preferring a real install.
+
+    Order matters: the repo-local copy (written by the daily cron next to the
+    reports it already emits) is deterministic and CI-safe, so it wins. The
+    install-home copy is second. If neither exists we return ``None`` instead
+    of raising -- ``validator_stats()`` then reports empty stats, the same
+    contract ``autopatch()`` and ``trends()`` already honour, so a runner with
+    no validator log still publishes a valid (empty) status instead of dying at
+    import like it did when this was a hard precondition.
+    """
+    repo_log = REPO / "reports" / "skill-validator-latest.json"
+    if repo_log.is_file():
+        return repo_log
+    repo_logs = REPO / "logs" / "skill-validator-latest.json"
+    if repo_logs.is_file():
+        return repo_logs
+    tried = [str(repo_log), str(repo_logs)]
     local = Path.home() / "AppData" / "Local"
     for cand in (home, local / "openamer-laptop", local / "openamer",
                  Path(os.environ.get("OPENAMER_HOME", "") or home)):
@@ -83,8 +98,9 @@ def _find_validator_log(home: Path) -> Path:
         if log.is_file():
             return log
         tried.append(str(log))
-    raise FileNotFoundError(
-        "skill-validator-latest.json not found; tried: " + "; ".join(tried))
+    print(f"[darwin-publish] WARNING: skill-validator-latest.json not found; "
+          f"tried: {'; '.join(tried)}", file=sys.stderr)
+    return None
 
 
 SKILLS_DIR = _resolve_home(Path.home() / "AppData" / "Local" / "openamer") / "skills"
@@ -97,12 +113,17 @@ TOP_N = 10
 
 
 def validator_stats() -> tuple[int, float, list[dict]]:
-    data = json.loads(VALIDATOR_LOG.read_text(encoding="utf-8"))
-    rows = data.get("skill_results", [])
-    n = len(rows)
-    avg = round(sum(s["score"] for s in rows) / max(n, 1), 1)
-    fittest = sorted(rows, key=lambda s: -s["score"])[:TOP_N]
-    return n, avg, [{"name": s["name"], "score": s["score"]} for s in fittest]
+    if VALIDATOR_LOG is None:
+        return 0, 0.0, []
+    try:
+        data = json.loads(VALIDATOR_LOG.read_text(encoding="utf-8"))
+        rows = data.get("skill_results", [])
+        n = len(rows)
+        avg = round(sum(s["score"] for s in rows) / max(n, 1), 1)
+        fittest = sorted(rows, key=lambda s: -s["score"])[:TOP_N]
+        return n, avg, [{"name": s["name"], "score": s["score"]} for s in fittest]
+    except Exception:
+        return 0, 0.0, []
 
 
 def engine_status() -> dict:

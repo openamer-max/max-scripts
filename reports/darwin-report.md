@@ -1,5 +1,5 @@
 # Darwin Engine Report
-_2026-10-17T01:41:24.739373+00:00 — evolutionary skill ecosystem_
+_2026-10-17T06:31:36.125389+00:00 — evolutionary skill ecosystem_
 
 **Population:** 1154 Skills | **Offspring:** 5 | **Competitions:** 32
 
@@ -7,11 +7,11 @@ _2026-10-17T01:41:24.739373+00:00 — evolutionary skill ecosystem_
 
 | Skill | Fitness | Usage | Age (days) | Mutationen W/L |
 |---|---|---|---|---|
-| autonomous-learning-architecture | 2119.0 | 1265 | 0 | 464/90 |
+| autonomous-learning-architecture | 2143.0 | 1265 | 0 | 476/90 |
 | asi-capability-summary | 2011.27 | 1999 | 22 | 0/0 |
-| a2a-brain-meshlearn-verify | 1718.87 | 1706 | 4 | 0/0 |
-| darwin-cron-guard | 1256.0 | 289 | 0 | 489/24 |
-| darwin-harvested-training-internet-learn-log-jsonl | 1238.0 | 278 | 0 | 484/21 |
+| a2a-brain-meshlearn-verify | 1718.83 | 1706 | 5 | 0/0 |
+| darwin-cron-guard | 1280.0 | 289 | 0 | 501/24 |
+| darwin-harvested-training-internet-learn-log-jsonl | 1262.0 | 278 | 0 | 496/21 |
 | auto-env-checker | 1189.27 | 1235 | 22 | 15/88 |
 | cdp-social-posting | 942.9 | 927 | 3 | 0/0 |
 | learning-loop | 751.13 | 740 | 56 | 0/0 |
@@ -37,8 +37,8 @@ _2026-10-17T01:41:24.739373+00:00 — evolutionary skill ecosystem_
 ## Competitions
 
 - ⏳ `a2a-brain-meshlearn-verify+asi-capability-summary` (0) vs `None` (0)
-- ⏳ `a2a-brain-meshlearn-verify__mutbroaden_trigger` (1718.87) vs `a2a-brain-meshlearn-verify` (1718.87)
-- ⏳ `a2a-brain-meshlearn-verify__muttighten_trigger` (1718.87) vs `a2a-brain-meshlearn-verify` (1718.87)
+- ⏳ `a2a-brain-meshlearn-verify__mutbroaden_trigger` (1718.83) vs `a2a-brain-meshlearn-verify` (1718.83)
+- ⏳ `a2a-brain-meshlearn-verify__muttighten_trigger` (1718.83) vs `a2a-brain-meshlearn-verify` (1718.83)
 - ⏳ `asi-capability-summary+asi-identity` (0) vs `None` (0)
 - ⏳ `asi-capability-summary__mutbroaden_trigger` (2011.27) vs `asi-capability-summary` (2011.27)
 - ⏳ `asi-capability-summary__muttighten_trigger` (2011.27) vs `asi-capability-summary` (2011.27)
@@ -47,16 +47,16 @@ _2026-10-17T01:41:24.739373+00:00 — evolutionary skill ecosystem_
 - ⏳ `auto-env-checker+cdp-social-posting` (0) vs `None` (0)
 - ⏳ `auto-env-checker__mutbroaden_trigger` (1189.27) vs `auto-env-checker` (1189.27)
 - ⏳ `auto-env-checker__muttighten_trigger` (1189.27) vs `auto-env-checker` (1189.27)
-- ⏳ `autonomous-learning-architecture__mutbroaden_trigger` (2119.0) vs `autonomous-learning-architecture` (2119.0)
-- ⏳ `autonomous-learning-architecture__muttighten_trigger` (2119.0) vs `autonomous-learning-architecture` (2119.0)
+- ⏳ `autonomous-learning-architecture__mutbroaden_trigger` (2143.0) vs `autonomous-learning-architecture` (2143.0)
+- ⏳ `autonomous-learning-architecture__muttighten_trigger` (2143.0) vs `autonomous-learning-architecture` (2143.0)
 - ⏳ `cdp-social-posting__mutbroaden_trigger` (942.9) vs `cdp-social-posting` (942.9)
 - ⏳ `cdp-social-posting__muttighten_trigger` (942.9) vs `cdp-social-posting` (942.9)
-- ⏳ `darwin-cron-guard__mutbroaden_trigger` (1256.0) vs `darwin-cron-guard` (1256.0)
-- ⏳ `darwin-cron-guard__muttighten_trigger` (1256.0) vs `darwin-cron-guard` (1256.0)
-- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__muttighten_trigger` (1238.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (1238.0)
-- ⏳ `discord-server-management__mutadd_verification_step` (45.03) vs `discord-server-management` (45.03)
-- ⏳ `discord-server-management__mutbroaden_trigger` (45.03) vs `discord-server-management` (45.03)
-- ⏳ `discord-server-management__muttighten_trigger` (45.03) vs `discord-server-management` (45.03)
+- ⏳ `darwin-cron-guard__mutbroaden_trigger` (1280.0) vs `darwin-cron-guard` (1280.0)
+- ⏳ `darwin-cron-guard__muttighten_trigger` (1280.0) vs `darwin-cron-guard` (1280.0)
+- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__muttighten_trigger` (1262.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (1262.0)
+- ⏳ `discord-server-management__mutadd_verification_step` (45.0) vs `discord-server-management` (45.0)
+- ⏳ `discord-server-management__mutbroaden_trigger` (45.0) vs `discord-server-management` (45.0)
+- ⏳ `discord-server-management__muttighten_trigger` (45.0) vs `discord-server-management` (45.0)
 - ⏳ `github-readme-summary__mutbroaden_trigger` (29.8) vs `github-readme-summary` (29.8)
 - ⏳ `github-readme-summary__muttighten_trigger` (29.8) vs `github-readme-summary` (29.8)
 - ⏳ `openamer-plugin-development__muttighten_trigger` (25.83) vs `openamer-plugin-development` (25.83)

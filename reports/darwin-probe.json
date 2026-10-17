@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T17:00:21.114733+00:00",
+  "updated": "2026-10-17T17:10:42.145035+00:00",
   "skills_dir": "C:\\Users\\damir\\AppData\\Local\\openamer-laptop\\skills",
   "total": 1154,
   "skills": {
@@ -6022,8 +6022,8 @@
       "missing": []
     },
     "internet-learning-cycle": {
-      "refs": 4,
-      "ok": 4,
+      "refs": 5,
+      "ok": 5,
       "score": 1.0,
       "missing": []
     },
@@ -6619,10 +6619,12 @@
       "missing": []
     },
     "github-ci-debugging": {
-      "refs": 4,
+      "refs": 5,
       "ok": 4,
-      "score": 1.0,
-      "missing": []
+      "score": 0.8,
+      "missing": [
+        "gate.sh"
+      ]
     },
     "go-mesh-daemon": {
       "refs": 1,

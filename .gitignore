@@ -98,6 +98,11 @@ apps/shared/src/**/*.js.map
 apps/shared/src/**/*.d.ts
 apps/desktop/release/
 apps/desktop/release-alt/
+# Builder scratch dir: a `release-verify/` checkout is populated by the
+# desktop build for local verification (see builder-debug.yml's
+# firstOrDefaultFilePatterns, which excludes it from the shipped artifact).
+# Binary build output (~500MB: .exe, .blockmap, win-unpacked/) — never track.
+apps/desktop/release-verify/
 *.tsbuildinfo
 
 # Web UI assets — synced from @openamer-research/ui at build time via

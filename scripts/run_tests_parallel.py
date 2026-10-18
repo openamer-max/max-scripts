@@ -116,8 +116,17 @@ def _approximately_count_tests(
     results = {}
 
     for path in files:
-        with open(path, "r", encoding="utf-8") as f:
-            contents = f.read()
+        # A discovered file can vanish between discovery and counting (a retry
+        # rewrites the temp dir), and on Windows a relative path with backslashes
+        # resolves against cwd, not the repo root -- measured 2026-10-16:
+        # ``openamer-agent\C`` was opened and raised FileNotFoundError. Skip
+        # silently; a missing file is not a test failure, it is a discovery race.
+        if not path.exists():
+            continue
+        try:
+            contents = path.read_text(encoding="utf-8")
+        except OSError:
+            continue
         results[path] = contents.count("def test_")
 
     return results
@@ -869,7 +878,36 @@ def main() -> int:
 
     # --files: explicit file list from the CI generate job — skip discovery.
     if args.files:
-        files = [repo_root / f for f in args.files.split(":") if f.strip()]
+        # Split on ":" but keep absolute paths intact. On Windows an absolute
+        # path is ``C:\...`` and the drive letter is a colon, so splitting naively
+        # hands ``C`` and ``\Users\...`` to Path.join, which resolves to
+        # ``repo_root / "C"`` -> ``.../openamer-agent/C``. Measured 2026-10-16:
+        # that FileNotFoundError was the whole failure.
+        files = []
+        parts = args.files.split(":")
+        i = 0
+        while i < len(parts):
+            f = parts[i].strip()
+            if not f:
+                i += 1
+                continue
+            # On Windows the drive letter IS the colon: ``C:\foo`` splits into
+            # ``C`` and ``\foo``, and ``Path("C")`` is not absolute, so the
+            # naive branch resolves to ``repo_root / "C"`` -> .../openamer-agent/C.
+            # Reattach a lone drive letter to the following fragment. Measured
+            # 2026-10-16: this was the whole failure.
+            if (
+                len(f) == 1
+                and f.isalpha()
+                and i + 1 < len(parts)
+                and parts[i + 1].lstrip().startswith("\\")
+            ):
+                f = f + ":" + parts[i + 1].strip()
+                i += 2
+            else:
+                i += 1
+            p = Path(f)
+            files.append(p if p.is_absolute() else repo_root / f)
         roots = []
     else:
         # Resolve discovery roots: positional path args override --paths if any

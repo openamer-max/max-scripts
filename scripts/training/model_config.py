@@ -111,6 +111,11 @@ def endpoint_for_default():
         u = _env("TOKENHARBOR_BASE_URL")
         if u:
             return _strip_v1(u)
+    if "kilo" in p:
+        u = _env("KILO_GATEWAY_BASE_URL")
+        if u:
+            return _strip_v1(u)
+        return "https://ai-gateway.kilo.ai/api"
     if "cloud" in p or "ollama" in p:
         u = _env("OLLAMA_BASE_URL")
         if u:
@@ -124,6 +129,8 @@ def auth_headers() -> dict:
     if "openrouter" in p:
         k = _env("OPENROUTER_API_KEY")
         return {"Authorization": f"Bearer {k}"} if k else {}
+    if "kilo" in p:
+        return {}  # keyless gateway — no auth header needed
     if "token" in p or "harbor" in p:
         k = _env("TOKENHARBOR_API_KEY")
         return {"Authorization": f"Bearer {k}"} if k else {}

@@ -1156,7 +1156,7 @@ def main(
     num_workers: int = 4,
     resume: bool = False,
     verbose: bool = False,
-    list_distributions: bool = False,
+    list_distributions_flag: bool = False,
     ephemeral_system_prompt: str = None,
     log_prefix_chars: int = 100,
     providers_allowed: str = None,
@@ -1219,7 +1219,7 @@ def main(
         python batch_runner.py --list_distributions
     """
     # Handle list distributions
-    if list_distributions:
+    if list_distributions_flag:
         from toolset_distributions import print_distribution_info
 
         print("📊 Available Toolset Distributions")

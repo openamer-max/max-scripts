@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-16T19:00:16",
+  "timestamp": "2026-10-18T19:10:28",
   "mode": "apply",
-  "population": 1154,
-  "avg_score": 38.6,
+  "population": 1181,
+  "avg_score": 38.5,
   "kept": [
     {
       "skill": "auto-internet-learning-metas-new",
@@ -33,18 +33,7 @@
       "fixes": []
     },
     {
-      "skill": "auto-competitor-intelligence-contractmd-the",
-      "before": 21,
-      "after": 25,
-      "delta": 4,
-      "fixes": [
-        "✅ metadata.openamer Block hinzugefügt",
-        "✅ platforms Feld hinzugefügt",
-        "✅ version Feld hinzugefügt"
-      ]
-    },
-    {
-      "skill": "auto-competitor-intelligence-some-uncomfortab",
+      "skill": "auto-internet-learning-llm-agents",
       "before": 21,
       "after": 28,
       "delta": 7,
@@ -55,7 +44,21 @@
       ]
     },
     {
-      "skill": "auto-competitor-intelligence-undisclosed-addi",
+      "skill": "auto-internet-learning-metas-new",
+      "before": 21,
+      "after": 31,
+      "delta": 10,
+      "fixes": []
+    },
+    {
+      "skill": "auto-internet-learning-openai-hacked",
+      "before": 21,
+      "after": 31,
+      "delta": 10,
+      "fixes": []
+    },
+    {
+      "skill": "auto-latest-research-insight-arxiv",
       "before": 21,
       "after": 28,
       "delta": 7,
@@ -66,32 +69,17 @@
       ]
     },
     {
-      "skill": "auto-efficiency-learning-advanced-quantizatio",
+      "skill": "auto-latest-research-insight-cultural",
+      "before": 21,
+      "after": 31,
+      "delta": 10,
+      "fixes": []
+    },
+    {
+      "skill": "auto-latest-research-insight-proofofthought",
       "before": 21,
       "after": 28,
       "delta": 7,
-      "fixes": [
-        "✅ metadata.openamer Block hinzugefügt",
-        "✅ platforms Feld hinzugefügt",
-        "✅ version Feld hinzugefügt"
-      ]
-    },
-    {
-      "skill": "auto-efficiency-learning-efficientqat-llm",
-      "before": 21,
-      "after": 28,
-      "delta": 7,
-      "fixes": [
-        "✅ metadata.openamer Block hinzugefügt",
-        "✅ platforms Feld hinzugefügt",
-        "✅ version Feld hinzugefügt"
-      ]
-    },
-    {
-      "skill": "auto-efficiency-learning-ondevice-llm",
-      "before": 21,
-      "after": 25,
-      "delta": 4,
       "fixes": [
         "✅ metadata.openamer Block hinzugefügt",
         "✅ platforms Feld hinzugefügt",

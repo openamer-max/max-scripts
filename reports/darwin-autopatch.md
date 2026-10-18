@@ -1,6 +1,6 @@
-# 🧬 Darwin Auto-Patch Report — 2026-10-16T19:00:16
+# 🧬 Darwin Auto-Patch Report — 2026-10-18T19:10:28
 
-- Population: 1154 skills, avg 38.6
+- Population: 1181 skills, avg 38.5
 - Mode: **apply**
 
 ## Improved (kept)
@@ -9,9 +9,9 @@
 - ✅ `auto-internet-learning-openai-hacked`: 21 → 31 (+10)
 - ✅ `auto-latest-research-insight-cultural`: 21 → 31 (+10)
 - ✅ `auto-structural-connection-between-tool`: 21 → 31 (+10)
-- ✅ `auto-competitor-intelligence-contractmd-the`: 21 → 25 (+4)
-- ✅ `auto-competitor-intelligence-some-uncomfortab`: 21 → 28 (+7)
-- ✅ `auto-competitor-intelligence-undisclosed-addi`: 21 → 28 (+7)
-- ✅ `auto-efficiency-learning-advanced-quantizatio`: 21 → 28 (+7)
-- ✅ `auto-efficiency-learning-efficientqat-llm`: 21 → 28 (+7)
-- ✅ `auto-efficiency-learning-ondevice-llm`: 21 → 25 (+4)
+- ✅ `auto-internet-learning-llm-agents`: 21 → 28 (+7)
+- ✅ `auto-internet-learning-metas-new`: 21 → 31 (+10)
+- ✅ `auto-internet-learning-openai-hacked`: 21 → 31 (+10)
+- ✅ `auto-latest-research-insight-arxiv`: 21 → 28 (+7)
+- ✅ `auto-latest-research-insight-cultural`: 21 → 31 (+10)
+- ✅ `auto-latest-research-insight-proofofthought`: 21 → 28 (+7)

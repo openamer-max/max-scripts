@@ -1,14 +1,14 @@
-[autopatch] validating population (2026-10-18T19:10:28) ...
-[autopatch] population: 1181 skills, avg 38.5
-[autopatch] 10 weak skills: auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-cultural(21), auto-structural-connection-between-tool(21), auto-internet-learning-llm-agents(21), auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-arxiv(21), auto-latest-research-insight-cultural(21), auto-latest-research-insight-proofofthought(21)
+[autopatch] validating population (2026-10-19T19:20:50) ...
+[autopatch] population: 1183 skills, avg 38.5
+[autopatch] 10 weak skills: auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-cultural(21), auto-structural-connection-between-tool(21), auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-cultural(21), auto-latest-research-insight-memgpt(21), auto-latest-research-insight-selfretrieval(21), auto-latest-research-insight-teuken7bbase(21)
 [autopatch] ✅ auto-internet-learning-metas-new: 21 → 31
 [autopatch] ✅ auto-internet-learning-openai-hacked: 21 → 31
 [autopatch] ✅ auto-latest-research-insight-cultural: 21 → 31
 [autopatch] ✅ auto-structural-connection-between-tool: 21 → 31
-[autopatch] ✅ auto-internet-learning-llm-agents: 21 → 28
 [autopatch] ✅ auto-internet-learning-metas-new: 21 → 31
 [autopatch] ✅ auto-internet-learning-openai-hacked: 21 → 31
-[autopatch] ✅ auto-latest-research-insight-arxiv: 21 → 28
 [autopatch] ✅ auto-latest-research-insight-cultural: 21 → 31
-[autopatch] ✅ auto-latest-research-insight-proofofthought: 21 → 28
+[autopatch] ✅ auto-latest-research-insight-memgpt: 21 → 25
+[autopatch] ✅ auto-latest-research-insight-selfretrieval: 21 → 28
+[autopatch] ✅ auto-latest-research-insight-teuken7bbase: 21 → 28
 [autopatch] report → C:\Users\damir\openamer-repo\reports\darwin-autopatch.md

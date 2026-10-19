@@ -3239,7 +3239,9 @@ class OptionalSkillSource(SkillSource):
                 and "__pycache__" not in f.parts
                 and f.suffix != ".pyc"
             ):
-                rel_path = str(f.relative_to(skill_dir))
+                # bundle keys are POSIX-shaped (like .gitignore/.skillignore);
+                # str() would put backslashes on Windows and every lookup misses
+                rel_path = f.relative_to(skill_dir).as_posix()
                 try:
                     files[rel_path] = f.read_bytes()
                 except OSError:
@@ -3576,7 +3578,9 @@ def quarantine_bundle(bundle: SkillBundle) -> Path:
         if isinstance(file_content, bytes):
             file_dest.write_bytes(file_content)
         else:
-            file_dest.write_text(file_content, encoding="utf-8")
+            # newline="" keeps the declared bytes: text mode rewrites "\n" as
+            # "\r\n" on Windows, which breaks the bundle hash comparison.
+            file_dest.write_text(file_content, encoding="utf-8", newline="")
 
     return dest
 

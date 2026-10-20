@@ -2960,7 +2960,7 @@ wheels = [
 
 [[package]]
 name = "openamer-agent"
-version = "2026.10.19"
+version = "2026.10.20"
 source = { editable = "." }
 dependencies = [
     { name = "certifi" },
@@ -5174,7 +5174,7 @@ dependencies = [
     { name = "tyro" },
     { name = "unsloth-zoo" },
     { name = "wheel" },
-    { name = "xformers", marker = "(platform_machine == 'AMD64' and 'linux' in sys_platform) or (platform_machine == 'x86_64' and 'linux' in sys_platform) or (platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'x86_64' and sys_platform == 'win32')" },
+    { name = "xformers", marker = "(platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'x86_64' and sys_platform == 'win32') or (platform_machine == 'AMD64' and 'linux' in sys_platform) or (platform_machine == 'x86_64' and 'linux' in sys_platform)" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fa/2e/1a70847822d97edc66d6dd548aaf457949bb6cddfe16ee2c806f6b25537a/unsloth-2026.9.2-py3-none-any.whl", hash = "sha256:439a2de85306661d6c4a46e1043472ffa57202c7dc438934eb9507224c441cfe", size = 82329161, upload-time = "2026-09-02T13:07:20.895Z" },

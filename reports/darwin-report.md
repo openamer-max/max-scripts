@@ -1,5 +1,5 @@
 # Darwin Engine Report
-_2026-10-20T07:56:08.340422+00:00 — evolutionary skill ecosystem_
+_2026-10-20T11:45:52.858729+00:00 — evolutionary skill ecosystem_
 
 **Population:** 1185 Skills | **Offspring:** 5 | **Competitions:** 32
 
@@ -7,11 +7,11 @@ _2026-10-20T07:56:08.340422+00:00 — evolutionary skill ecosystem_
 
 | Skill | Fitness | Usage | Age (days) | Mutationen W/L |
 |---|---|---|---|---|
-| autonomous-learning-architecture | 2121.0 | 984 | 0 | 628/135 |
+| autonomous-learning-architecture | 2143.0 | 984 | 0 | 639/135 |
 | asi-capability-summary | 1760.17 | 1748 | 25 | 0/0 |
 | a2a-brain-meshlearn-verify | 1718.73 | 1706 | 8 | 0/0 |
-| darwin-cron-guard | 1581.0 | 284 | 0 | 654/24 |
-| darwin-harvested-training-internet-learn-log-jsonl | 1562.0 | 276 | 0 | 647/21 |
+| darwin-cron-guard | 1603.0 | 284 | 0 | 665/24 |
+| darwin-harvested-training-internet-learn-log-jsonl | 1584.0 | 276 | 0 | 658/21 |
 | auto-env-checker | 882.17 | 928 | 25 | 15/88 |
 | cdp-social-posting | 732.8 | 717 | 6 | 0/0 |
 | learning-loop | 672.03 | 661 | 59 | 0/0 |
@@ -20,10 +20,10 @@ _2026-10-20T07:56:08.340422+00:00 — evolutionary skill ecosystem_
 
 ## Bottom 5 (selection candidates)
 
-- **tao-setup-nvidia-gpu-host** (Fitness 7.7, 9 days old)
-- **tao-train-optical-inspection** (Fitness 7.7, 9 days old)
-- **web-artifacts-builder** (Fitness 7.7, 9 days old)
-- **xlsx** (Fitness 7.7, 9 days old)
+- **tao-setup-nvidia-gpu-host** (Fitness 7.67, 10 days old)
+- **tao-train-optical-inspection** (Fitness 7.67, 10 days old)
+- **web-artifacts-builder** (Fitness 7.67, 10 days old)
+- **xlsx** (Fitness 7.67, 10 days old)
 - **cron-autotest-run-cron-entry** (Fitness 7.03, 29 days old)
 
 ## New mutations
@@ -47,13 +47,13 @@ _2026-10-20T07:56:08.340422+00:00 — evolutionary skill ecosystem_
 - ⏳ `auto-env-checker+cdp-social-posting` (0) vs `None` (0)
 - ⏳ `auto-env-checker__mutbroaden_trigger` (882.17) vs `auto-env-checker` (882.17)
 - ⏳ `auto-env-checker__muttighten_trigger` (882.17) vs `auto-env-checker` (882.17)
-- ⏳ `autonomous-learning-architecture__mutbroaden_trigger` (2121.0) vs `autonomous-learning-architecture` (2121.0)
-- ⏳ `autonomous-learning-architecture__muttighten_trigger` (2121.0) vs `autonomous-learning-architecture` (2121.0)
+- ⏳ `autonomous-learning-architecture__mutbroaden_trigger` (2143.0) vs `autonomous-learning-architecture` (2143.0)
+- ⏳ `autonomous-learning-architecture__muttighten_trigger` (2143.0) vs `autonomous-learning-architecture` (2143.0)
 - ⏳ `cdp-social-posting__mutbroaden_trigger` (732.8) vs `cdp-social-posting` (732.8)
 - ⏳ `cdp-social-posting__muttighten_trigger` (732.8) vs `cdp-social-posting` (732.8)
-- ⏳ `darwin-cron-guard__mutbroaden_trigger` (1581.0) vs `darwin-cron-guard` (1581.0)
-- ⏳ `darwin-cron-guard__muttighten_trigger` (1581.0) vs `darwin-cron-guard` (1581.0)
-- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__muttighten_trigger` (1562.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (1562.0)
+- ⏳ `darwin-cron-guard__mutbroaden_trigger` (1603.0) vs `darwin-cron-guard` (1603.0)
+- ⏳ `darwin-cron-guard__muttighten_trigger` (1603.0) vs `darwin-cron-guard` (1603.0)
+- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__muttighten_trigger` (1584.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (1584.0)
 - ⏳ `discord-server-management__mutadd_verification_step` (40.9) vs `discord-server-management` (40.9)
 - ⏳ `discord-server-management__mutbroaden_trigger` (40.9) vs `discord-server-management` (40.9)
 - ⏳ `discord-server-management__muttighten_trigger` (40.9) vs `discord-server-management` (40.9)

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 OpenAmer CLI - Unified command-line interface for OpenAmer Agent.
 

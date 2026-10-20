@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Per-provider model-selection wizard flows for ``openamer setup`` / ``openamer model``.
 
 Extracted from ``openamer_cli/main.py`` as part of the god-file decomposition

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Mixture-of-Agents runtime helpers for /moa turns.
 
 The slash command is deliberately not a model tool. It marks one user turn as

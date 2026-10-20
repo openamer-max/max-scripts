@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Fail when in-tree code depends on a plugin-compat pointer.
 
 ``compat_manifest.json`` lists every name the Sep 2026 decomposition kept importable from its OLD

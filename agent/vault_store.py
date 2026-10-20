@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Local credential vault: named items, resolved on demand, never in the environment.
 
 WHY A SEPARATE ABSTRACTION

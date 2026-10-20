@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Boundary-aware partial compression — "summarize up to here".
 
 Inspired by Claude Code's Rewind menu "Summarize up to here" action

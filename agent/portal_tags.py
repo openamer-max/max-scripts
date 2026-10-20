@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Centralized OpenAmer Portal request tags.
 
 Every OpenAmer request that hits the OpenAmer Portal — main agent loop, auxiliary

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Session Search Tool - Long-Term Conversation Recall
 

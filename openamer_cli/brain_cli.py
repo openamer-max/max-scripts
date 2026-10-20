@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``openamer_cli.brain_cli`` — make the learning loop visible and measurable.
 
 Provides the ``openamer brain stats | status | graph | insights`` subcommands

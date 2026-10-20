@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Organism Identity (Phase 27) - every Darwin entity gets a human identity:
 a real name, a face (facial parameters), a personality, a mood, a biography.

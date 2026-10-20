@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """SCALING AXIS A: does the group-state method scale with GROUP SIZE?
 
 WHY THIS IS THE HONEST OPEN QUESTION

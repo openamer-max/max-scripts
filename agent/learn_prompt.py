@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """``/learn`` — build the standards-guided prompt that turns whatever the user
 described into a reusable skill.
 

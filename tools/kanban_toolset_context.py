@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Explicit Kanban selection during one model-schema build.
 
 The registry's ordinary availability cache is profile-wide, while a gateway

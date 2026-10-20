@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Shell-script hooks bridge.
 

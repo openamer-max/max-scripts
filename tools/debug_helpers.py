@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared debug session infrastructure for OpenAmer tools.
 
 Replaces the identical DEBUG_MODE / _log_debug_call / _save_debug_log /

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 429-Resilience Helper - shared logic for cron wrappers that hit rate limits.
 ============================================================================

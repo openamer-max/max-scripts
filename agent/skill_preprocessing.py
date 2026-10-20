@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared SKILL.md preprocessing helpers."""
 
 import logging

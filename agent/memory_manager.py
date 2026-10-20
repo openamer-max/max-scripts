@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """MemoryManager — orchestrates memory providers for the agent.
 
 Single integration point in run_agent.py. Replaces scattered per-backend

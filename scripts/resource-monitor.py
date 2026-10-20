@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Resource Monitor — Live-Terminal-Dashboard CPU/RAM/DISK/NET + Top-Prozesse + Alarm
 

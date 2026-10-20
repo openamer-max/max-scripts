@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Brain Train — train an OpenAmer-specific small model from collected brain data.
 
 Hardware-aware: full QLoRA on an NVIDIA GPU (3060Ti), CPU smoke-test on laptops with no

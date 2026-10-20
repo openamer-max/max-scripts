@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """self_evolve.py — Autonomous growth logger for OpenAmer.
 
 Scans recent sessions for new patterns, capabilities, and bugs.

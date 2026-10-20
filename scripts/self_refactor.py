@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """self_refactor.py — guided, safety-gated self-refactoring of openamer_cli.
 
 The concrete step from "collecting rules" toward real self-modification: this

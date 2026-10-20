@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """desktop_rebuild.py — safe, non-self-killing Desktop rebuild + restart.
 
 THE hard rule this enforces: never kill OpenAmer.exe from the agent (a PID

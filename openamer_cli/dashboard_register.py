@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``openamer dashboard register`` — register a self-hosted dashboard OAuth client.
 
 Automates what a user otherwise does by hand: open the OpenAmer Portal

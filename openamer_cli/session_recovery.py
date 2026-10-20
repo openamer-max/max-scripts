@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Offline, non-destructive recovery for a damaged OpenAmer session database.
 
 The recovery path deliberately avoids in-place repair:

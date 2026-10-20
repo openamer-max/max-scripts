@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Autonomous Web Agent — self-directed internet navigation for OpenAmer.
 
 The WebAgent class wraps OpenAmer's browser_* and web_search tools into a plan-

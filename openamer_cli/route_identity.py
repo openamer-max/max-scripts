@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Fail-closed URL identity normalization for model/provider routes."""
 
 from __future__ import annotations

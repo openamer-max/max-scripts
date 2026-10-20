@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """fix_text_encoding.py - AST-guided sweep for the Windows subprocess footgun.
 
 The footgun: subprocess.call/run/Popen/check_* with text=True but no encoding=.

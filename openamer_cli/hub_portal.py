@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 ``openamer hub`` — OpenAmer Hub Portal (lokales Web-Dashboard).
 

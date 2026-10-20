@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer middleware contract helpers.
 
 Observer hooks report what happened. Middleware can change what happens by

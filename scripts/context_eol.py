@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """context_eol.py — hard Context-End-Of-Life automation.
 
 Implements the EOL trigger (context-compressor skill): measure the running

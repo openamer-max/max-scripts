@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Kanban decomposer — fan a triage task out into a graph of child tasks.
 
 Invoked by ``openamer kanban decompose [task_id | --all]`` and the gateway

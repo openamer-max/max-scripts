@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Lint-and-Fix Engine — run linters, categorize issues, auto-fix, and watch.
 

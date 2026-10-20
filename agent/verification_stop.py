@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Turn-end verification guard for coding edits.
 
 This module is intentionally policy-only. It never runs checks itself; it turns

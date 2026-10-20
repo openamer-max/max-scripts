@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Darwin Live Dashboard - HTTP server exposing the ecosystem state.
 Endpoints:

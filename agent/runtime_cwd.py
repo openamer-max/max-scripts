@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Single source of truth for the agent working directory.
 
 `TERMINAL_CWD` is the runtime carrier for the configured working directory

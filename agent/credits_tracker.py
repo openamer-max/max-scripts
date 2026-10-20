@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Credits tracking for OpenAmer inference API responses.
 
 Parses x-openamer-credits-* (and optional x-openamer-tool-pool-*) headers from

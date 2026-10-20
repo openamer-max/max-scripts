@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Smart Approvals (Human-in-the-Loop) for OpenAmer Agent.
 
 Provides risk-aware approval gates that pause agent execution before certain

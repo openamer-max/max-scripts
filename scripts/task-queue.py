@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Persistent Task Queue — JSON-basiert, mit Prioritäten, Daemon, Retry & Stats.
 

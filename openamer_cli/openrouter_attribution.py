@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 OpenRouter App Attribution — sorgt dafür dass OpenAmer in den OpenRouter-Rankings erscheint.
 

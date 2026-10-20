@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Continuous Benchmarking — testet OpenAmer gegen Standard-Benchmarks.
 
 Misst Fähigkeiten in 5 Dimensionen:

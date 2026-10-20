@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 # -*- coding: utf-8 -*-
 """
 Auto-Dokumentation Generator — README, CHANGELOG, Skills-Index, Cron-Status.

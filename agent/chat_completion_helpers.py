@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Helper functions for the chat-completions code path.
 
 Extracted from :class:`AIAgent` for cleanliness — bodies of the

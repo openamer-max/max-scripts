@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Interactive setup wizard for the WhatsApp Cloud API adapter.
 

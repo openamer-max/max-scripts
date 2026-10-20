@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``openamer portal`` — the human-readable entry point for OpenAmer Portal.
 
 Running ``openamer portal`` with no subcommand performs the one-shot Portal

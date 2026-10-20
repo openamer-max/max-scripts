@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Plugin LLM facade — host-owned LLM access for trusted plugins.
 ==============================================================

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Background keepalive for long-lived OpenAmer Portal sessions."""
 
 from __future__ import annotations

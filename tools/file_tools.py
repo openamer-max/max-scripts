@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """File Tools Module - LLM agent file manipulation tools."""
 
 import errno

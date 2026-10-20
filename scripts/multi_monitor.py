@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 multi-monitor.py — Multi-Monitor Desktop Control für OpenAmer Agent.
 

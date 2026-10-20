@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Guardrails — configurable safety rules for agent actions.
 
 Extends the existing HITL system with pre-defined safety policies.

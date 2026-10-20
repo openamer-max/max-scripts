@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 SSH Remote Manager — Multi-Host-Verwaltung + parallel exec + scp + Ping-Health-Check
 

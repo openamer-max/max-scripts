@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Normalized OpenAmer Portal account entitlement helpers."""
 
 from __future__ import annotations

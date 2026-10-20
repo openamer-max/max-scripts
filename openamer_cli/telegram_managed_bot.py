@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Telegram Managed Bot onboarding client.
 
 Uses Telegram's Managed Bots feature to create a user-owned child bot without

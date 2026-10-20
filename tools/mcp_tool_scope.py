@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Connection-ledger keys for tools.mcp_tool under a profile multiplexer.
 
 Every ledger in ``tools.mcp_tool`` (``_servers``, connecting/error/cooldown maps, circuit

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Progressive tool disclosure ("tool search") for OpenAmer Agent.
 
 When enabled, MCP and non-core plugin tools are replaced in the model-visible

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """darwin_promote.py — gate candidates into the live population.
 
 A species-candidate (darwin/species-candidates/<name>/SKILL.md) is promoted

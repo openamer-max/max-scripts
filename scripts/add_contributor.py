@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Add a contributor email → GitHub login mapping.
 
 Writes one file per email under contributors/emails/ (filename = email,

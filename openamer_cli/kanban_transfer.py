@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Kanban board export / import — move a whole board between machines.
 
 Backs ``openamer kanban export|import``, the ``/boards/{slug}/export`` and

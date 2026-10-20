@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Skill bundles — aliases that load multiple skills under one slash command.
 
 A skill bundle is a small YAML file that names a set of skills to load

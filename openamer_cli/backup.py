@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Backup and import commands for openamer CLI.
 

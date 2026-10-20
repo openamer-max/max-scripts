@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Messaging-platform setup wizards (Telegram, BlueBubbles, webhooks) and the ``openamer setup
 gateway`` flow. setup.py re-exports the public names, and tests monkeypatch prompt/print/env
 helpers on openamer_cli.setup, so those are imported lazily per function."""

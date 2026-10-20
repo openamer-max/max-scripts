@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Wiki Generator — Auto-Docs aus Skills + Code
 
 Generiert eine vollständige Wissensdatenbank auf GitHub Pages.

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Stream diagnostics — per-attempt counters, exception chains, retry logging.
 
 When a streaming chat-completions request dies mid-response, we want to

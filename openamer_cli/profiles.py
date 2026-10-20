@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Profile management for multiple isolated OpenAmer instances.
 

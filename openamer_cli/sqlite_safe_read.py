@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Lock-safe inspection of SQLite database files.
 
 Why this module exists

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """verdict_report.py — verdict-first reports with delta vs prior (AEON fleet-control).
 
 Problem: our cron reports lead with detail. A reader (Damir, or the next cron

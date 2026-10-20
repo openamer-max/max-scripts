@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Background daemon that exports closed sessions as training trajectories.
 
 Spawned by ``openamer_cli.main()`` at startup.  Polls the state DB every 60s

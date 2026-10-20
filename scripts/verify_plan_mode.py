@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """End-to-end proof that plan mode refuses a real mutating tool call.
 
 Drives the REAL agent/tool_executor.py sequential path with a fake-but-permissive

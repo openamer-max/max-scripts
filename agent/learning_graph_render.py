@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Terminal renderer for the learning timeline (learned skills + memories).
 
 The desktop app (``apps/desktop/src/app/starmap``) paints a GPU radial

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Bounded experiment: is there a goal whose label does NOT follow from the inputs?
 
 Self-learning's own verdict says: "Aussagekräftig wäre ein Ziel, das NICHT aus den

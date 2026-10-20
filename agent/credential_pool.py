@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Persistent multi-credential pool for same-provider failover."""
 
 from __future__ import annotations

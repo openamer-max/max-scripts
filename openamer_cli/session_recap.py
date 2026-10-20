@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Session recap — summarize what's happened in the current session.
 
 Inspired by Claude Code's `/recap` command (v2.1.114, April 2026), which

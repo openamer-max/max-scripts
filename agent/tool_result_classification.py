@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared helpers for classifying tool result payloads."""
 
 from __future__ import annotations

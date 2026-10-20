@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Skills Hub — Source adapters and hub state management for the OpenAmer Skills Hub.
 

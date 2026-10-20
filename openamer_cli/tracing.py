@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Tracing & Debugging Dashboard für OpenAmer — Agent-Run-Visualisierung.
 
 Stellt eine SQLite-basierte Trace-Datenbank, ein HTML-Dashboard und CLI-

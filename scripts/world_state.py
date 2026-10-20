@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """World State Model (SEAgent idea, adapted): assess each workflow STEP
 BEFORE running it, so drift is predicted instead of only healed after the fact.
 

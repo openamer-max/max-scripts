@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """WIS nightwatch wrapper for the cron job.
 
 Why this exists: the cron job ran the WIS check through an AGENT session, so it

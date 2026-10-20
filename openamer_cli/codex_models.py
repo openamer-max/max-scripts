@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Codex model discovery from API, local cache, and config."""
 
 from __future__ import annotations

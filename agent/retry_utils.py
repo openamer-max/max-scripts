@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Retry utilities — jittered backoff for decorrelated retries.
 
 Replaces fixed exponential backoff with jittered delays to prevent

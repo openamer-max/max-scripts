@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """AWS Bedrock Converse API adapter for OpenAmer Agent.
 
 Provides native integration with Amazon Bedrock using the Converse API,

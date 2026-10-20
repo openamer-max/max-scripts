@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Native Windows containment for local terminal commands.
 
 Why this module exists

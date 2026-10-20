@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Install psutil on Termux/Android by patching upstream platform detection.
 
 psutil's setup currently gates Linux sources behind

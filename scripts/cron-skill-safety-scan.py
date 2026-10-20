@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Cron watchdog: Skill Safety Scan (daily).
 
 Motivation: the 2026-09-16 competitor scan surfaced China's CVERC "skill

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """A controlled demo target — nothing private is ever on screen.
 
 Purpose: give the background-computer-use demo a window whose contents we fully

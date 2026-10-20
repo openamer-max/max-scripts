@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """CLI helpers for configuring Mixture of Agents."""
 
 from __future__ import annotations

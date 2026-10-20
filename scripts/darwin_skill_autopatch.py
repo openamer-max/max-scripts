@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """darwin_skill_autopatch.py — Closed-loop auto-evolution for weak skills.
 
 Pipeline (zero LLM tokens, cron-safe):

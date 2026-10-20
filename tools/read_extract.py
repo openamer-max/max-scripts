@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Stdlib document-to-text extraction for ``read_file``.
 
 Supports Jupyter notebooks, DOCX, and XLSX without adding hard dependencies.

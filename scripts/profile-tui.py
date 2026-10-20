@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Drive the OpenAmer TUI under OPENAMER_DEV_PERF and summarize the pipeline.
 
 Usage:

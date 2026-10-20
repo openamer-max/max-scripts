@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Persist acceptance with the same ownership snapshot as the terminal write."""
 from __future__ import annotations
 

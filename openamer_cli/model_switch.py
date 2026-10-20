@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared model-switching logic for CLI and gateway /model commands.
 
 Both the CLI (cli.py) and gateway (gateway/run.py) /model handlers

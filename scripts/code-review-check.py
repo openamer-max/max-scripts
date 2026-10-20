@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """code-review-check.py - Automated Code Review & Security Scanning Script"""
 
 import subprocess

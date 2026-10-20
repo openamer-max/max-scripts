@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Durable Execution — checkpoint/resume for agent sessions.
 
 Survives crashes: the agent periodically snapshots its state, and

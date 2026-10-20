@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """openamer mcp audit — security posture of configured MCP servers.
 
 Implements a lightweight, read-only "zero-trust / defense-in-depth" audit over

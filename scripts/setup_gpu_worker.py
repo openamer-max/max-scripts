@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer GPU Worker Setup — run this ON THE SECOND PC (with RTX 3060 Ti).
 
 Automatically:

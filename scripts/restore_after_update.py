@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Restore-after-update: brings back everything the desktop updater breaks.
 
 The OpenAmer desktop updater rebuilds the venv and restarts the app.

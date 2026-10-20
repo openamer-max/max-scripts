@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Slash command definitions and autocomplete for the OpenAmer CLI.
 
 Central registry for all slash commands. Every consumer -- CLI help, gateway

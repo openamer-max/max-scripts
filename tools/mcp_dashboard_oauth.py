@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Dashboard-mediated callback bridge for MCP OAuth.
 
 The MCP SDK remains responsible for discovery, DCR, PKCE, state validation and

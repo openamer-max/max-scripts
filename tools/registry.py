@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Central registry for all openamer-agent tools.
 
 Each tool file calls ``registry.register()`` at module level to declare its

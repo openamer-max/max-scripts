@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Configurable tool-output truncation limits.
 
 Ported from anomalyco/opencode PR #23770 (``feat(truncate): allow

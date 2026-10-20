@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Parent-death watchdog supervisor for stdio MCP subprocesses.
 
 Problem this fixes (#TBD): a stdio MCP server (e.g. ``npx -y mcp-remote

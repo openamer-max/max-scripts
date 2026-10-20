@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Tool-dispatch helpers — parallelism gating, multimodal envelopes, mutation tracking.
 
 Pure module-level utilities extracted from ``run_agent.py``:

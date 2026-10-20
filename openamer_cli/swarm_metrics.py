@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Swarm Metrics Dashboard — live Messung der A2A Swarm Performance.
 

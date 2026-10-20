@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """autonom_watchtower.py — 24/7 self-driving guardian for the OpenAmer instance.
 
 Runs as a no_agent cron (zero LLM tokens, zero cost). Every tick it checks the

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Verify the group-state ENGINE: train, persist, reload, answer, and the tool.
 
 WHY: the architecture was demonstrated but never USABLE — every script trained

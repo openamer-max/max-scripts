@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``$OPENAMER_HOME/cache/<kind>/`` materialisation helpers for the image/video
 generation provider ABCs.
 

@@ -734,3 +734,17 @@ Long-form posts about how OpenAmer measures itself — every number quoted in th
 Apache License 2.0 — see [LICENSE](LICENSE).
 
 OpenAmer Agent.
+
+---
+
+<!-- OPENAMER-MAX-MIRROR-ATTRIBUTION -->
+
+## Spiegel-Attribution
+
+**by Amer Sacirovic** — Dieses Repository ist ein FULL MIRROR von [`https://github.com/openamer/openamer`](https://github.com/openamer/openamer).
+
+- Originalcode unveraendert, **Apache-2.0-Lizenz erhalten** (siehe `LICENSE`)
+- Deutsche Praesentation: [`README.de.md`](README.de.md)
+- Herkunfts- und Lizenznachweis: [`ATTRIBUTION_BY_AMER.md`](ATTRIBUTION_BY_AMER.md)
+
+*Spiegel gepflegt von Amer Sacirovic.*

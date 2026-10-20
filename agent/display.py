@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """CLI presentation -- spinner, kawaii faces, tool preview formatting.
 
 Pure display functions and classes with no AIAgent dependency.

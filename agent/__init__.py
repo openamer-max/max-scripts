@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Agent internals -- extracted modules from run_agent.py.
 
 These modules contain pure utility functions and self-contained classes

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Generic managed-tool gateway helpers for OpenAmer-hosted vendor passthroughs."""
 
 from __future__ import annotations

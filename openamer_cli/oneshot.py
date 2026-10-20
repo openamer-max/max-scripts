@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Oneshot (-z) mode: send a prompt, get the final content block, exit.
 
 Bypasses cli.py entirely.  No banner, no spinner, no session_id line,

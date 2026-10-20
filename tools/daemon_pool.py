@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared daemon-thread ThreadPoolExecutor.
 
 Stdlib ``ThreadPoolExecutor`` workers are non-daemon AND are registered in

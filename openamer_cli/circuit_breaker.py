@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Circuit Breaker — Selbstzerstörungs-Schutz für autonome Systeme.
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Self-Learning: Trainiert oa_ripple-Netz auf Session-Daten."""
 import math, random, json, time
 from pathlib import Path

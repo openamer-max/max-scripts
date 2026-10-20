@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """darwin-autopatch-cron.py — cron wrapper: launch autopatch detached, exit fast.
 
 The full autopatch run (3 validator passes) exceeds the 110s cron timeout,

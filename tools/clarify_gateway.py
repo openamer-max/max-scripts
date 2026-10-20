@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Gateway-side clarify primitive (blocking event-based queue).
 
 The ``clarify`` tool needs to ask the user a question and block the agent

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Unified removal contract for every credential source OpenAmer reads from.
 
 Readers live in ``agent.credential_pool``; what is unified here is **removal**:

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Managed scope — IT-pushed, user-immutable config & env layer.
 
 A system-level directory (default ``/etc/openamer``, root-owned and not

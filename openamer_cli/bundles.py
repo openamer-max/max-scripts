@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Implementation of the ``openamer bundles`` CLI subcommand.
 
 Mirrors the structure of ``openamer_cli/skills_hub.py`` but for skill

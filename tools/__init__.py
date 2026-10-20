@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Tools package namespace.
 
 Keep package import side effects minimal. Importing ``tools`` should not

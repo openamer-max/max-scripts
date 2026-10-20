@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Compatibility helper for explicit agent stop producers."""
 
 from __future__ import annotations

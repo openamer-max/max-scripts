@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared CLI/TUI-safe helpers for background MCP discovery."""
 
 from __future__ import annotations

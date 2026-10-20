@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 KI-gesteuerter Auto-Test-Runner: Git-Change-basierte Test-Priorisierung,
 parallele Ausführung, Failure-History-Verfolgung.

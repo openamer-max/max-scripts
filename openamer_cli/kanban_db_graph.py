@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Task graph initialization and atomic decomposition persistence."""
 from __future__ import annotations
 

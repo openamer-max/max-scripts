@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Security policy for credential-bearing stdlib urllib requests."""
 
 from __future__ import annotations

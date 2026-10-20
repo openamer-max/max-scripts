@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Hunger-Reserve: Fallback-Kette gegen 429-Rate-Limits.
 ====================================================

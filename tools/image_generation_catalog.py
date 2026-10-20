@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """FAL image model catalog + upscaler constants for ``tools.image_generation_tool``.
 
 Each entry translates the unified inputs (prompt + aspect_ratio) into the model's native

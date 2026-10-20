@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Live session context-window breakdown for UI surfaces.
 
 Estimates how the next provider request is composed: system prompt tiers,

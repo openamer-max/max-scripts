@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Rate limit tracking for inference API responses.
 
 Captures x-ratelimit-* headers from provider responses and provides

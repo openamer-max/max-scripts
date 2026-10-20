@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Camofox browser backend — local anti-detection browser via REST API.
 
 Camofox-browser is a self-hosted Node.js server wrapping Camoufox (Firefox

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Continuous Learning Loop — Fehler-Capture + Kategorisierung + Memory + Skill-Generierung + Trend
 

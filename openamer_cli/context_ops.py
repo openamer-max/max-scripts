@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Deterministic context- and tool-result management helpers.
 
 These are pure, side-effect-free functions: no LLM calls, no I/O. They exist so

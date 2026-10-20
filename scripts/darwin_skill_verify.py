@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """darwin_skill_verify.py - run the check a skill claims, and record whether it passes.
 
 Why this exists

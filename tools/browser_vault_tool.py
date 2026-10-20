@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Model-blind browser autofill from the local credential vault.
 
 One agent-facing tool, ``browser_vault``, with three actions: ``list``,

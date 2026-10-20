@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 CLI handlers for Plugin Framework, Evaluation, and RAG Pipeline.
 

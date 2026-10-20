@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Lightweight internationalization (i18n) for OpenAmer static user-facing messages.
 
 Scope (thin slice, by design): only the highest-impact static strings shown

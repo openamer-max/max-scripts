@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Desktop Evidence Ledger — every desktop action, with pixel proof.
 
 No other agent documents what it did on your desktop. This one does.

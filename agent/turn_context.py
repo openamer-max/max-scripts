@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Per-turn setup for ``run_conversation`` (the turn prologue).
 
 ``run_conversation`` opened with ~470 lines of straight-line setup before the

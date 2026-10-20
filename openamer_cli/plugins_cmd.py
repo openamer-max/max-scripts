@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``openamer plugins`` CLI subcommand — install, update, remove, and list plugins.
 
 Plugins are installed from Git repositories into ``~/.openamer/plugins/``.

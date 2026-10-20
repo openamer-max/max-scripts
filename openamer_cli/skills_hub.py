@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Skills Hub CLI — Unified interface for the OpenAmer Skills Hub.
 

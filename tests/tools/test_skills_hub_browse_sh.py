@@ -56,6 +56,69 @@ class TestBrowseShSource(unittest.TestCase):
     def test_source_id(self):
         self.assertEqual(self.src.source_id(), "browse-sh")
 
+    def test_catalog_request_excludes_brotli(self):
+        """browse.sh serves brotli; httpx's brotlicffi backend breaks on it.
+
+        The DecodingError is an httpx.HTTPError subclass, so without an
+        explicit Accept-Encoding the failure is swallowed and the source
+        silently contributes 0 skills instead of its full catalog. The repo
+        already applies the same exclusion to the skills.sh sitemap.
+        """
+        captured = {}
+
+        class _Resp:
+            status_code = 200
+
+            @staticmethod
+            def json():
+                return {"skills": []}
+
+        def fake_get(url, **kwargs):
+            captured.update(kwargs)
+            captured["url"] = url
+            return _Resp()
+
+        with patch("tools.skills_hub.httpx.get", side_effect=fake_get):
+            with patch("tools.skills_hub._read_index_cache", return_value=None):
+                with patch("tools.skills_hub._write_index_cache"):
+                    self.src._fetch_catalog()
+
+        self.assertIn("headers", captured, "the catalog request sent no headers")
+        self.assertIn(
+            "Accept-Encoding",
+            captured["headers"],
+            "the catalog request must set Accept-Encoding",
+        )
+        self.assertNotIn(
+            "br",
+            captured["headers"]["Accept-Encoding"].lower(),
+            "brotli must be excluded: httpx's brotli backend fails on these payloads",
+        )
+
+    def test_catalog_decode_failure_is_not_silent(self):
+        """A decode error must not masquerade as an empty catalog.
+
+        The catalog fetch returns [] on a transport error, which is the
+        same shape as "the source is empty". The index builder relies on
+        the difference to tell "browse.sh is down" from "browse.sh is
+        healthy but empty" -- so the error path has to be distinguishable.
+        """
+        import httpx
+
+        def boom(*args, **kwargs):
+            raise httpx.DecodingError(
+                "brotli: decoder process called with data "
+                "when 'can_accept_more_data()' is False"
+            )
+
+        with patch("tools.skills_hub.httpx.get", side_effect=boom):
+            with patch("tools.skills_hub._read_index_cache", return_value=None):
+                with patch("tools.skills_hub._write_index_cache") as write:
+                    result = self.src._fetch_catalog()
+
+        self.assertEqual(result, [], "a failed fetch yields no skills")
+        write.assert_not_called()
+
     @patch.object(BrowseShSource, "_fetch_catalog", return_value=SAMPLE_CATALOG)
     def test_search_returns_results(self, _mock_catalog):
         results = self.src.search("airbnb", limit=10)

@@ -3049,7 +3049,19 @@ class BrowseShSource(SkillSource):
         if cached is not None:
             return cached
         try:
-            resp = httpx.get(self.CATALOG_URL, timeout=20)
+            # browse.sh serves this catalog brotli-compressed, and httpx's
+            # optional brotlicffi backend has a streaming-decode bug that
+            # fails on these payloads. Excluding "br" from Accept-Encoding
+            # makes the server fall back to gzip (or identity), which works
+            # on every httpx install. Without this the DecodingError is
+            # swallowed as an httpx.HTTPError and the source contributes 0
+            # skills instead of its full catalog. Same fix as skills.sh
+            # above.
+            resp = httpx.get(
+                self.CATALOG_URL,
+                timeout=20,
+                headers={"Accept-Encoding": "gzip"},
+            )
             if resp.status_code != 200:
                 return []
             data = resp.json()

@@ -25,7 +25,7 @@ import pytest
 from tools.skills_hub import GitHubAuth, GitHubSource, SkillMeta
 
 
-def _make_source(skills, groupings=None):
+def _make_source(skills):
     """A GitHubSource whose taps all yield the same skill list."""
     src = GitHubSource(auth=MagicMock())
     src.taps = [{"repo": "acme/skills", "path": "skills"}]
@@ -86,8 +86,22 @@ class TestTapListingContract:
     def _entries(self, names):
         return [{"type": "dir", "name": n} for n in names]
 
-    def test_concurrent_listing_matches_sequential_order(self):
+    @pytest.fixture
+    def isolated_source(self):
+        """A GitHubSource with the on-disk index cache neutralised.
+
+        ``_list_skills_in_repo`` reads and writes a real cache file under
+        OPENAMER_HOME, keyed by repo and path. Without this, a tap listing
+        test inherits whatever a previous test wrote for the same key and
+        asserts against foreign data.
+        """
         src = GitHubSource(auth=MagicMock())
+        with patch.object(src, "_read_cache", return_value=None), \
+             patch.object(src, "_write_cache"):
+            yield src
+
+    def test_concurrent_listing_matches_sequential_order(self, isolated_source):
+        src = isolated_source
         names = [f"skill-{i}" for i in range(12)]
         entries = self._entries(names)
 
@@ -111,8 +125,8 @@ class TestTapListingContract:
             f"acme/skills/skills/{n}" for n in names
         ]
 
-    def test_grouping_stamps_are_applied_in_the_concurrent_path(self):
-        src = GitHubSource(auth=MagicMock())
+    def test_grouping_stamps_are_applied_in_the_concurrent_path(self, isolated_source):
+        src = isolated_source
         entries = self._entries(["alpha", "beta"])
 
         def fake_inspect(identifier):
@@ -137,8 +151,8 @@ class TestTapListingContract:
         assert by_name["alpha"].extra.get("category") == "Category A"
         assert "category" not in by_name["beta"].extra
 
-    def test_hidden_directories_are_skipped(self):
-        src = GitHubSource(auth=MagicMock())
+    def test_hidden_directories_are_skipped(self, isolated_source):
+        src = isolated_source
         entries = self._entries(["visible", ".hidden", "_private"])
 
         with patch.object(src, "_github_get") as gh:

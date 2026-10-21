@@ -69,6 +69,15 @@ jobs:
     needs: detect
     if: needs.detect.outputs.python == 'true'
     uses: ./.github/workflows/tests.yml
+    # The timeout has to live on the CALLING job, not inside the called
+    # workflow. A `timeout-minutes` on a job of a reusable workflow is not
+    # enforced while the caller has no limit of its own -- the run then
+    # falls back to the 6-hour default. Measured: the "Run tests slice 4/8"
+    # job carries `timeout-minutes: 30` inside tests.yml, yet it kept
+    # running for 2h10m instead of being killed at 30 minutes, and the run
+    # only stopped when the whole workflow hit its own ceiling. Setting the
+    # limit here actually bounds the test lane.
+    timeout-minutes: 45
     with:
       slice_count: 8
 

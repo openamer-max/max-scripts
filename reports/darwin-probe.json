@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-19T17:20:52.435071+00:00",
+  "updated": "2026-10-20T18:42:43.309481+00:00",
   "skills_dir": "C:\\Users\\damir\\AppData\\Local\\openamer-laptop\\skills",
-  "total": 1183,
+  "total": 1185,
   "skills": {
     "auto-competitor-intelligence-claudepowered-ai": {
       "refs": 0,
@@ -1539,7 +1539,19 @@
       "score": 1.0,
       "missing": []
     },
+    "auto-latest-research-insight-hybrid": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
     "auto-latest-research-insight-memgpt": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
+    "auto-latest-research-insight-training": {
       "refs": 0,
       "ok": 0,
       "score": 1.0,
@@ -7086,10 +7098,12 @@
       "missing": []
     },
     "windows-test-portability": {
-      "refs": 1,
+      "refs": 2,
       "ok": 1,
-      "score": 1.0,
-      "missing": []
+      "score": 0.5,
+      "missing": [
+        "check_eol.py"
+      ]
     },
     "windows-text-encoding-safety": {
       "refs": 1,

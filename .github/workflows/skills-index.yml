@@ -28,9 +28,10 @@ jobs:
     #
     # The old 15-minute budget killed every scheduled run (they all ended
     # "cancelled" after 15m01s and the index was never published). 60 minutes
-    # is still not enough: the measured build needs 65. 120 minutes leaves
-    # headroom for a slow ClawHub page and a slow GitHub resolve.
-    timeout-minutes: 120
+    # is still not enough: the measured build needs 65. On a GitHub-hosted
+    # runner the same crawl is slower than on this laptop, so 180 minutes
+    # covers the measurement with real headroom.
+    timeout-minutes: 180
     environment: trusted-automation
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

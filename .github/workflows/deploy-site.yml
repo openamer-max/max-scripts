@@ -49,7 +49,12 @@ jobs:
   deploy-docs:
     if: github.repository == 'openamer/openamer'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # The "Prepare skills index" step can fall back to a fresh crawl when no
+    # healthy artifact or live index is available. That crawl needs ~20
+    # minutes on its own (ClawHub catalog walk), so the old 30-minute budget
+    # could kill the deploy mid-crawl. 60 minutes leaves room for the crawl
+    # plus the docusaurus build.
+    timeout-minutes: 60
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Use the user's REAL browser profile for a browser session — on a copy.
 
 WHY A COPY, AND WHY THAT MATTERS
@@ -62,6 +61,14 @@ _PROFILE_FILES = (
     "Local State", "Local Storage", "Session Storage", "IndexedDB",
 )
 _PROFILE_DIRS = ("Local Storage", "Session Storage", "IndexedDB")
+
+# Chrome 96+ moved the cookie store out of the profile root into
+# ``<profile>/Network/Cookies``. Snapshotting only the old root-level path
+# silently produced a copy with an EMPTY cookie jar — the browser launched,
+# but every site looked logged out. Both layouts are copied; the one that
+# actually exists on disk wins.
+_PROFILE_SUBDIRS = ("Network",)
+_PROFILE_NETWORK_FILES = ("Cookies", "Cookies-journal")
 
 # Never copy these, even if they match above: they are device-scoped or huge.
 _PROFILE_SKIP = ("Cache", "Code Cache", "GPUCache", "Service Worker", "Crashpad", "ShaderCache")
@@ -251,6 +258,28 @@ def copy_dir_for() -> str:
     return str(get_openamer_home() / "browser-real-profile")
 
 
+def _copy_profile_file(src: Path, dest: Path) -> bool:
+    """Copy one profile file, tolerating a locked or half-written source.
+
+    A live Chrome keeps some profile files (notably ``Login Data``) under a
+    lock that makes a plain ``shutil.copy2`` fail with ``OSError: [Errno 22]``
+    on Windows. A single locked file must not abort the whole snapshot — the
+    cookie store is what carries the session, and losing it because an
+    unrelated file was busy would silently produce a logged-out copy.
+    """
+    try:
+        shutil.copy2(src, dest)
+        return True
+    except (OSError, shutil.Error) as exc:
+        logger.warning("browser real profile: skipping %s (%s)", src.name, exc)
+        try:
+            if dest.exists():
+                dest.unlink()
+        except OSError:
+            pass
+        return False
+
+
 def snapshot_profile(profile_dir: str, copy_dir: Optional[str] = None,
                      *, default_profile: str = "Default") -> str:
     """Copy the login-bearing parts of ``profile_dir`` into ``copy_dir``.
@@ -293,14 +322,29 @@ def snapshot_profile(profile_dir: str, copy_dir: Optional[str] = None,
     for name in _PROFILE_FILES:
         candidate = sub / name
         if candidate.is_file():
-            shutil.copy2(candidate, dest_sub / name)
-            copied += 1
+            if _copy_profile_file(candidate, dest_sub / name):
+                copied += 1
     for name in _PROFILE_DIRS:
         candidate = sub / name
         if candidate.is_dir():
             shutil.copytree(candidate, dest_sub / name, dirs_exist_ok=True,
                             ignore=shutil.ignore_patterns(*_PROFILE_SKIP))
             copied += 1
+
+    # Chrome 96+ layout: the cookie store lives in ``<profile>/Network/``.
+    # Copying it is what makes the snapshot carry a real session — without
+    # this the copy launches cleanly and every site reports "logged out".
+    for subdir in _PROFILE_SUBDIRS:
+        src_net = sub / subdir
+        if not src_net.is_dir():
+            continue
+        dest_net = dest_sub / subdir
+        dest_net.mkdir(parents=True, exist_ok=True)
+        for name in _PROFILE_NETWORK_FILES:
+            candidate = src_net / name
+            if candidate.is_file():
+                if _copy_profile_file(candidate, dest_net / name):
+                    copied += 1
 
     if copied == 0:
         raise RealProfileError(

@@ -116,6 +116,29 @@ class Tab:
                     return None
                 return result.get("value")
 
+    def bring_to_front(self) -> bool:
+        """Aktiviert den Tab im Browser.
+
+        YouTube bricht laufende Uploads ab, wenn der Tab im Hintergrund ist
+        (der Fortschritts-Kanal wird gestoppt). ``Page.bringToFront`` hebt
+        den Tab auf "visible" — das Fenster wandert dabei **nicht** nach vorn,
+        der Nutzer wird nicht unterbrochen.
+        """
+        self._id += 1
+        my_id = self._id
+        self.ws.send(json.dumps({"id": my_id, "method": "Page.bringToFront",
+                                 "params": {}}))
+        ok = False
+        try:
+            while True:
+                msg = json.loads(self.ws.recv())
+                if msg.get("id") == my_id:
+                    ok = "error" not in msg
+                    break
+        except Exception:
+            return False
+        return ok
+
     def wait_text(self, needle: str, timeout: float = 25.0,
                   poll: float = 1.0) -> bool:
         """Wartet, bis ein Text im Body auftaucht."""

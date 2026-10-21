@@ -2227,6 +2227,11 @@ class ClawHubSource(SkillSource):
     # minutes. Bound it so a slow/large catalog cannot hang the caller.
     CATALOG_WALK_BUDGET_SECONDS = 12
 
+    # How often a single catalog page is retried before the walk gives up.
+    # ClawHub occasionally takes >30s for one page; without a retry the
+    # whole crawl ends there and every later page is lost.
+    CATALOG_PAGE_ATTEMPTS = 4
+
     def source_id(self) -> str:
         return "clawhub"
 
@@ -2566,6 +2571,12 @@ class ClawHubSource(SkillSource):
         hit_deadline = False
         hit_max_items = False
 
+        # A page that times out must not end the crawl: ClawHub answers
+        # most pages in ~2s but occasionally takes >30s, and one slow page
+        # used to cost every remaining page. Retry the same cursor a few
+        # times before giving up on the walk.
+        page_attempts = 0
+        exhausted = False
         for _ in range(max_pages):
             if deadline is not None and time.monotonic() > deadline:
                 hit_deadline = True
@@ -2574,12 +2585,32 @@ class ClawHubSource(SkillSource):
             if cursor:
                 params["cursor"] = cursor
 
-            try:
-                resp = httpx.get(f"{self.BASE_URL}/skills", params=params, timeout=30)
-                if resp.status_code != 200:
+            data: Any = None
+            for attempt in range(self.CATALOG_PAGE_ATTEMPTS):
+                try:
+                    resp = httpx.get(
+                        f"{self.BASE_URL}/skills", params=params, timeout=30
+                    )
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        break
+                    if resp.status_code in (429, 500, 502, 503, 504):
+                        # Transient server-side condition: wait it out.
+                        time.sleep(min(2 ** attempt, 20))
+                        continue
+                    # Any other status is a hard stop (e.g. 400 for a
+                    # malformed cursor) -- retrying would not help.
                     break
-                data = resp.json()
-            except (httpx.HTTPError, json.JSONDecodeError):
+                except (httpx.HTTPError, json.JSONDecodeError):
+                    if attempt + 1 < self.CATALOG_PAGE_ATTEMPTS:
+                        time.sleep(min(2 ** attempt, 20))
+                        continue
+                    break
+
+            if data is None:
+                # The page could not be fetched even after retries: the
+                # walk is incomplete, and the flag keeps it out of the
+                # full-catalog cache.
                 break
 
             items = data.get("items", []) if isinstance(data, dict) else []
@@ -2605,6 +2636,8 @@ class ClawHubSource(SkillSource):
 
             cursor = data.get("nextCursor") if isinstance(data, dict) else None
             if not isinstance(cursor, str) or not cursor:
+                # The cursor ran out: this really is the whole catalog.
+                exhausted = True
                 break
 
             # Browse's cold-start fallback only renders one page, so stop as
@@ -2614,11 +2647,12 @@ class ClawHubSource(SkillSource):
                 hit_max_items = True
                 break
 
-        # Only cache a walk that reached a natural stop (cursor exhausted or
-        # page cap). A walk truncated by the wall-clock budget OR by max_items
-        # is partial, so writing it would poison the shared full-catalog cache
-        # with incomplete data.
-        if not hit_deadline and not hit_max_items:
+        # Only a walk whose cursor actually ran out is the complete catalog.
+        # A walk that ended on a page cap, on the wall-clock budget, on
+        # max_items or on a fetch failure is partial, and caching it would
+        # poison the shared full-catalog cache with incomplete data -- the
+        # next run would then serve the truncated catalog forever.
+        if exhausted and not hit_deadline and not hit_max_items:
             _write_index_cache(cache_key, [_skill_meta_to_dict(s) for s in results])
         return results
 

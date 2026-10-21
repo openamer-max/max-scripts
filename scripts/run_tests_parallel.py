@@ -94,6 +94,11 @@ _DEFAULT_FILE_TIMEOUT_SECONDS = 300.0
 # Set to 0 to disable (env: OPENAMER_TEST_FILE_RETRIES).
 _DEFAULT_FILE_RETRIES = 1
 
+# Exit code the runner uses for "killed by the per-file timeout".
+# A timeout is deterministic (the file hangs), not a flake, so it must
+# never be retried -- see _run_one_file.
+_TIMEOUT_RC = 124
+
 # Duration cache: maps relative file paths to last-observed subprocess
 # wall-clock seconds. Used by ``--slice`` to distribute files across
 # CI jobs by estimated total time, so no one job gets all the slow files.
@@ -280,7 +285,13 @@ def _run_one_file(
         file, pytest_args, repo_root, file_timeout
     )
     attempt = 0
-    while rc != 0 and attempt < retries:
+    # A per-file timeout (exit code 124) is NOT a flaky test: the file
+    # hangs deterministically. Retrying it costs another full
+    # file_timeout (900s in CI) and buries the hang under a second
+    # timeout, so the slice sat at exactly 30 minutes until the
+    # job-level timeout killed it, with the offending file never named.
+    # Report it as a failure right away.
+    while rc != 0 and rc != _TIMEOUT_RC and attempt < retries:
         attempt += 1
         first_output = output
         file, rc, output, summary, subproc_wall2 = _run_one_file_once(

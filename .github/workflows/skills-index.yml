@@ -22,11 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     # The crawl is dominated by the ClawHub catalog walk: ~50k skills at
     # 200 per page, fetched one cursor page at a time (the API supports no
-    # offset). Measured at ~1.5-8s per page, that is 10-20 minutes on its
-    # own, so a 15-minute job budget killed every scheduled run (they all
+    # offset). Measured at ~8s per page, that is ~35 minutes on its own, so
+    # the old 15-minute job budget killed every scheduled run (they all
     # ended "cancelled" after 15m01s and the index was never published).
-    # 45 minutes leaves headroom for a slow ClawHub page.
-    timeout-minutes: 45
+    # 60 minutes leaves headroom for a slow ClawHub page.
+    timeout-minutes: 60
     environment: trusted-automation
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

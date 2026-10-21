@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Check that subprocess calls in TUI-context code specify stdin=.
 
 When OpenAmer runs in TUI mode, the gateway child process communicates with

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Best-effort early import for the OpenAI SDK's native streaming parser.
 
 The OpenAI SDK imports ``jiter`` while constructing streaming chat-completion

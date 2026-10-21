@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Generic slash-command confirmation primitive (gateway-side).
 
 Slash commands that have a non-destructive but expensive side effect worth

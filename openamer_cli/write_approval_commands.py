@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Shared handlers for the /memory and /skills write-approval subcommands.
 
 Both the interactive CLI (``cli.py``) and the gateway (``gateway/run.py``) call

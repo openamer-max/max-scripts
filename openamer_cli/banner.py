@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Welcome banner, ASCII art, skills summary, and update check for the CLI.
 
 Pure display functions with no OpenAmerCLI state dependency.

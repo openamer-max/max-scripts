@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Slash-command handlers for the interactive CLI (god-file decomposition Phase 4).
 
 This module hosts the ``_handle_*_command`` slash-command handlers lifted out of

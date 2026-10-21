@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Conversational Voice System for OpenAmer — voice sessions, barge-in, wake word.
 
 Provides a ``VoiceSession`` class for real-time conversational voice interaction:

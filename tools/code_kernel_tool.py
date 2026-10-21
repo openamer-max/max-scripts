@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """``code_kernel`` — run Python cells in a session-persistent interpreter.
 
 WHY THIS TOOL EXISTS

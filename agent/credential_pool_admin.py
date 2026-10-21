@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Locked credential-pool administration and target resolution."""
 from __future__ import annotations
 

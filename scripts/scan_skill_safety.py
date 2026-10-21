@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Skill Safety Scanner — static prompt-injection / skill-poisoning audit.
 
 Motivation (2026-09-16 competitor intel): China's CVERC (National Computer Virus

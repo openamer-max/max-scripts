@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Clipboard image extraction for macOS, Windows, Linux, and WSL2.
 
 Provides a single function `save_clipboard_image(dest)` that checks the

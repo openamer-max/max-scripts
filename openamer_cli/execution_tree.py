@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Interactive execution tree visualization for OpenAmer.
 
 Records and displays the execution history of agent calls as a tree

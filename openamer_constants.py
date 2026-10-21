@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared constants for OpenAmer Agent.
 
 Import-safe module with no dependencies — can be imported from anywhere

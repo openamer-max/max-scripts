@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Session Insights Engine for OpenAmer Agent.
 

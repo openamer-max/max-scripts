@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Prompt channel for credential entry.
 
 A credential must be typed by the USER, on their own surface, through a masked

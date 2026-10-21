@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Propagate agent-turn context into worker threads that dispatch OpenAmer tools.
 
 A bare ``threading.Thread`` / ``ThreadPoolExecutor`` worker starts with an

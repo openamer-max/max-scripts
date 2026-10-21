@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Notification Engine v1.0 — Multi-Channel Alerting für OpenAmer
 ===============================================================

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Per-agent iteration budget — thread-safe consume/refund counter.
 
 Extracted from ``run_agent.py``.  Each ``AIAgent`` instance (parent or

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """spawn_instance.py — automated child-instance flow (AEON spawn-instance idea).
 
 Seda (our first child) was created by hand: mkdir, identity.json, heartbeat.py,

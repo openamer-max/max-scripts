@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Ambient session-accounting context for auxiliary LLM calls.
 
 Auxiliary calls (vision, compression, title generation, web_extract,

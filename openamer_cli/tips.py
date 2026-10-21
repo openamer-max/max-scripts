@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Random tips shown at CLI session start to help users discover features."""
 
 import random

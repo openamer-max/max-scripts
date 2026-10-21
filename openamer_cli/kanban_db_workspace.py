@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Task workspace lifecycle: scratch/dir/worktree resolution (incl. git worktree creation), post-completion cleanup with containment guards, worker tmux teardown and the first-use scratch-workspace tip.
 
 Split out of ``openamer_cli.kanban_db``; origin-resident helpers are reached

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Security Agent — Automated Security Scanning & Vulnerability Detection.
 Scans npm, Python, codebase patterns, and env config for security issues.

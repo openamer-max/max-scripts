@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Text / ``--json`` output helpers shared by the ``openamer kanban`` CLI modules."""
 
 from __future__ import annotations

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Mixture-of-Agents configuration and slash-command helpers."""
 
 from __future__ import annotations

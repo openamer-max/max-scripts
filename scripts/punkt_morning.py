@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """punkt_morning.py — "Punkt" morning companion (data collector for cron).
 
 Gathers overnight state and prints a compact German briefing:

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Binary file extensions to skip for text-based operations.
 
 These files can't be meaningfully compared as text and are often large.

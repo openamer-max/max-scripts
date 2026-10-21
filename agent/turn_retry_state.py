@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Per-attempt recovery bookkeeping for the conversation turn loop.
 
 The inner retry loop in ``run_conversation`` (``while retry_count <

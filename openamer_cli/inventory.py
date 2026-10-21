@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Provider/model inventory context — shared substrate for the dashboard
 ``/api/model/options``, the TUI ``model.options``/``model.save_key``
 JSON-RPC handlers, and the interactive picker.

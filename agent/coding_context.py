@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Coding-context awareness — base OpenAmer, every interactive surface.
 
 When the user runs OpenAmer inside a code workspace (CLI, TUI, desktop app, or an

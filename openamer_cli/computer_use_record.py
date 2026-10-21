@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Recording and playback system for desktop automation via computer_use.
 
 Provides:

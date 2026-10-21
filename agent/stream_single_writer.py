@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Best-effort accessors for the single-writer stream fence (#65991).
 
 The fence itself lives on ``AIAgent`` (``_claim_stream_writer`` /

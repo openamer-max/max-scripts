@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Windows gateway service backend (Scheduled Task + Startup-folder fallback).
 
 This mirrors the contract exposed by ``launchd_install`` / ``launchd_start`` /

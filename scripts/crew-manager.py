@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Crew-Manager: Multi-Agent-Orchestrator mit Rollen (Dev/Tester/Reviewer/Architect).
 Fuehrt spezialisierte Rollen als parallele Subprozesse aus (subprocess.Popen).

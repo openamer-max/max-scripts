@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Image generation provider ABC.
 
 Providers register via ``PluginContext.register_image_gen_provider()`` (from

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """CLI subcommand: ``openamer send`` — pipe text from shell scripts to any
 configured messaging platform (Telegram, Discord, Slack, Signal, SMS, etc.).
 

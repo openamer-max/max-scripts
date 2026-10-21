@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Unified tool configuration for OpenAmer Agent.
 

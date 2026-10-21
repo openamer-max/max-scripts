@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared dollar-denominated usage model for the billing/subscription surfaces.
 
 The single source of truth behind the ``/usage`` and ``/subscription`` usage

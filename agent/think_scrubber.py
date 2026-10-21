@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Stateful scrubber for reasoning/thinking blocks in streamed assistant text.
 
 ``run_agent._strip_think_blocks`` is regex-based and correct for a complete

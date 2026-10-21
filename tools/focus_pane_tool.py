@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Reveal/focus a pane in the OpenAmer desktop GUI.
 
 Gated on ``OPENAMER_DESKTOP`` (like the other GUI affordances). Emits

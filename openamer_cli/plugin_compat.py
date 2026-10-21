@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Plugin compatibility with the Sep 2026 decomposition: detect, warn, and (after the date) disable.
 
 The decomposition (PR #102117) moved most of OpenAmer's internals into ``<stem>_<topic>`` sibling modules.

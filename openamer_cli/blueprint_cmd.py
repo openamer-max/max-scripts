@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared ``/blueprint`` command logic for CLI, TUI, and gateway.
 
 The conversational counterpart to the dashboard's Automation Blueprints form. Where a

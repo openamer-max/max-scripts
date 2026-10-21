@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 neural_lab.py — OpenAmer Neural Architecture Lab
 Reines Python, kein PyTorch/TF. Für CPU-Forschung.

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 auto-backup.py — Tägliche Sicherung + Rotation + Wiederherstellung + optional encryption
 

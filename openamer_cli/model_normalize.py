@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Per-provider model name normalization.
 
 Different LLM providers expect model identifiers in different formats:

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """darwin_evolution_page.py — build the public evolution page (Phase 5).
 
 Reads real Darwin data (history JSONL + latest status JSON) and renders a

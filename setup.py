@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 setup.py — wheel/sdist build guard.
 

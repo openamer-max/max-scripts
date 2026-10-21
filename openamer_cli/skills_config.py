@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Skills configuration for OpenAmer Agent.
 `openamer skills` enters this module.

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """System-prompt assembly for :class:`AIAgent`.
 
 The agent's system prompt is built once per session and reused across all

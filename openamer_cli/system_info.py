@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """openamer_cli.system_info — OpenAmer's self-knowledge of its own system.
 
 One source of truth for "what system am I running on" so OpenAmer can reason

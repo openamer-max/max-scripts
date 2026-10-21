@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Self-tests for the competitive-mechanism tools (run: python scripts/test_competitive_mechanisms.py).
 
 No pytest dependency -- plain asserts so it runs anywhere on this box.

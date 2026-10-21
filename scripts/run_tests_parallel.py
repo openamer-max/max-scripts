@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Per-file parallel test runner.
 
 The minimum-viable replacement for pytest-xdist + a subprocess-isolation

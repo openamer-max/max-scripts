@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared runtime provider resolution for CLI, gateway, cron, and helpers."""
 
 from __future__ import annotations

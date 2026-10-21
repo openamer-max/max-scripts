@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``openamer skin`` — list, switch, and tweak skins from the CLI.
 
 ``set`` is the load-bearing verb: it changes ONE color of the ACTIVE skin **in

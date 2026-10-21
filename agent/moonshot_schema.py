@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Helpers for translating OpenAI-style tool schemas to Moonshot's schema subset.
 
 Moonshot (Kimi) accepts a stricter subset of JSON Schema than standard OpenAI

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """calibration.py - epistemic self-honesty: can this system be WRONG, and does it know?
 
 Gap this fills: an audit of our own code found ZERO files implementing

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Abstract base class for pluggable memory providers.
 
 Memory providers give the agent persistent recall across sessions.

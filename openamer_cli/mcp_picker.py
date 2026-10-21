@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """MCP picker — interactive `openamer mcp picker` (also the default `openamer mcp`).
 
 Lists every catalog entry plus any custom MCP servers the user has added via

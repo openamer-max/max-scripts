@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Shared platform registry for OpenAmer Agent.
 

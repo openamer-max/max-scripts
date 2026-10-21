@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Curator — background skill maintenance orchestrator.
 
 The curator is an auxiliary-model task that periodically reviews agent-created

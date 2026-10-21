@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Context-local state for delegate_task child execution.
 
 The parent OpenAmer process may itself be a Kanban dispatcher worker with

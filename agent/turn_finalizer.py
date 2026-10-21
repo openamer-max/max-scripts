@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Post-loop turn finalization for ``run_conversation``.
 
 Extracted from ``agent/conversation_loop.py`` as part of the god-file

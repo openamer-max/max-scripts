@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Single resolver for every vision_analyze image source -> bytes + mime.
 
 All source handling (data:/http(s)/file/local/container) funnels through

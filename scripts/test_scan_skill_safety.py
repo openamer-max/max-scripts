@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Self-test for scan_skill_safety.py — does it actually catch a poisoned skill?
 
 Builds a throwaway tree with one clean skill and one skill that carries each

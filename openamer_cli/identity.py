@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer ASI identity core.
 
 OpenAmer has its own identity. This module is the single source of truth for

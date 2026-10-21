@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """openamer_cli.security — OpenAmer security hardening: a real risk audit + safe-mode.
 
 Rather than mutating the 170KB approval kernel blindly, this module audits the

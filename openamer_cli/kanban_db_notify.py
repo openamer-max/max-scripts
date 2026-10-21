@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Notification subscriptions consumed by the gateway kanban-notifier: per-(task, platform, chat, thread) rows with delivery metadata, unseen-event cursors and purge of stale done-task subs.
 
 Split out of ``openamer_cli.kanban_db``; origin-resident helpers are reached

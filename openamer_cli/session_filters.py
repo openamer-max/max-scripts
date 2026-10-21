@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared time/filter parsing for `openamer sessions prune` / `archive`.
 
 Turns user-friendly CLI values into the epoch bounds and filter kwargs

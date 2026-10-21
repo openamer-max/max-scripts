@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Print the screen rect of the demo window, so ffmpeg records only that window.
 
 Recording a region rather than the whole desktop guarantees the clip contains

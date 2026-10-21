@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Image generation provider registry.
 
 Populated by plugins at import-time via ``PluginContext.register_image_gen_provider()``;

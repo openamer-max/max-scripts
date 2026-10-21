@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Darwin Engine — Evolutionary skill ecosystem for OpenAmer
 ==========================================================

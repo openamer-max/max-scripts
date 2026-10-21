@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 import sys, io
 sys.path.insert(0, r"C:\Users\damir\openamer-repo")
 from rich.console import Console

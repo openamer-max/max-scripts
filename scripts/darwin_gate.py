@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Darwin Gate (Phase 31) - Agent proposals go through OpenAmer CLI.
 

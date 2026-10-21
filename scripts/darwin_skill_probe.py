@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """darwin_skill_probe.py — executable verification of what a skill claims.
 
 Why this exists

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Code Execution Tool -- Programmatic Tool Calling (PTC)
 

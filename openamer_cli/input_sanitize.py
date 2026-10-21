@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Sanitize user prompt text leaked from terminal / paste control sequences."""
 
 from __future__ import annotations

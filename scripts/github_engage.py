@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """github_engage.py — real, authenticated GitHub outreach using the working token.
 
 The Browser outreach stalled at "login wall" because it tried comment-as-UI.

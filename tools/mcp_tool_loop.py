@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Background-loop plumbing for tools.mcp_tool: cross-process discovery file lock, scheduling
 coroutines onto the MCP loop from caller threads (with profile HOME override and dashboard OAuth
 flow propagation) and the loop's exception handler. Origin state (``_lock``, ``_mcp_loop``) is

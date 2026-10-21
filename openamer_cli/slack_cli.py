@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``openamer slack ...`` CLI subcommands.
 
 Today only ``openamer slack manifest`` is implemented — it generates the

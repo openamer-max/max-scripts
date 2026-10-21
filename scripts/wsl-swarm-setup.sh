@@ -1,4 +1,5 @@
 #!/bin/bash
+# max-scripts Mirror — by Amer Sacirovic
 # OpenAmer WSL Swarm-Node Setup
 # Führt nach apt-Install aus: richtet den WSL-Node für den OpenAmer-Swarm ein
 

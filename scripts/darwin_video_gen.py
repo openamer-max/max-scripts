@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Darwin Video Generator - records the 3D world via playwright.
 Output: reports/video/darwin-video.mp4

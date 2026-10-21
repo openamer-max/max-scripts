@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Codex API runtime — App Server and Responses-API streaming paths.
 
 Extracted from :class:`AIAgent` to keep the agent loop file focused.

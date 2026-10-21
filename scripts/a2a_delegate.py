@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """a2a_delegate.py — delegate a task from THIS laptop to the remote a2a worker.
 
 All transport is over the real internet via GitHub (the a2a relay); nothing uses

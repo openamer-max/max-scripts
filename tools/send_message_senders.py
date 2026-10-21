@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Standalone per-platform senders and error helpers for send_message."""
 
 import asyncio

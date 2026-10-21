@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Cron-wrapper: resource-monitor.py --once --alert (Exit 1 bei Schwellwert = Alarm)."""
 import subprocess, sys
 from pathlib import Path

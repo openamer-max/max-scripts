@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Close a read-only agent terminal tab in the OpenAmer desktop GUI.
 
 Each ``terminal(background=true)`` process is mirrored as a read-only tab in the

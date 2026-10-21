@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Runtime import scan: actually import every module and report failures.
 
 Ground truth for "which modules are broken". A syntax/compile check cannot see a

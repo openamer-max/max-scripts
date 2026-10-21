@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Rendering of MCP tool-result content blocks into model-facing text: size
 capping, _meta filtering, image/audio caching to MEDIA tags, resource links and
 embedded resources."""

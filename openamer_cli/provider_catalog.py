@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Unified provider catalog — one source of truth for the provider universe.
 
 The provider list shown by ``openamer model`` (CLI/TUI) and the desktop Settings

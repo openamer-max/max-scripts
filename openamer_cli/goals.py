@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Persistent session goals — the Ralph loop for OpenAmer.
 
 A goal is a free-form user objective that stays active across turns. After

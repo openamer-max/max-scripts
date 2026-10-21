@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """a2a_worker.py — a remotely-hosted sub-agent node (runs on GitHub Actions).
 
 It talks to the shared GitHub repo (the a2a relay), never opens a port:

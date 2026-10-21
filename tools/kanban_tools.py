@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Kanban tools — structured tool-call surface for worker + orchestrator agents.
 
 Registered only under the dispatcher (``OPENAMER_KANBAN_TASK`` set) or when the profile

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAI-compatible shim that forwards OpenAmer requests to `copilot --acp`.
 
 This adapter lets OpenAmer treat the GitHub Copilot ACP server as a chat-style

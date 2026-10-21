@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Unified provider-credential lifecycle across every store OpenAmer reads.
 
 A provider API key can live in up to THREE stores at once:

@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Prompt-size diagnostic: ``openamer prompt-size``.
 
 Reports a byte/char breakdown of the system prompt the agent would build for

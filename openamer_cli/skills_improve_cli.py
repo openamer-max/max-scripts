@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """CLI integration for the Self-Improving Skills System.
 
 Provides handler functions for `openamer skills stats`, `openamer skills improve`,

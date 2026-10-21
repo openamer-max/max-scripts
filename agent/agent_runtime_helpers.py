@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Assorted AIAgent runtime helpers — moved out of run_agent.py for clarity.
 
 Each function takes the parent ``AIAgent`` as its first argument

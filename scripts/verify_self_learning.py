@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Verification for scripts/self_learning.py.
 
 Proves the honesty gate FIRES (not just that it is silent on good data) using

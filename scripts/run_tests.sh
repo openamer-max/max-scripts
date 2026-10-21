@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# max-scripts Mirror — by Amer Sacirovic
 # Canonical test runner for openamer-agent. Run this instead of calling
 # `pytest` directly to guarantee your local run matches CI behavior.
 #

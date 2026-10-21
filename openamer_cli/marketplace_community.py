@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Agent Marketplace Community — Community features for the marketplace.
 
 Extends the marketplace with:

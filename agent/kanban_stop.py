@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Turn-end guard for kanban workers.
 
 Kanban workers must end with ``kanban_complete`` or ``kanban_block``. Models

@@ -1,0 +1,39 @@
+repos:
+  # Auto-formating (black+isort)
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=88, --target-version=py39]
+
+  # Sort imports (isort)
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: isort (sort Python imports)
+
+  # Security scanning (bandit)
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: bandit
+        args: [-aa]
+
+  # Linting consistency
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.13
+    hooks:
+      - id: ruff
+        args: [--fix, --show-source]
+
+  # Markdown linting
+  - repo: local
+    hooks:
+      - id: markdown-lint
+        name: markdownlint
+        entry: mdl
+        language: node
+        additional_dependencies: []
+        pass_filenames: true

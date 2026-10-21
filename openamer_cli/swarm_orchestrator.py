@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """
 Swarm Orchestrator — Advanced Multi-Agent Orchestration for OpenAmer.
 

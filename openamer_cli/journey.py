@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """``openamer journey`` — what OpenAmer has learned, on a timeline.
 
 A terminal-native rendition of the desktop Star Map / Memory Graph: a horizontal

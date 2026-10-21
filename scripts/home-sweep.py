@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Native home-hygiene organ — quarantine *provable* junk out of the user's HOME.
 
 Owned by the ASI heartbeat (infra subsystem), not a standalone cron.  It runs

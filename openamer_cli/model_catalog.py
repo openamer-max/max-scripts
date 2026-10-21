@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Remote model catalog fetcher.
 
 The OpenAmer docs site hosts a JSON manifest of curated models for providers

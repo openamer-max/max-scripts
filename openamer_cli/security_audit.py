@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """On-demand supply-chain audit for OpenAmer Agent installs.
 
 Scans three surfaces a OpenAmer user actually controls and we can map to

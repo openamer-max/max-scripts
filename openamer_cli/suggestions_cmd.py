@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Shared ``/suggestions`` command logic for CLI and gateway.
 
 Both surfaces call ``handle_suggestions_command(args, origin=...)`` and present

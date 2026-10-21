@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Central manager for per-server MCP OAuth state.
 
 One instance shared across the process. Holds per-server OAuth provider

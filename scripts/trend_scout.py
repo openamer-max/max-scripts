@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """trend_scout.py — hourly, zero-cost AI-agent trend radar.
 
 Polls free public sources (no key, no LLM tokens) for what's new/better in the

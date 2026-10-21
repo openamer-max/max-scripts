@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Windows-safe stdio configuration.
 
 On Windows, Python's ``sys.stdout``/``sys.stderr`` default to the console's

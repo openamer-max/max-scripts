@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Evolutionäre Architektur-Suche: Findet beste Kombination aus Aktivierungen + Topologie."""
 import math, random, time, json
 from pathlib import Path

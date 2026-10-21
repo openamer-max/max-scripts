@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Validation for the ``platform_toolsets`` config section.
 
 Pure, side-effect-free helpers so the logic is unit-testable without importing

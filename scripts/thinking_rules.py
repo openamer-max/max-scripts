@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """scripts/thinking_rules.py — persistent, self-enforcing reasoning rules.
 
 Turn hard-won reasoning lessons into durable, loadable rules — the concrete

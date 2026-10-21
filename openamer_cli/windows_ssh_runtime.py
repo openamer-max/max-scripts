@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Native Windows trust boundary for Desktop SSH backend lifecycle."""
 
 from __future__ import annotations

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Distributed Agent Mesh — Master/Worker-Nodes, HTTP-Task-Delegation, Heartbeat, Local-First Fallback.
 

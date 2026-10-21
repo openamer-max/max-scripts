@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """SQLite connection lifecycle for the Kanban DB: open/configure, cross-process init and dispatch-tick locks, WAL checkpoints, corruption detection + quarantine + repair, additive migrations and the busy-retrying ``write_txn`` boundary.
 
 Split out of ``openamer_cli.kanban_db``; origin-resident helpers are reached

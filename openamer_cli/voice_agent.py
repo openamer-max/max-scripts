@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Voice Agents — realtime voice interaction for OpenAmer.
 
 Enables voice-driven agent conversations:

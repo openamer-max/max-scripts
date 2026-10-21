@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Forschungslauf 2: oa_ripple vs Standard — Benchmark auf 4 Aufgaben."""
 import math, random, time
 

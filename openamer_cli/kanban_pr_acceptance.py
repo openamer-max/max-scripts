@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Exact-head GitHub acceptance for explicitly declared PR tasks.
 
 Network work happens outside SQLite transactions. The lifecycle owner persists

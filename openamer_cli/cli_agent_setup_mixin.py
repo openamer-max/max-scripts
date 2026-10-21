@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Agent-construction and session-resume display methods for ``OpenAmerCLI``.
 
 Extracted from ``cli.py`` as part of the god-file decomposition campaign

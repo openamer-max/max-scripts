@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 Self-Hosted Independence v1.0 — Ollama/Local-LLM-Detection + Auto-Failover + Health
 ===================================================================================

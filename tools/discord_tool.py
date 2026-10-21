@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Discord server introspection and management tool.
 
 Provides the agent with the ability to interact with Discord servers

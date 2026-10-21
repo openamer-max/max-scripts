@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Architect/Editor Mode — separation of planning from implementation.
 
 Architect mode: plans solutions, analyzes codebase, suggests approaches

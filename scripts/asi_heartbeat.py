@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """ASI Heartbeat — Cron-Einstiegspunkt.
 
 Wird vom Cron-Job 'asi-heartbeat-tick' alle 5 Minuten aufgerufen.

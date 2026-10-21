@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Funding Engine — Einnahmen generieren und verfolgen
 
 Reale Einnahmequellen (keine Theorie):

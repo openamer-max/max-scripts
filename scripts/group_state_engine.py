@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Group-state inference: train, SAVE, LOAD, and answer from a trained model.
 
 WHY THIS FILE EXISTS

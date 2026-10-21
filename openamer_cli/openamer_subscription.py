@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Helpers for OpenAmer subscription managed-tool capabilities."""
 
 from __future__ import annotations

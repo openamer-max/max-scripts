@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """CLI handlers for ``openamer secrets bitwarden ...``.
 
 Subcommands:

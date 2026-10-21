@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """
 remote-web.py — Remote Web Platform für OpenAmer
 =================================================

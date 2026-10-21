@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Curator snapshot + rollback.
 
 A pre-run snapshot of ``~/.openamer/skills/`` (excluding ``.curator_backups/``

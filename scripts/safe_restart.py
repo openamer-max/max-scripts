@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """safe_restart.py — coordinate a safe Desktop restart (never self-kill).
 
 Why this exists: an agent that kills OpenAmer.exe kills the chat/agent that

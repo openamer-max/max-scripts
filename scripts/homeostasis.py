@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Homeostasis - internal consistency regulation for OpenAmer's own knowledge.
 
 NOT a competitor copy. Every competitor we studied optimises OUTWARD: more

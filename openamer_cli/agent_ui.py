@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Visual Drag-Drop Agent Builder Web UI — Browser-based agent creation.
 
 Starts a local web server that provides a drag-and-drop visual interface

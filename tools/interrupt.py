@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Per-thread interrupt signaling for all tools.
 
 Provides thread-scoped interrupt tracking so that interrupting one agent

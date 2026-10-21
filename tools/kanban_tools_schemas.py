@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Tool schemas for tools.kanban_tools (model-facing; strings are byte-frozen)."""
 from __future__ import annotations
 

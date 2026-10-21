@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Windows subprocess compatibility helpers.
 
 OpenAmer is developed on Linux / macOS and tested natively on Windows too.

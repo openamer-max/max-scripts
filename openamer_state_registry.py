@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Process-wide shared SessionDB registry.
 
 WHY THIS EXISTS (2026-09-17)

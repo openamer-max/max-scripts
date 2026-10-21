@@ -1,3 +1,4 @@
+# max-scripts Mirror — by Amer Sacirovic
 """Safe ``tar.gz`` primitives shared by the profile and kanban transfer paths."""
 
 from __future__ import annotations

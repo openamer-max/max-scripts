@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# max-scripts Mirror — by Amer Sacirovic
 """Use the user's REAL browser profile for a browser session — on a copy.
 
 WHY A COPY, AND WHY THAT MATTERS

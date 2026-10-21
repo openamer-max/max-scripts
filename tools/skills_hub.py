@@ -638,7 +638,10 @@ class GitHubSource(SkillSource):
                 seen[r.identifier] = r
         results = list(seen.values())
 
-        return results[:limit]
+        # limit <= 0 means "no cap" (crawl_skills_sh relies on it); slicing with
+        # [:0] returned an empty list after walking every tap -- 201s of work
+        # thrown away, and the index build got nothing from GitHub at all.
+        return results if limit <= 0 else results[:limit]
 
     def fetch(self, identifier: str) -> Optional[SkillBundle]:
         """

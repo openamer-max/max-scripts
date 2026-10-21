@@ -20,13 +20,17 @@ jobs:
     # Only run on the upstream repository, not on forks
     if: github.repository == 'openamer/openamer'
     runs-on: ubuntu-latest
-    # The crawl is dominated by the ClawHub catalog walk: ~50k skills at
-    # 200 per page, fetched one cursor page at a time (the API supports no
-    # offset). Measured at ~8s per page, that is ~35 minutes on its own, so
-    # the old 15-minute job budget killed every scheduled run (they all
-    # ended "cancelled" after 15m01s and the index was never published).
-    # 60 minutes leaves headroom for a slow ClawHub page.
-    timeout-minutes: 60
+    # The crawl is dominated by the ClawHub catalog walk. The API offers
+    # cursor pagination only (no offset), and a full run measured 8.16s per
+    # page at 197 items per page -- so the 80,829-skill catalog is 411 pages
+    # and 3452s (57.5 min) of walking alone. Adding the skills.sh path
+    # resolution (446s) the whole build took 3900s = 65 minutes.
+    #
+    # The old 15-minute budget killed every scheduled run (they all ended
+    # "cancelled" after 15m01s and the index was never published). 60 minutes
+    # is still not enough: the measured build needs 65. 120 minutes leaves
+    # headroom for a slow ClawHub page and a slow GitHub resolve.
+    timeout-minutes: 120
     environment: trusted-automation
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

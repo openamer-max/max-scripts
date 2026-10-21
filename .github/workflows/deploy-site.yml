@@ -50,11 +50,12 @@ jobs:
     if: github.repository == 'openamer/openamer'
     runs-on: ubuntu-latest
     # The "Prepare skills index" step can fall back to a fresh crawl when no
-    # healthy artifact or live index is available. That crawl needs ~20
-    # minutes on its own (ClawHub catalog walk), so the old 30-minute budget
-    # could kill the deploy mid-crawl. 60 minutes leaves room for the crawl
-    # plus the docusaurus build.
-    timeout-minutes: 60
+    # healthy artifact or live index is available. That crawl measured 3900s
+    # (65 min) end to end -- the ClawHub catalog walk alone is 3452s -- so the
+    # old 30-minute budget could kill the deploy mid-crawl, and a 60-minute
+    # one is not enough either. 120 minutes covers the crawl plus the
+    # docusaurus build.
+    timeout-minutes: 120
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}

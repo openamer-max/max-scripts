@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21T00:42:19.048192+00:00",
+  "updated": "2026-10-21T02:41:03.133418+00:00",
   "skills": {
     "auto-competitor-intelligence-claudepowered-ai": {
       "fitness": 12.47,
@@ -306,10 +306,10 @@
       "mutations_lost": 0
     },
     "auto-competitor-intelligence-ai-coding": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -1586,12 +1586,12 @@
       "mutations_lost": 4
     },
     "darwin-harvested-tmp-buf-check-py": {
-      "fitness": 20.73,
+      "fitness": 19.73,
       "usage": 0,
       "health": 1,
       "age_days": 8,
       "mutations_won": 6,
-      "mutations_lost": 4
+      "mutations_lost": 5
     },
     "darwin-harvested-tmp-check-online-l": {
       "fitness": 13.73,
@@ -1762,10 +1762,10 @@
       "mutations_lost": 3
     },
     "auto-best-practice-from-official": {
-      "fitness": 12.4,
+      "fitness": 12.37,
       "usage": 0,
       "health": 1,
-      "age_days": 18,
+      "age_days": 19,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -1802,26 +1802,26 @@
       "mutations_lost": 0
     },
     "auto-latest-research-insight-arxiv": {
-      "fitness": 12.43,
+      "fitness": 12.4,
       "usage": 0,
       "health": 1,
-      "age_days": 17,
+      "age_days": 18,
       "mutations_won": 0,
       "mutations_lost": 0
     },
     "auto-multidomain-learning-climate-science": {
-      "fitness": 12.43,
+      "fitness": 12.4,
       "usage": 0,
       "health": 1,
-      "age_days": 17,
+      "age_days": 18,
       "mutations_won": 0,
       "mutations_lost": 0
     },
     "auto-multidomain-learning-medical-diagnosis": {
-      "fitness": 12.43,
+      "fitness": 12.4,
       "usage": 0,
       "health": 1,
-      "age_days": 17,
+      "age_days": 18,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -1906,10 +1906,10 @@
       "mutations_lost": 4
     },
     "darwin-harvested-fix-install-the-missing-pytest-deps-": {
-      "fitness": 8.77,
+      "fitness": 8.73,
       "usage": 0,
       "health": 1,
-      "age_days": 37,
+      "age_days": 38,
       "mutations_won": 0,
       "mutations_lost": 3
     },
@@ -2082,10 +2082,10 @@
       "mutations_lost": 0
     },
     "a2a-swarm": {
-      "fitness": 12.6,
+      "fitness": 12.57,
       "usage": 0,
       "health": 1,
-      "age_days": 12,
+      "age_days": 13,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -2362,12 +2362,12 @@
       "mutations_lost": 0
     },
     "autonomous-learning-architecture": {
-      "fitness": 2172.0,
+      "fitness": 2178.0,
       "usage": 984,
       "health": 1,
       "age_days": 0,
-      "mutations_won": 664,
-      "mutations_lost": 156
+      "mutations_won": 670,
+      "mutations_lost": 162
     },
     "capabilities-registry": {
       "fitness": 13.77,
@@ -2538,11 +2538,11 @@
       "mutations_lost": 0
     },
     "darwin-cron-guard": {
-      "fitness": 1655.0,
+      "fitness": 1667.0,
       "usage": 284,
       "health": 1,
       "age_days": 0,
-      "mutations_won": 691,
+      "mutations_won": 697,
       "mutations_lost": 24
     },
     "darwin-engine": {
@@ -2650,10 +2650,10 @@
       "mutations_lost": 2
     },
     "darwin-harvested-browser-scripts": {
-      "fitness": 12.77,
+      "fitness": 12.73,
       "usage": 0,
       "health": 1,
-      "age_days": 7,
+      "age_days": 8,
       "mutations_won": 1,
       "mutations_lost": 2
     },
@@ -2762,10 +2762,10 @@
       "mutations_lost": 0
     },
     "darwin-harvested-git-merge-head": {
-      "fitness": 12.77,
+      "fitness": 12.73,
       "usage": 0,
       "health": 1,
-      "age_days": 7,
+      "age_days": 8,
       "mutations_won": 1,
       "mutations_lost": 2
     },
@@ -2802,10 +2802,10 @@
       "mutations_lost": 3
     },
     "darwin-harvested-import-fehler-n-16-attributeerror": {
-      "fitness": 12.77,
+      "fitness": 12.73,
       "usage": 0,
       "health": 1,
-      "age_days": 7,
+      "age_days": 8,
       "mutations_won": 1,
       "mutations_lost": 2
     },
@@ -2946,10 +2946,10 @@
       "mutations_lost": 2
     },
     "darwin-harvested-openamer-cli": {
-      "fitness": 46.77,
+      "fitness": 46.73,
       "usage": 31,
       "health": 1,
-      "age_days": 7,
+      "age_days": 8,
       "mutations_won": 2,
       "mutations_lost": 1
     },
@@ -3274,10 +3274,10 @@
       "mutations_lost": 2
     },
     "darwin-harvested-tmp-nist-f-r-den-windows-interpreter": {
-      "fitness": 15.77,
+      "fitness": 15.73,
       "usage": 0,
       "health": 1,
-      "age_days": 7,
+      "age_days": 8,
       "mutations_won": 2,
       "mutations_lost": 1
     },
@@ -3354,10 +3354,10 @@
       "mutations_lost": 3
     },
     "darwin-harvested-tools-code-kernel-py": {
-      "fitness": 12.77,
+      "fitness": 12.73,
       "usage": 0,
       "health": 1,
-      "age_days": 7,
+      "age_days": 8,
       "mutations_won": 1,
       "mutations_lost": 2
     },
@@ -3386,11 +3386,11 @@
       "mutations_lost": 2
     },
     "darwin-harvested-training-internet-learn-log-jsonl": {
-      "fitness": 1634.0,
+      "fitness": 1646.0,
       "usage": 276,
       "health": 1,
       "age_days": 0,
-      "mutations_won": 683,
+      "mutations_won": 689,
       "mutations_lost": 21
     },
     "darwin-harvested-training-internet-learner-py": {
@@ -3874,10 +3874,10 @@
       "mutations_lost": 0
     },
     "discord-server-management": {
-      "fitness": 40.9,
+      "fitness": 40.87,
       "usage": 37,
       "health": 1,
-      "age_days": 33,
+      "age_days": 34,
       "mutations_won": 0,
       "mutations_lost": 8
     },
@@ -4890,10 +4890,10 @@
       "mutations_lost": 0
     },
     "doca-structured-tools-contract": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -5738,10 +5738,10 @@
       "mutations_lost": 0
     },
     "jetson-customize-pcie": {
-      "fitness": 7.7,
+      "fitness": 7.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -5762,10 +5762,10 @@
       "mutations_lost": 0
     },
     "jetson-customize-usb": {
-      "fitness": 7.7,
+      "fitness": 7.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -5850,10 +5850,10 @@
       "mutations_lost": 0
     },
     "jetson-link-docs": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -6042,10 +6042,10 @@
       "mutations_lost": 0
     },
     "kermt-pretrain-scratch": {
-      "fitness": 7.7,
+      "fitness": 7.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -6322,10 +6322,10 @@
       "mutations_lost": 0
     },
     "nemo-mbridge-perf-moe-long-context": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -6562,10 +6562,10 @@
       "mutations_lost": 0
     },
     "nemotron-voice-agent-builder": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -6746,10 +6746,10 @@
       "mutations_lost": 0
     },
     "nvidia-ontology-query": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -6922,10 +6922,10 @@
       "mutations_lost": 0
     },
     "physical-ai-infrastructure-setup-and-resilient-scaling": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -6946,10 +6946,10 @@
       "mutations_lost": 0
     },
     "physicsnemo-discover": {
-      "fitness": 12.7,
+      "fitness": 12.67,
       "usage": 0,
       "health": 1,
-      "age_days": 9,
+      "age_days": 10,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -7818,10 +7818,10 @@
       "mutations_lost": 0
     },
     "dsh-ci-test-reliability": {
-      "fitness": 12.4,
+      "fitness": 12.37,
       "usage": 0,
       "health": 1,
-      "age_days": 18,
+      "age_days": 19,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -7842,10 +7842,10 @@
       "mutations_lost": 0
     },
     "dsh-doc": {
-      "fitness": 12.4,
+      "fitness": 12.37,
       "usage": 0,
       "health": 1,
-      "age_days": 18,
+      "age_days": 19,
       "mutations_won": 0,
       "mutations_lost": 0
     },
@@ -8122,10 +8122,10 @@
       "mutations_lost": 0
     },
     "obsidian": {
-      "fitness": 11.4,
+      "fitness": 11.37,
       "usage": 0,
       "health": 1,
-      "age_days": 48,
+      "age_days": 49,
       "mutations_won": 0,
       "mutations_lost": 0
     },

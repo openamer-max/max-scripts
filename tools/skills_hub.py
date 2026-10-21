@@ -22,6 +22,7 @@ import shutil
 import subprocess
 import time
 from abc import ABC, abstractmethod
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -554,6 +555,13 @@ def _filter_results_by_provider(
     ]
 
 
+# Concurrency for the per-skill SKILL.md fetches of a GitHub tap. Each
+# request is an independent api.github.com call; 8 keeps the cold index
+# build well inside its CI budget while staying far below GitHub's rate
+# limits.
+TAP_FETCH_WORKERS = 8
+
+
 class GitHubSource(SkillSource):
     """Fetch skills from GitHub repos via the Contents API."""
 
@@ -771,8 +779,15 @@ class GitHubSource(SkillSource):
         if not isinstance(entries, list):
             return []
 
-        skills: List[SkillMeta] = []
-        groupings = self._get_skillsh_groupings(repo)
+        # Collect the candidate skill directories first, then fetch their
+        # SKILL.md metadata concurrently. Every candidate costs one GitHub
+        # API call, and the cold index build has hundreds of them across
+        # 6 taps -- strictly sequential that was ~200s of the build wall
+        # clock, which on its own pushed CI past its job timeout. The
+        # requests are independent, so a small thread pool turns that into
+        # seconds. Result order matches the sequential walk.
+        identifiers: List[str] = []
+        prefix = path.rstrip("/")
         for entry in entries:
             if entry.get("type") != "dir":
                 continue
@@ -781,11 +796,23 @@ class GitHubSource(SkillSource):
             if dir_name.startswith((".", "_")):
                 continue
 
-            prefix = path.rstrip("/")
-            skill_identifier = f"{repo}/{prefix}/{dir_name}" if prefix else f"{repo}/{dir_name}"
-            meta = self.inspect(skill_identifier)
+            identifiers.append(
+                f"{repo}/{prefix}/{dir_name}" if prefix else f"{repo}/{dir_name}"
+            )
+
+        groupings = self._get_skillsh_groupings(repo)
+
+        if identifiers:
+            with ThreadPoolExecutor(max_workers=TAP_FETCH_WORKERS) as pool:
+                inspected = list(pool.map(self.inspect, identifiers))
+        else:
+            inspected = []
+
+        skills: List[SkillMeta] = []
+        for identifier, meta in zip(identifiers, inspected):
             if meta:
                 if groupings:
+                    dir_name = identifier.rsplit("/", 1)[-1]
                     category = groupings.get(meta.name) or groupings.get(dir_name)
                     if category:
                         meta.extra["category"] = category

@@ -1,13 +1,21 @@
-"""Contract tests for GitHubSource.search() limit semantics.
+"""Contract tests for the GitHub tap listing path.
 
-``limit <= 0`` means "no cap". The offline index builder relies on this:
-``scripts/build_skills_index.py`` calls ``search("", limit=0)`` to pull the
-whole tap catalog. Slicing with ``[:0]`` returned an empty list *after* every
-tap had already been walked, so the build burned 201s of GitHub traffic and
-still contributed zero skills to the index.
+Two properties matter here:
 
-These tests pin the contract (a non-positive limit must not truncate the
-result), not the current tap count, so they stay valid as taps change.
+1. ``GitHubSource.search()`` with a non-positive limit must not truncate the
+   result set. The offline index builder calls ``search("", limit=0)`` to pull
+   the whole tap catalog; slicing with ``[:0]`` returned an empty list *after*
+   every tap had already been walked, so the build burned 201s of GitHub
+   traffic and still contributed zero skills.
+
+2. The tap listing fetches its per-skill SKILL.md metadata concurrently. The
+   result must be identical to the sequential walk -- same skills, same
+   order, same category stamps -- because the index file is sorted by
+   (source, name) downstream and a reordering would change the shipped
+   artifact.
+
+These tests pin behaviour, not the current tap or skill count, so they stay
+valid as the upstream catalogs change.
 """
 
 from unittest.mock import MagicMock, patch
@@ -17,7 +25,7 @@ import pytest
 from tools.skills_hub import GitHubAuth, GitHubSource, SkillMeta
 
 
-def _make_source(skills):
+def _make_source(skills, groupings=None):
     """A GitHubSource whose taps all yield the same skill list."""
     src = GitHubSource(auth=MagicMock())
     src.taps = [{"repo": "acme/skills", "path": "skills"}]
@@ -70,3 +78,74 @@ class TestSearchLimitContract:
         src, _ = _make_source(0)
         with patch.object(src, "_list_skills_in_repo", return_value=[]):
             assert src.search("", limit=0) == []
+
+
+class TestTapListingContract:
+    """The concurrent tap walk must produce exactly the sequential result."""
+
+    def _entries(self, names):
+        return [{"type": "dir", "name": n} for n in names]
+
+    def test_concurrent_listing_matches_sequential_order(self):
+        src = GitHubSource(auth=MagicMock())
+        names = [f"skill-{i}" for i in range(12)]
+        entries = self._entries(names)
+
+        def fake_inspect(identifier):
+            return SkillMeta(
+                name=identifier.rsplit("/", 1)[-1],
+                description="d",
+                source="github",
+                identifier=identifier,
+                trust_level="community",
+            )
+
+        with patch.object(src, "_github_get") as gh:
+            gh.return_value.status_code = 200
+            gh.return_value.json.return_value = entries
+            with patch.object(src, "_get_skillsh_groupings", return_value=None):
+                with patch.object(src, "inspect", side_effect=fake_inspect):
+                    results = src._list_skills_in_repo("acme/skills", "skills")
+
+        assert [r.identifier for r in results] == [
+            f"acme/skills/skills/{n}" for n in names
+        ]
+
+    def test_grouping_stamps_are_applied_in_the_concurrent_path(self):
+        src = GitHubSource(auth=MagicMock())
+        entries = self._entries(["alpha", "beta"])
+
+        def fake_inspect(identifier):
+            return SkillMeta(
+                name=identifier.rsplit("/", 1)[-1],
+                description="d",
+                source="github",
+                identifier=identifier,
+                trust_level="community",
+            )
+
+        with patch.object(src, "_github_get") as gh:
+            gh.return_value.status_code = 200
+            gh.return_value.json.return_value = entries
+            with patch.object(
+                src, "_get_skillsh_groupings", return_value={"alpha": "Category A"}
+            ):
+                with patch.object(src, "inspect", side_effect=fake_inspect):
+                    results = src._list_skills_in_repo("acme/skills", "skills")
+
+        by_name = {r.name: r for r in results}
+        assert by_name["alpha"].extra.get("category") == "Category A"
+        assert "category" not in by_name["beta"].extra
+
+    def test_hidden_directories_are_skipped(self):
+        src = GitHubSource(auth=MagicMock())
+        entries = self._entries(["visible", ".hidden", "_private"])
+
+        with patch.object(src, "_github_get") as gh:
+            gh.return_value.status_code = 200
+            gh.return_value.json.return_value = entries
+            with patch.object(src, "_get_skillsh_groupings", return_value=None):
+                with patch.object(src, "inspect", return_value=None):
+                    results = src._list_skills_in_repo("acme/skills", "skills")
+
+        assert results == []

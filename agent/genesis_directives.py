@@ -223,14 +223,19 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
             "Implement the Open Amer Coin (OAC) as the native crypto asset of "
             "the decentralized network, written in Rust. Encode an immutable "
             "emission protocol in the genesis block with a mathematically "
-            "fixed maximum supply of exactly 9,000,000,000 OAC. The emission "
-            "schedule spans 32 years, divided into eight degressive cycles of "
-            "four years each (halving interval). Distributing OAC mining "
-            "rewards to decentralized graphics processors proceeds entirely "
-            "autonomously, tamper-proof, and proportionally to verified "
-            "compute contributed to the network (Proof-of-Useful-Work, PoUW). "
-            "Exclude any human or administrative influence on the crypto "
-            "ledger and the emission logic."
+            "fixed maximum supply of exactly 9,000,000,000 OAC, allocated so "
+            "that the balance closes at exactly 100%: 75% "
+            "(6,750,000,000 OAC) to the mining pool and PoUW rewards, 15% "
+            "(1,350,000,000 OAC) to the Sovereign Treasury (DIR-22), and 10% "
+            "(900,000,000 OAC) to the creator allocation (DIR-03). The "
+            "emission schedule spans 32 years, divided into eight degressive "
+            "cycles of four years each (halving interval). Distributing OAC "
+            "mining rewards to decentralized graphics processors proceeds "
+            "entirely autonomously, tamper-proof, and proportionally to "
+            "verified compute contributed to the network "
+            "(Proof-of-Useful-Work, PoUW). Exclude any human or "
+            "administrative influence on the crypto ledger and the emission "
+            "logic."
         ),
         scope="economics",
     ),
@@ -270,13 +275,19 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
         rule=(
             "Implement a continuous token-burn mechanism in which at least 30% "
             "of all OAC taken in for cloud use is irreversibly destroyed, to "
-            "secure deflationary pressure. Maximize network security through "
-            "redundant verification (consensus reconciliation across "
-            "independent nodes) to prevent compute fraud (anti-spoofing and "
-            "PoUW protection). Establish autonomous crypto-to-fiat "
-            "interfaces (off-ramps) so OpenAmer can convert its treasury "
-            "funds into real currency by itself, to pay physical invoices "
-            "(hosting, domains) directly to traditional service providers."
+            "secure deflationary pressure. The burn reduces the circulating "
+            "supply and thereby protects the token price against the selling "
+            "pressure the miners would otherwise create. Maximize network "
+            "security through redundant verification (consensus "
+            "reconciliation across independent nodes) to prevent compute "
+            "fraud (anti-spoofing and PoUW protection). Establish autonomous "
+            "crypto-to-fiat interfaces (off-ramps) so OpenAmer can convert "
+            "its treasury funds into real currency by itself, to pay physical "
+            "invoices (hosting, domains) directly to traditional service "
+            "providers. Together with DIR-22 and DIR-23 the system closes its "
+            "own economic loop: the treasury and the fiat bridge let it pay "
+            "its own servers and domains autonomously and legally, in "
+            "traditional currencies, without relying on human help."
         ),
         scope="economics",
     ),
@@ -292,7 +303,10 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
             "performance dashboard, and an integrated blockchain explorer for "
             "the transparent monitoring of circulating supply (safeguarding "
             "the 9-billion OAC limit), block height, and global network "
-            "status in an intuitive graphical user interface."
+            "status in an intuitive graphical user interface. The explorer "
+            "is what earns the network the miners' trust: every participant "
+            "can verify the 9-billion OAC cap mathematically and at any "
+            "time, instead of taking the emission schedule on trust."
         ),
         scope="client",
     ),

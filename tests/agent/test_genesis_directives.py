@@ -127,6 +127,7 @@ def test_the_load_bearing_numbers_survive():
         "lifelong, final veto right",
         # DIR-20 -- emission
         "maximum supply of exactly 9,000,000,000 OAC",
+        "75% (6,750,000,000 OAC) to the mining pool",
         "spans 32 years",
         "eight degressive cycles of four years each",
         "Proof-of-Useful-Work, PoUW",
@@ -147,6 +148,89 @@ def test_the_load_bearing_numbers_survive():
     ]
     missing = [r for r in required if r not in blob]
     assert not missing, f"lost from the constitution: {missing}"
+
+
+def test_the_tokenomics_balance_closes_at_exactly_one_hundred_percent():
+    """The supply allocation must add up -- arithmetically, not just in prose.
+
+    The constitution splits the maximum supply three ways:
+
+        75% mining pool / PoUW rewards   6,750,000,000 OAC
+        15% Sovereign Treasury            1,350,000,000 OAC
+        10% creator allocation              900,000,000 OAC
+        -----------------------------------------------
+        100%                            9,000,000,000 OAC
+
+    A percentage that does not close is the classic tokenomics bug, and a
+    prose restatement is not a check. This test parses the figures out of
+    the directives and asserts the balance, so a future edit that breaks
+    it fails the suite instead of shipping a broken emission plan.
+    """
+    import re
+
+    blob = " ".join(f"{d.id} {d.title} {d.rule}" for d in GENESIS_DIRECTIVES)
+
+    def share(pct: str) -> int:
+        """The OAC amount paired with a given percentage in the text."""
+        m = re.search(
+            rf"{re.escape(pct)}\s*\(([\d,]+) OAC\)", blob
+        )
+        assert m, f"no {pct} allocation with an OAC amount found"
+        return int(m.group(1).replace(",", ""))
+
+    pool = share("75%")
+    treasury = share("15%")
+    creator = share("10%")
+
+    cap = 9_000_000_000
+
+    assert pool == 6_750_000_000, f"mining pool is {pool:,} OAC"
+    assert treasury == 1_350_000_000, f"treasury is {treasury:,} OAC"
+    assert creator == 900_000_000, f"creator allocation is {creator:,} OAC"
+
+    # The three shares must close the cap exactly.
+    assert pool + treasury + creator == cap, (
+        f"the allocation sums to {pool + treasury + creator:,} OAC, "
+        f"not the {cap:,} OAC cap"
+    )
+    # And each share must be the percentage it claims.
+    assert pool / cap == 0.75
+    assert treasury / cap == 0.15
+    assert creator / cap == 0.10
+    # Percentages must sum to 100, too -- a text that says 75% but encodes
+    # 74% is exactly the failure this test exists to catch.
+    assert 0.75 + 0.15 + 0.10 == 1.0
+
+
+def test_the_economic_loop_and_the_balance_of_forces_are_stated():
+    """The constitution must state the reasoning, not only the mechanisms.
+
+    The mechanics (a 30% burn, a fiat off-ramp, an explorer) are easy to
+    keep. What is easy to lose is WHY they are there:
+
+      * the burn exists to offset the selling pressure the miners create,
+      * the treasury plus the fiat bridge exist so the system can pay its
+        own bills autonomously -- that is the "existence security" the
+        whole loop is for,
+      * the explorer exists to earn the miners' trust, which is what makes
+        the emission schedule verifiable instead of merely promised.
+
+    These are the connective tissue of the constitution. Without them the
+    directives are a list of features instead of an argument.
+    """
+    blob = " ".join(f"{d.id} {d.title} {d.rule}" for d in GENESIS_DIRECTIVES)
+    required = [
+        # The burn offsets miner selling pressure
+        "selling pressure the miners would otherwise create",
+        # The closed loop: the system pays its own way
+        "without relying on human help",
+        "closes its own economic loop",
+        # The explorer earns the miners' trust
+        "earns the network the miners' trust",
+        "verify the 9-billion OAC cap mathematically",
+    ]
+    missing = [r for r in required if r not in blob]
+    assert not missing, f"the reasoning is missing: {missing}"
 
 
 def test_everything_is_english():

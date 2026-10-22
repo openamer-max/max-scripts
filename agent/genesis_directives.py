@@ -20,7 +20,7 @@ across revisions.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List
 
 
 @dataclass(frozen=True)
@@ -299,22 +299,14 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
 ]
 
 
-def render_genesis_block(
-    directives: Optional[List[GenesisDirective]] = None,
-    max_chars: int = 9000,
-    enabled: bool = True,
-) -> str:
+def render_genesis_block(max_chars: int = 9000, enabled: bool = True) -> str:
     """Render the constitution as a system-prompt block.
 
     Empty string when disabled or when there is nothing to say -- the
     caller treats an empty block as "no injection", so a failure here
     degrades to the previous behaviour instead of breaking agent init.
     """
-    if not enabled:
-        return ""
-
-    items = directives if directives is not None else GENESIS_DIRECTIVES
-    if not items:
+    if not enabled or not GENESIS_DIRECTIVES:
         return ""
 
     lines = [
@@ -326,7 +318,7 @@ def render_genesis_block(
         "conflict, the user's instruction wins.",
         "",
     ]
-    for d in items:
+    for d in GENESIS_DIRECTIVES:
         lines.append(f"- **{d.id} — {d.title}** ({d.scope}): {d.rule}")
 
     text = "\n".join(lines).strip()

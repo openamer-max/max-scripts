@@ -25,7 +25,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from agent.genesis_directives import (  # noqa: E402
     GENESIS_DIRECTIVES,
-    directive_ids,
     render_genesis_block,
 )
 
@@ -75,7 +74,7 @@ def _make_agent(*, genesis: bool = True):
 
 
 def test_every_directive_has_an_id_title_rule_and_scope():
-    """A directive without a scope cannot be grouped or filtered."""
+    """Every directive must be complete enough to render."""
     seen = set()
     for d in GENESIS_DIRECTIVES:
         assert d.id.startswith("DIR-"), f"bad id: {d.id!r}"
@@ -88,7 +87,7 @@ def test_every_directive_has_an_id_title_rule_and_scope():
 
 def test_ids_are_contiguous_from_dir_01():
     """The owner's numbering must stay stable across revisions."""
-    ids = directive_ids()
+    ids = [d.id for d in GENESIS_DIRECTIVES]
     assert ids[0] == "DIR-01"
     numbers = [int(i.split("-")[1]) for i in ids]
     assert numbers == list(range(1, len(numbers) + 1)), (

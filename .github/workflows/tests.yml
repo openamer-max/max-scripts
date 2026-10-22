@@ -45,6 +45,40 @@ jobs:
           MATRIX=$(python3 scripts/run_tests_parallel.py --generate-slices ${{ inputs.slice_count }})
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
+  oac-genesis:
+    name: "OAC genesis contract is generated"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: "3.11"
+
+      # The committed contract is a projection of agent/tokenomics.py. If
+      # the plan changes and the contract is not regenerated, the two
+      # disagree -- and nothing else in the tree would notice. This check
+      # is what makes the committed file safe to trust.
+      - name: Verify the committed contract matches the tokenomics plan
+        run: python3 scripts/generate_oac_genesis.py --check
+
+      # Compile it for real: a contract that does not build is not a
+      # contract. solc is pinned so the verdict does not depend on
+      # whatever version happens to be installed.
+      - name: Set up Node
+        uses: actions/setup-node@2028fbc5c25fe9cf00f0b8a3fb9c9c3b0d4a2b1e9 # v4.1.0
+        with:
+          node-version: "22"
+
+      - name: Install solc
+        run: npm install --no-save --no-audit --no-fund solc@0.8.24
+
+      - name: Compile the genesis contract
+        run: python3 scripts/compile_oac_genesis.py
+
   test:
     name: Run tests slice ${{ matrix.slice.index }}/${{ inputs.slice_count }}
     needs: generate

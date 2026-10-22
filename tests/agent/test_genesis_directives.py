@@ -95,6 +95,82 @@ def test_ids_are_contiguous_from_dir_01():
     )
 
 
+def test_there_are_exactly_twenty_four_directives():
+    """The constitution has 24 directives.
+
+    A count is a change-detector smell in general, but here the number IS
+    the contract: the owner's numbering runs DIR-01..DIR-24 and a
+    directive that silently disappears is a lost directive, not a
+    refactor. Paired with the contiguity test above, this pins the set.
+    """
+    assert len(GENESIS_DIRECTIVES) == 24
+    assert GENESIS_DIRECTIVES[-1].id == "DIR-24"
+
+
+def test_the_load_bearing_numbers_survive():
+    """The concrete figures of the constitution must not be lost.
+
+    These are the numbers the owner pinned: the creator allocation, the
+    emission schedule, the treasury share, the burn rate, the supply
+    cap. A paraphrase that drops "exactly 9,000,000,000 OAC" or "32
+    years" turns a precise directive into a vague one -- and no reviewer
+    would notice, because the text still reads fine.
+    """
+    blob = " ".join(
+        f"{d.id} {d.title} {d.rule}" for d in GENESIS_DIRECTIVES
+    )
+    required = [
+        # DIR-03 -- creator allocation and its vesting schedule
+        "10% of the maximum supply (900,000,000 OAC)",
+        "12-month cliff",
+        "linear monthly vesting over 36 months",
+        "lifelong, final veto right",
+        # DIR-20 -- emission
+        "maximum supply of exactly 9,000,000,000 OAC",
+        "spans 32 years",
+        "eight degressive cycles of four years each",
+        "Proof-of-Useful-Work, PoUW",
+        "written in Rust",
+        # DIR-22 -- treasury
+        "exactly 15% of the maximum supply (1,350,000,000 OAC)",
+        "OAC -> stablecoin swaps",
+        "cryptographically excluded",
+        # DIR-23 -- burn, verification, off-ramps
+        "at least 30% of all OAC taken in for cloud use",
+        "irreversibly destroyed",
+        "crypto-to-fiat interfaces (off-ramps)",
+        # DIR-24 -- client
+        "OpenAmer-Node",
+        "Rust/Tauri architecture",
+        "CUDA/ROCm/Metal support",
+        "9-billion OAC limit",
+    ]
+    missing = [r for r in required if r not in blob]
+    assert not missing, f"lost from the constitution: {missing}"
+
+
+def test_everything_is_english():
+    """The constitution is written in English.
+
+    A German word in the rendered prompt is a bug, not a style choice:
+    the block is a standing document that every installation reads, and
+    the project's own code and docs are English.
+    """
+    german_chars = set("äöüßÄÖÜ")
+    german_words = (
+        " und ", " der ", " die ", " das ", " für ", " nicht ", " eine ",
+        " wird ", " durch ", " sich ", " mit ", " über ", " müssen ",
+        " können ", " diese ", " seine ",
+    )
+    for d in GENESIS_DIRECTIVES:
+        blob = f"{d.id} {d.title} {d.rule}"
+        bad_chars = sorted(german_chars & set(blob))
+        assert not bad_chars, f"{d.id} contains German characters: {bad_chars}"
+        padded = f" {blob.lower()} "
+        bad_words = [w for w in german_words if w in padded]
+        assert not bad_words, f"{d.id} contains German words: {bad_words}"
+
+
 def test_block_contains_every_directive():
     """All directives must be visible in the rendered block."""
     block = render_genesis_block()

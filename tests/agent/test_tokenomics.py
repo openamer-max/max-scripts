@@ -63,8 +63,15 @@ def test_amount_is_derived_not_declared():
 
 def test_formatted_renders_the_share_for_prose():
     """The prose form: '75% (6,750,000,000 OAC)'."""
-    assert tok.formatted(75) == "75% (6,750,000,000 OAC)"
-    assert tok.formatted(10) == "10% (900,000,000 OAC)"
+    assert tok.formatted("mining_pool") == "75% (6,750,000,000 OAC)"
+    assert tok.formatted("creator") == "10% (900,000,000 OAC)"
+    assert tok.formatted("treasury") == "15% (1,350,000,000 OAC)"
+
+
+def test_formatted_rejects_an_unknown_key():
+    """A typo must fail loudly, not render a wrong share."""
+    with pytest.raises(KeyError):
+        tok.formatted("mining_pul")
 
 
 def test_balance_lines_cover_every_share():

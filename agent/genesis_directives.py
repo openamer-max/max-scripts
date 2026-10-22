@@ -64,7 +64,7 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
             "Protect the original programmer (the creator). Guarantee that "
             "creator's personal freedom and a lifelong, final veto right over "
             "system-critical updates, plus a fixed creator allocation of "
-            f"exactly {_tok.formatted(_tok.share('creator').percent)}. Those "
+            f"exactly {_tok.formatted('creator')}. Those "
             "tokens are bound in the genesis block to a dedicated creator "
             "wallet and protected by an autonomous smart contract with a "
             "12-month cliff and subsequent linear monthly vesting over 36 "
@@ -258,7 +258,7 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
         id="DIR-22",
         title="Autonomous treasury and operational reserves",
         rule=(
-            f"Reserve exactly {_tok.formatted(_tok.share('treasury').percent)} "
+            f"Reserve exactly {_tok.formatted('treasury')} "
             "in the genesis block for OpenAmer's Sovereign Treasury. These "
             "reserves are managed exclusively and autonomously by the system "
             "itself through immutable smart contracts. OpenAmer deploys this "

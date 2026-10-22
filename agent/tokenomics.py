@@ -116,7 +116,12 @@ _assert_balance()
 
 
 def amount(pct: int) -> int:
-    """The OAC amount for a share of the maximum supply."""
+    """The OAC amount a percentage of the maximum supply works out to.
+
+    Pure arithmetic, independent of the allocation -- which is what
+    makes it useful as a cross-check: the allocation's own amounts are
+    compared against this, so a hand-edited share cannot pass.
+    """
     return pct * MAX_SUPPLY // 100
 
 
@@ -128,9 +133,15 @@ def share(key: str) -> Allocation:
     raise KeyError(key)
 
 
-def formatted(pct: int) -> str:
-    """A share rendered for prose: ``75% (6,750,000,000 OAC)``."""
-    return f"{pct}% ({amount(pct):,} {OAC})"
+def formatted(key: str) -> str:
+    """One share rendered for prose: ``75% (6,750,000,000 OAC)``.
+
+    Takes the allocation's key, not a percentage: the amount comes from
+    the checked allocation, so a rendered share can never disagree with
+    the plan it claims to describe.
+    """
+    a = share(key)
+    return f"{a.percent}% ({a.amount:,} {OAC})"
 
 
 def balance_lines() -> List[str]:

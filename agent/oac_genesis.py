@@ -19,11 +19,20 @@ assert on the generated source:
 
 Every number in the output is derived from ``agent.tokenomics``; none
 is typed here. A change to the plan changes the contract.
+
+This module also owns the COMPILER RESOLUTION, because both the CI
+script and the test suite need to reach the same compiler and must not
+drift apart: ``solc`` on PATH, else the npm package ``solc`` (driven
+through its Node API -- its CLI shim mis-handles --standard-json on
+Windows), else ``npx solc@<version>``.
 """
 
 from __future__ import annotations
 
-from typing import List
+import shutil
+import tempfile
+from pathlib import Path
+from typing import List, Optional
 
 from agent import tokenomics as _tok
 
@@ -216,3 +225,46 @@ def verify() -> None:
             raise ValueError(
                 f"{_constant_name(a.key)} is not an immutable constant"
             )
+
+
+# ── compiler resolution ────────────────────────────────────────────────
+
+BRIDGE = Path(__file__).resolve().parent.parent / "scripts" / "compile_solidity.js"
+"""The node bridge that drives the npm solc package's Node API."""
+
+
+def npm_solc_root() -> Optional[Path]:
+    """The npm ``solc`` package, if it is installed.
+
+    The repo's own ``node_modules`` comes first: that is where
+    ``npm install`` puts it, and where CI puts it. The scratch
+    directory is the fallback for a machine without a repo install.
+    """
+    here = Path(__file__).resolve().parent.parent
+    for root in (
+        here / "node_modules" / "solc",
+        Path(tempfile.gettempdir()) / "oac-solc" / "node_modules" / "solc",
+        Path.home() / "node_modules" / "solc",
+    ):
+        if (root / "index.js").exists():
+            return root
+    return None
+
+
+def solc_command() -> Optional[List[str]]:
+    """The command that compiles Solidity, or None if there is none.
+
+    One resolution for the CI script and the test suite, so they can
+    never reach different compilers.
+    """
+    solc = shutil.which("solc")
+    if solc:
+        return [solc]
+    node = shutil.which("node")
+    if node:
+        root = npm_solc_root()
+        if root is not None:
+            return [node, str(BRIDGE), str(root)]
+    if shutil.which("npx"):
+        return ["npx", "--yes", f"solc@{SOL_VERSION}"]
+    return None

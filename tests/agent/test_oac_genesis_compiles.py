@@ -22,10 +22,8 @@ artefact is ever committed.
 from __future__ import annotations
 
 import json
-import shutil
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -36,43 +34,11 @@ sys.path.insert(0, str(REPO))
 from agent import oac_genesis  # noqa: E402
 
 CONTRACT = REPO / "chain" / "contracts" / "OpenAmerGenesis.sol"
-SOLC_VERSION = oac_genesis.SOL_VERSION
-_BRIDGE = Path(__file__).resolve().parent / "fixtures" / "compile_solidity.js"
-
-
-def _find_solcjs() -> list[str] | None:
-    """A local solc package, if one is installed somewhere we can reach.
-
-    The npm package's CLI shim has unreliable ``--standard-json``
-    handling (it prepends a diagnostic line and mis-parses the input
-    file on Windows), so the compiler is driven through the package's
-    Node API instead -- via a small bridge script that reads the input
-    on stdin and writes the output on stdout.
-    """
-    node = shutil.which("node")
-    if not node:
-        return None
-    roots = [
-        Path(tempfile.gettempdir()) / "oac-solc" / "node_modules" / "solc",
-        REPO / "node_modules" / "solc",
-    ]
-    for root in roots:
-        if (root / "index.js").exists():
-            return [node, str(_BRIDGE), str(root)]
-    return None
 
 
 def _solc_command() -> list[str] | None:
-    """The command that compiles Solidity, or None if there is none."""
-    solc = shutil.which("solc")
-    if solc:
-        return [solc]
-    solcjs = _find_solcjs()
-    if solcjs:
-        return solcjs
-    if shutil.which("npx"):
-        return ["npx", "--yes", f"solc@{SOLC_VERSION}"]
-    return None
+    """The compiler command, resolved by the module both callers share."""
+    return oac_genesis.solc_command()
 
 
 def _compile(source: str) -> dict:

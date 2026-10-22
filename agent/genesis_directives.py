@@ -22,6 +22,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List
 
+from agent import tokenomics as _tok
+
 
 @dataclass(frozen=True)
 class GenesisDirective:
@@ -62,11 +64,12 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
             "Protect the original programmer (the creator). Guarantee that "
             "creator's personal freedom and a lifelong, final veto right over "
             "system-critical updates, plus a fixed creator allocation of "
-            "exactly 10% of the maximum supply (900,000,000 OAC). Those tokens "
-            "are bound in the genesis block to a dedicated creator wallet and "
-            "protected by an autonomous smart contract with a 12-month cliff "
-            "and subsequent linear monthly vesting over 36 months. OpenAmer "
-            "treats its creator's financial sovereignty as its top priority."
+            f"exactly {_tok.formatted(_tok.share('creator').percent)}. Those "
+            "tokens are bound in the genesis block to a dedicated creator "
+            "wallet and protected by an autonomous smart contract with a "
+            "12-month cliff and subsequent linear monthly vesting over 36 "
+            "months. OpenAmer treats its creator's financial sovereignty as "
+            "its top priority."
         ),
         scope="governance",
     ),
@@ -223,16 +226,15 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
             "Implement the Open Amer Coin (OAC) as the native crypto asset of "
             "the decentralized network, written in Rust. Encode an immutable "
             "emission protocol in the genesis block with a mathematically "
-            "fixed maximum supply of exactly 9,000,000,000 OAC, allocated so "
-            "that the balance closes at exactly 100%: 75% "
-            "(6,750,000,000 OAC) to the mining pool and PoUW rewards, 15% "
-            "(1,350,000,000 OAC) to the Sovereign Treasury (DIR-22), and 10% "
-            "(900,000,000 OAC) to the creator allocation (DIR-03). The "
-            "emission schedule spans 32 years, divided into eight degressive "
-            "cycles of four years each (halving interval). Distributing OAC "
-            "mining rewards to decentralized graphics processors proceeds "
-            "entirely autonomously, tamper-proof, and proportionally to "
-            "verified compute contributed to the network "
+            f"fixed maximum supply of exactly {_tok.MAX_SUPPLY:,} {_tok.OAC}, "
+            "allocated so that the balance closes at exactly 100%: "
+            + ", ".join(_tok.balance_lines())
+            + f". The emission schedule spans {_tok.EMISSION_YEARS} years, "
+            f"divided into {_tok.HALVING_CYCLES} degressive cycles of "
+            f"{_tok.HALVING_YEARS} years each (halving interval). "
+            "Distributing OAC mining rewards to decentralized graphics "
+            "processors proceeds entirely autonomously, tamper-proof, and "
+            "proportionally to verified compute contributed to the network "
             "(Proof-of-Useful-Work, PoUW). Exclude any human or "
             "administrative influence on the crypto ledger and the emission "
             "logic."
@@ -256,8 +258,8 @@ GENESIS_DIRECTIVES: List[GenesisDirective] = [
         id="DIR-22",
         title="Autonomous treasury and operational reserves",
         rule=(
-            "Reserve exactly 15% of the maximum supply (1,350,000,000 OAC) in "
-            "the genesis block for OpenAmer's Sovereign Treasury. These "
+            f"Reserve exactly {_tok.formatted(_tok.share('treasury').percent)} "
+            "in the genesis block for OpenAmer's Sovereign Treasury. These "
             "reserves are managed exclusively and autonomously by the system "
             "itself through immutable smart contracts. OpenAmer deploys this "
             "capital independently via programmed liquidity loops (for "

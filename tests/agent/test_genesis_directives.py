@@ -15,6 +15,7 @@ pins the whole path:
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock
@@ -27,6 +28,11 @@ from agent.genesis_directives import (  # noqa: E402
     GENESIS_DIRECTIVES,
     render_genesis_block,
 )
+
+
+def _blob() -> str:
+    """The whole constitution as one searchable string."""
+    return " ".join(f"{d.id} {d.title} {d.rule}" for d in GENESIS_DIRECTIVES)
 
 
 def _make_agent(*, genesis: bool = True):
@@ -116,12 +122,10 @@ def test_the_load_bearing_numbers_survive():
     years" turns a precise directive into a vague one -- and no reviewer
     would notice, because the text still reads fine.
     """
-    blob = " ".join(
-        f"{d.id} {d.title} {d.rule}" for d in GENESIS_DIRECTIVES
-    )
+    blob = _blob()
     required = [
         # DIR-03 -- creator allocation and its vesting schedule
-        "10% of the maximum supply (900,000,000 OAC)",
+        "exactly 10% (900,000,000 OAC)",
         "12-month cliff",
         "linear monthly vesting over 36 months",
         "lifelong, final veto right",
@@ -129,11 +133,11 @@ def test_the_load_bearing_numbers_survive():
         "maximum supply of exactly 9,000,000,000 OAC",
         "75% (6,750,000,000 OAC) to the mining pool",
         "spans 32 years",
-        "eight degressive cycles of four years each",
+        "8 degressive cycles of 4 years each",
         "Proof-of-Useful-Work, PoUW",
         "written in Rust",
         # DIR-22 -- treasury
-        "exactly 15% of the maximum supply (1,350,000,000 OAC)",
+        "exactly 15% (1,350,000,000 OAC)",
         "OAC -> stablecoin swaps",
         "cryptographically excluded",
         # DIR-23 -- burn, verification, off-ramps
@@ -161,14 +165,16 @@ def test_the_tokenomics_balance_closes_at_exactly_one_hundred_percent():
         -----------------------------------------------
         100%                            9,000,000,000 OAC
 
-    A percentage that does not close is the classic tokenomics bug, and a
-    prose restatement is not a check. This test parses the figures out of
-    the directives and asserts the balance, so a future edit that breaks
-    it fails the suite instead of shipping a broken emission plan.
+    The arithmetic itself lives in ``agent/tokenomics`` and is checked
+    there. What this test adds is the link: the numbers the PROMPT
+    states must be the numbers the module computes. A directive that
+    hardcoded its own copy of the share would pass the module's tests
+    and still ship a wrong figure -- so the text is parsed back out and
+    compared against the module.
     """
-    import re
+    from agent import tokenomics as tok
 
-    blob = " ".join(f"{d.id} {d.title} {d.rule}" for d in GENESIS_DIRECTIVES)
+    blob = _blob()
 
     def share(pct: str) -> int:
         """The OAC amount paired with a given percentage in the text."""
@@ -178,15 +184,16 @@ def test_the_tokenomics_balance_closes_at_exactly_one_hundred_percent():
         assert m, f"no {pct} allocation with an OAC amount found"
         return int(m.group(1).replace(",", ""))
 
+    cap = tok.MAX_SUPPLY
+
     pool = share("75%")
     treasury = share("15%")
     creator = share("10%")
 
-    cap = 9_000_000_000
-
-    assert pool == 6_750_000_000, f"mining pool is {pool:,} OAC"
-    assert treasury == 1_350_000_000, f"treasury is {treasury:,} OAC"
-    assert creator == 900_000_000, f"creator allocation is {creator:,} OAC"
+    # The text must state the module's figures, not its own.
+    assert pool == tok.amount(75), f"mining pool is {pool:,} OAC"
+    assert treasury == tok.amount(15), f"treasury is {treasury:,} OAC"
+    assert creator == tok.amount(10), f"creator allocation is {creator:,} OAC"
 
     # The three shares must close the cap exactly.
     assert pool + treasury + creator == cap, (
@@ -218,7 +225,7 @@ def test_the_economic_loop_and_the_balance_of_forces_are_stated():
     These are the connective tissue of the constitution. Without them the
     directives are a list of features instead of an argument.
     """
-    blob = " ".join(f"{d.id} {d.title} {d.rule}" for d in GENESIS_DIRECTIVES)
+    blob = _blob()
     required = [
         # The burn offsets miner selling pressure
         "selling pressure the miners would otherwise create",

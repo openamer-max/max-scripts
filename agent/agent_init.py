@@ -1749,6 +1749,13 @@ def init_agent(
     # single turn; the runtime already executes such batches concurrently.
     agent._parallel_tool_call_guidance = bool(_agent_section.get("parallel_tool_call_guidance", True))
 
+    # Genesis Directives toggle.  Default True.  The directives live in the
+    # tracked tree (agent/genesis_directives.py) so they ship with every
+    # update; this flag is the operator's way to decline them.  A
+    # constitution the user cannot refuse is a takeover, so the switch has
+    # to exist and has to be honoured.
+    agent._genesis_directives = bool(_agent_section.get("genesis_directives", True))
+
     # Local Python toolchain probe toggle.  Default True.  When False,
     # the probe is skipped entirely (no subprocess calls, no system-prompt
     # line).  Useful for users on exotic setups where the probe heuristics

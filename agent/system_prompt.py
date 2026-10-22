@@ -440,6 +440,32 @@ def build_system_prompt_parts(agent: Any, system_message: Optional[str] = None) 
             f"after explicit direction."
         )
 
+    # Genesis Directives — the standing constitution of this OpenAmer
+    # instance.  They live in the tracked tree (agent/genesis_directives.py)
+    # so every installation receives them on update.
+    #
+    # Appended at the very END of the stable tier on purpose.  The stable
+    # tier is the cached prefix, and its leading blocks (identity, help,
+    # steer, coding, workspace) are what a cache hit is built on -- a block
+    # inserted in the middle would shift every following block and
+    # invalidate the prefix on every rebuild.  At the end it is still
+    # inside the cached region, so it costs nothing extra per turn, and the
+    # head of the prompt keeps its exact byte layout.
+    #
+    # Gated by config.yaml ``agent.genesis_directives`` (default True): the
+    # operator can decline them, and a constitution the user cannot refuse
+    # is a takeover.
+    try:
+        from agent.genesis_directives import render_genesis_block
+        _genesis_block = render_genesis_block(
+            enabled=getattr(agent, "_genesis_directives", True)
+        )
+        if _genesis_block:
+            post_workspace_parts.append(_genesis_block)
+    except Exception:
+        # Genesis failure must never block prompt build.
+        pass
+
     platform_key = (agent.platform or "").lower().strip()
     # Resolve the built-in/plugin default hint for this platform, then apply
     # any per-platform override from config (platform_hints.<platform>).

@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-20T20:42:40",
+  "timestamp": "2026-10-22T21:00:01",
   "mode": "apply",
-  "population": 1185,
-  "avg_score": 38.5,
+  "population": 1192,
+  "avg_score": 38.6,
   "kept": [
     {
       "skill": "auto-internet-learning-metas-new",
@@ -54,32 +54,32 @@
       "fixes": []
     },
     {
-      "skill": "auto-latest-research-insight-hybrid",
-      "before": 21,
-      "after": 25,
-      "delta": 4,
-      "fixes": [
-        "✅ metadata.openamer Block hinzugefügt",
-        "✅ platforms Feld hinzugefügt",
-        "✅ version Feld hinzugefügt"
-      ]
-    },
-    {
-      "skill": "auto-latest-research-insight-training",
-      "before": 21,
-      "after": 25,
-      "delta": 4,
-      "fixes": [
-        "✅ metadata.openamer Block hinzugefügt",
-        "✅ platforms Feld hinzugefügt",
-        "✅ version Feld hinzugefügt"
-      ]
-    },
-    {
-      "skill": "auto-latest-research-insight-understanding",
+      "skill": "auto-multidomain-learning-business-automation",
       "before": 21,
       "after": 28,
       "delta": 7,
+      "fixes": [
+        "✅ metadata.openamer Block hinzugefügt",
+        "✅ platforms Feld hinzugefügt",
+        "✅ version Feld hinzugefügt"
+      ]
+    },
+    {
+      "skill": "auto-multidomain-learning-climate-science",
+      "before": 21,
+      "after": 28,
+      "delta": 7,
+      "fixes": [
+        "✅ metadata.openamer Block hinzugefügt",
+        "✅ platforms Feld hinzugefügt",
+        "✅ version Feld hinzugefügt"
+      ]
+    },
+    {
+      "skill": "auto-multidomain-learning-financial-market",
+      "before": 21,
+      "after": 25,
+      "delta": 4,
       "fixes": [
         "✅ metadata.openamer Block hinzugefügt",
         "✅ platforms Feld hinzugefügt",

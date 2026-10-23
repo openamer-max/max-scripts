@@ -69,7 +69,7 @@ jobs:
       # contract. solc is pinned so the verdict does not depend on
       # whatever version happens to be installed.
       - name: Set up Node
-        uses: actions/setup-node@2028fbc5c25fe9cf00f0b8a3fb9c9c3b0d4a2b1e9 # v4.1.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
 

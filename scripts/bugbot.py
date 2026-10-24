@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Bugbot — Autonomous Bug Detection & Fixing Agent.
 Scans GitHub Issues, reproduces bugs, creates fixes, and submits PRs.

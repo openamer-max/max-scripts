@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """SQLite-backed Kanban board for multi-profile, multi-project collaboration.
 
 In a fresh install the board lives at ``<root>/kanban.db`` where

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared SQLite primitives for the small per-profile / board stores.
 
 The projects and kanban stores open WAL SQLite files with the same two

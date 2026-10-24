@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Web Search Provider Registry
 ============================

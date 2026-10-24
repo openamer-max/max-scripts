@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# max-scripts Mirror — by Amer Sacirovic
 # Run a OpenAmer instance in an isolated sandbox — separate OPENAMER_HOME,
 # separate Electron userData, and a distinct Desktop app name so it doesn't compete
 # with your main desktop instance's single-instance lock.

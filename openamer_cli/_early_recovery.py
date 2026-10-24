@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Dependency-light venv recovery that runs BEFORE openamer_cli.main's imports.
 
 The ``openamer`` console entry point is ``openamer_cli.main:main``.  Importing

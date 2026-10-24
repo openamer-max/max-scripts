@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """ai_deep.py — opt-in deep reasoning AND vision, budget-controlled (P4+P5).
 
 Gives the agent two "heavy" capabilities WITHOUT blowing the budget, both via

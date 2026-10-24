@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Turn-end guard for kanban workers, which must end with ``kanban_complete`` or
 ``kanban_block``. Some models narrate the next step and stop with no tool calls;
 OpenAmer treats that as a clean exit → ``rc=0`` → dispatcher ``protocol_violation``.

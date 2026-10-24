@@ -3,6 +3,8 @@
 import unittest
 from unittest.mock import patch
 
+import httpx
+
 from tools.skills_hub import ClawHubSource, SkillMeta
 
 
@@ -425,6 +427,111 @@ class TestClawHubSource(unittest.TestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0].identifier, "only-skill")
         mock_write_cache.assert_called_once()
+
+    @patch("tools.skills_hub._write_index_cache")
+    @patch("tools.skills_hub._read_index_cache", return_value=None)
+    @patch("tools.skills_hub.httpx.get")
+    def test_catalog_walk_retries_a_timed_out_page(
+        self, mock_get, _mock_read_cache, mock_write_cache
+    ):
+        """A slow page must be retried, not end the crawl.
+
+        ClawHub occasionally takes >30s for one page. The walk used to abort
+        on the first ReadTimeout, losing every remaining page -- and then
+        cached the truncated result as the complete catalog.
+        """
+        calls = {"n": 0}
+
+        def side_effect(url, *args, **kwargs):
+            if not url.endswith("/skills"):
+                return _MockResponse(status_code=404, json_data={})
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise httpx.ReadTimeout("read operation timed out")
+            return _MockResponse(
+                status_code=200,
+                json_data={"items": [{"slug": "after-retry"}]},
+            )
+
+        mock_get.side_effect = side_effect
+
+        with patch("tools.skills_hub.time.sleep"):
+            results = self.src._load_catalog_index()
+
+        self.assertEqual([r.identifier for r in results], ["after-retry"])
+        self.assertEqual(calls["n"], 2, "the failed page must be retried once")
+        mock_write_cache.assert_called_once()
+
+    @patch("tools.skills_hub._write_index_cache")
+    @patch("tools.skills_hub._read_index_cache", return_value=None)
+    @patch("tools.skills_hub.httpx.get")
+    def test_catalog_walk_does_not_cache_when_a_page_fails(
+        self, mock_get, _mock_read_cache, mock_write_cache
+    ):
+        """A walk that dies on a failing page is partial and must not be cached.
+
+        The cache-hit path serves the cached catalog to every later caller, so
+        caching a truncated walk would make the truncated count permanent.
+        """
+        def side_effect(url, *args, **kwargs):
+            if not url.endswith("/skills"):
+                return _MockResponse(status_code=404, json_data={})
+            raise httpx.ReadTimeout("read operation timed out")
+
+        mock_get.side_effect = side_effect
+
+        with patch("tools.skills_hub.time.sleep"):
+            results = self.src._load_catalog_index()
+
+        self.assertEqual(results, [])
+        mock_write_cache.assert_not_called()
+
+    @patch("tools.skills_hub._write_index_cache")
+    @patch("tools.skills_hub._read_index_cache", return_value=None)
+    @patch("tools.skills_hub.httpx.get")
+    def test_catalog_walk_retries_a_transient_server_error(
+        self, mock_get, _mock_read_cache, mock_write_cache
+    ):
+        """A 503 is transient and must be retried, not treated as fatal."""
+        calls = {"n": 0}
+
+        def side_effect(url, *args, **kwargs):
+            if not url.endswith("/skills"):
+                return _MockResponse(status_code=404, json_data={})
+            calls["n"] += 1
+            if calls["n"] == 1:
+                return _MockResponse(status_code=503, json_data={})
+            return _MockResponse(
+                status_code=200,
+                json_data={"items": [{"slug": "after-503"}]},
+            )
+
+        mock_get.side_effect = side_effect
+
+        with patch("tools.skills_hub.time.sleep"):
+            results = self.src._load_catalog_index()
+
+        self.assertEqual([r.identifier for r in results], ["after-503"])
+        mock_write_cache.assert_called_once()
+
+    @patch("tools.skills_hub._write_index_cache")
+    @patch("tools.skills_hub._read_index_cache", return_value=None)
+    @patch("tools.skills_hub.httpx.get")
+    def test_catalog_walk_does_not_cache_on_a_hard_error_status(
+        self, mock_get, _mock_read_cache, mock_write_cache
+    ):
+        """A non-retryable status (e.g. 400) ends the walk without caching."""
+        def side_effect(url, *args, **kwargs):
+            if url.endswith("/skills"):
+                return _MockResponse(status_code=400, json_data={})
+            return _MockResponse(status_code=404, json_data={})
+
+        mock_get.side_effect = side_effect
+
+        results = self.src._load_catalog_index()
+
+        self.assertEqual(results, [])
+        mock_write_cache.assert_not_called()
 
 
 class TestClawHubCatalogWalkBounded(unittest.TestCase):

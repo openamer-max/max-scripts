@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Metacognition & Civilization Seeds (Phase 24).
 

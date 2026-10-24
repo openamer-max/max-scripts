@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """`openamer checkpoints` CLI subcommand.
 
 Gives users direct visibility and control over the filesystem checkpoint

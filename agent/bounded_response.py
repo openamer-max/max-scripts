@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Bounded reads of HTTP error response bodies.
 
 When a provider returns a non-OK status on a *streaming* request, OpenAmer reads

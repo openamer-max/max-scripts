@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Boot-time re-seed of a terminally-dead OpenAmer bootstrap session.
 
 Background

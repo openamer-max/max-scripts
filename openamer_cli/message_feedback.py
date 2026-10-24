@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Persistent, deterministic user-message feedback for self-improvement.
 
 Captures lightweight user signals about agent replies (``helpful`` /

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """RepoMap — scan a git repo and build a structured map of the codebase.
 
 Provides:

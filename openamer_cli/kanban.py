@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """CLI for the OpenAmer Kanban board — ``openamer kanban …`` subcommand.
 
 Exposes the full Kanban command surface documented in the design spec

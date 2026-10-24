@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Update all 7 language READMEs with new feature rows (self-modify, plugins search, brain data)."""
 
 import os

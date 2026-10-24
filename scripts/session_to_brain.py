@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Export session trajectories from the local state.db into the A2A brain dataset.
 
 This is the "train from everything" pipeline: every chat message, every

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Web Observability Portal — live agent activity dashboard, session browser,
 trace viewer, and JSON export.
 

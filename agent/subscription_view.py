@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Surface-agnostic core for the ``/subscription`` TUI screen.
 
 Companion to :mod:`agent.billing_view` — same fail-open philosophy: when not

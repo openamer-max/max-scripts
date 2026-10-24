@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Website access policy helpers for URL-capable tools.
 
 This module loads a user-managed website blocklist from ~/.openamer/config.yaml

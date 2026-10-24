@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Kanban Swarm v1: thin swarm topology helpers on top of Kanban.
 
 Deliberately no second scheduler — a small task graph written into the

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Doctor command for openamer CLI.
 

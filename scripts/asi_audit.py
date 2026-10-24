@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """ASI Capability Audit — what we can actually do, with evidence, not claims.
 
 WHAT THIS IS

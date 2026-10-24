@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """API error classification for smart failover and recovery.
 
 A priority-ordered pipeline maps an API exception to a ``ClassifiedError``

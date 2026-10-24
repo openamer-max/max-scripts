@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Per-reasoning-model stale-timeout floor for known reasoning models.
 
 Reasoning models (those that emit extended thinking blocks before their

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared file safety rules used by both tools and ACP shims."""
 
 from __future__ import annotations

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """knowledge_inventory.py — map & retrieve the agent's full knowledge base.
 
 Turns the 278 skills / 324 modules / thinking-rules from *dead files* into

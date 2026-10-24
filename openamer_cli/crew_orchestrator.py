@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Crew Orchestrator — Multi-Agent Orchestration for OpenAmer.
 

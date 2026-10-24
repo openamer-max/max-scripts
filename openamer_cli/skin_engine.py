@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer skin/theme engine — the theme SDK for every surface.
 
 A data-driven skin system that lets users (and OpenAmer itself) customize the

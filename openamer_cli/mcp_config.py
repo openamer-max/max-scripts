@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 MCP Server Management CLI — ``openamer mcp`` subcommand.
 

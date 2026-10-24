@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Context compression — extract the AIAgent methods that drive summarisation.
 
 Three concerns live here:

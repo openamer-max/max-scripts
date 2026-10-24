@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Unified self-relaunch for OpenAmer CLI.
 

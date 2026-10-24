@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Billing and subscription handlers for the interactive CLI (god-file decomposition).
 
 This module hosts the OpenAmer billing/subscription methods lifted out of

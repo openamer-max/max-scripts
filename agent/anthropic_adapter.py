@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Anthropic Messages API adapter for OpenAmer Agent.
 
 Translates between OpenAmer's internal OpenAI-style message format and

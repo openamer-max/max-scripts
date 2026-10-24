@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 OpenAmer Desktop (Chat GUI) uninstaller.
 

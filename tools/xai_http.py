@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared helpers for direct xAI HTTP integrations."""
 
 from __future__ import annotations

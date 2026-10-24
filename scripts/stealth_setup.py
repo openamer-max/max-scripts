@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 OpenAmer Stealth Browser Plugin — Anti-Detection für agent-browser.
 Macht automatisierte Browseranfragen für Websites unsichtbar.

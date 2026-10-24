@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Verification-loop helpers for the ``pre_verify`` round-end gate.
 
 When the agent has edited code and is about to verify/finish, the loop fires the

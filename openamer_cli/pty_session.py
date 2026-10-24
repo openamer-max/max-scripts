@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Keep-alive PTY sessions for dashboard terminals.
 
 A PTY process outlives the WebSocket that created it: a single drain task

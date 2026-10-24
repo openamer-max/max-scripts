@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """CLI subcommand: `openamer curator <subcommand>`.
 
 Thin shell around agent/curator.py and tools/skill_usage.py. Renders a status

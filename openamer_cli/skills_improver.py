@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Self-Improving Skills System for OpenAmer.
 
 Tracks skill usage, identifies improvement opportunities, and

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 TTS Provider Registry
 =====================

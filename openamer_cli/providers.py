@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Single source of truth for provider identity in OpenAmer Agent.
 

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Thread-scoped stdout/stderr silencing for background worker threads.
 
 ``contextlib.redirect_stdout``/``redirect_stderr`` reassign the *process-global*

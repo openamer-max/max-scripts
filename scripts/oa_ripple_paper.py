@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """oa_ripple paper + Modell — Forschungsergebnis dokumentiert & deployed."""
 import math, json, time
 import sys

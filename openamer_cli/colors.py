@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared ANSI color utilities for OpenAmer CLI modules."""
 
 import os

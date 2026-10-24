@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Security advisory checker for OpenAmer Agent.
 

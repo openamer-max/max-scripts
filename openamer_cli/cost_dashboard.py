@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Cost Dashboard — track, report, and budget LLM inference costs.
 

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """cron_mesh_daemon.py — ensure the Go mesh-daemon is running (5-min cron).
 
 Probes http://127.0.0.1:18920/health; if down, starts the binary detached.

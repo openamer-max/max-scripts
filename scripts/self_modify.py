@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Self-modification with a test gate and rollback — for OpenAmer Agent.
 
 This is the "does not break" axis made concrete for OpenAmer itself: a change

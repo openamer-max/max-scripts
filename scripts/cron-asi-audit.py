@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Weekly ASI capability audit — silent unless a capability went dark.
 
 Cron contract: empty stdout = nothing to say. This job speaks only when a

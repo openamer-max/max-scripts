@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Swarm Communication (Phase 30) - workers talk to each other.
 

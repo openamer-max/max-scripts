@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Message and tool-payload sanitization helpers.
 
 Pure functions extracted from ``run_agent.py`` so the AIAgent module can

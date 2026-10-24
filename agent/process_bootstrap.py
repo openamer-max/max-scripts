@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Process-level bootstrap helpers for ``run_agent``.
 
 Three concerns, all tied to ``AIAgent`` boot-time / runtime IO setup:

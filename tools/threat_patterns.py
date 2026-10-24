@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared threat-pattern library for context window security scanning.
 
 This module is the single source of truth for prompt-injection / promptware /

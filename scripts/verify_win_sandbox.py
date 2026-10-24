@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Live verification for the Windows containment module — real OS calls, no mocks.
 
 Run:  python scripts/verify_win_sandbox.py

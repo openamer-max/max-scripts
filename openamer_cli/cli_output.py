@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared CLI output helpers for OpenAmer CLI modules.
 
 Extracts the identical ``print_info/success/warning/error`` and ``prompt()``

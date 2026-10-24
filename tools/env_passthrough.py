@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Environment variable passthrough registry.
 
 Skills that declare ``required_environment_variables`` in their frontmatter

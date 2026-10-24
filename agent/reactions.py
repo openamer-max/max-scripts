@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Token-free detection of user *reactions* to the agent.
 
 Currently the only reaction is ``vibe`` — an expression of affection or

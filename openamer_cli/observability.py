@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Observability & Tracing — Agent Execution Browser.
 
 Provides a step-by-step view of what the agent did, which tools it called,

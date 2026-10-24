@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """iso-certify — AC-4 dashboard turn-isolation certify harness.
 
 Certifies Mechanism-B process isolation

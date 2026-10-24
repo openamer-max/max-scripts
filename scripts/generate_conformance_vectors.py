@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Conformance-vector generator — the native adapters as executable spec.
 
 Renders a shared corpus (markdown grid + scar tissue + adversarial agent

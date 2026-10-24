@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 File Organizer – Desktop/Downloads/Documents Scan + Temp-Cleanup + Duplikaterkennung + Typ-Organizer + Undo
 

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Progressive subdirectory hint discovery.
 
 As the agent navigates into subdirectories via tool calls (read_file, terminal,

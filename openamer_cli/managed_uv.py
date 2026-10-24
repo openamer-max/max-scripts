@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer-managed uv and Python runtime repair.
 
 OpenAmer owns its own uv binary at ``$OPENAMER_HOME/bin/uv`` (or ``uv.exe`` on

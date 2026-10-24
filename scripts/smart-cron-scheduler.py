@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Smart Cron Scheduler — Job-Analyse + System-Auslastung + optimierte Schedules.
 

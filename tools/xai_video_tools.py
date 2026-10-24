@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """xAI-specific Imagine video edit and extend tools."""
 
 from __future__ import annotations

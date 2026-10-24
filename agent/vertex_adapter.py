@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Vertex AI (Google Cloud) adapter for OpenAmer Agent.
 
 Provides authentication and configuration for Vertex AI's OpenAI-compatible

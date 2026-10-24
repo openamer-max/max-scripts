@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Kanban diagnostics — structured, actionable distress signals for tasks.
 
 A ``Diagnostic`` carries a **kind** (canonical code the UI/tests match on), a

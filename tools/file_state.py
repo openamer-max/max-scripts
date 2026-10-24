@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Cross-agent file state coordination.
 
 Prevents mangled edits when concurrent subagents (same process, same

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Azure Foundry endpoint auto-detection.
 
 Inspect a Microsoft Foundry / Azure OpenAI endpoint to determine:

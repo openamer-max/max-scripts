@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Approval context: who is asking, from where, under which policy.
 
 Session identity and observability contextvars, the interactive/gateway/cron/

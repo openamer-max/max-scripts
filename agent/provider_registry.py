@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared engine behind the ``agent.*_registry`` provider registries.
 
 Every pluggable-backend registry has the same shape: a global name->provider map

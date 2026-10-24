@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 system-snapshot.py — Vollständiger Systemzustand auf einen Blick
 

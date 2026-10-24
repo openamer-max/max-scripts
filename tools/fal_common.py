@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared FAL.ai SDK plumbing.
 
 Holds the stateless atoms that every FAL-backed tool needs:

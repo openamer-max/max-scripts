@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 CI/CD Code Review Bot — reviews GitHub PRs and diffs programmatically.
 

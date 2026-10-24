@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Discord Voice Doctor — diagnostic tool for voice channel support.
 
 Checks all dependencies, configuration, and bot permissions needed

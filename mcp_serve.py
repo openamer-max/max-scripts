@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 OpenAmer MCP Server — expose messaging conversations as MCP tools.
 

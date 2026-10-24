@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Port a file (or symbol) from upstream hermes-agent into the openamer tree.
 
 Applies the openamer rebrand to the copied text and fails loudly on any

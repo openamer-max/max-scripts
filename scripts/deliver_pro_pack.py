@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """deliver_pro_pack.py — delivery automation for Pro Skill Pack purchases.
 
 Flow: ko-fi/BMAC webhooks (or manual CSV export) append order lines to

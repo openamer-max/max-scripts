@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Raw Chrome DevTools Protocol (CDP) passthrough tool.
 

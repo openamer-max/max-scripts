@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Darwin Grid Client - connect a local ecosystem to the grid.
 

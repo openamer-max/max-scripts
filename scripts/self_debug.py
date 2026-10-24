@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Self-Debugging Engine — ASI Tool Invention.
 Scannt openamer-repo Code, findet Fehler, erstellt Patches autonom.
 

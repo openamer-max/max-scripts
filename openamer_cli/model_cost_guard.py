@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Expensive-model confirmation helpers for model selection surfaces."""
 
 from __future__ import annotations

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Process Registry -- In-memory registry for managed background processes.
 

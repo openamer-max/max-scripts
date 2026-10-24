@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared one-off LLM requests for non-conversational helpers.
 
 A "one-shot" is a single, stateless model call that runs *outside* any

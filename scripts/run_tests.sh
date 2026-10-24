@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# max-scripts Mirror — by Amer Sacirovic
 # Canonical test runner for openamer-agent. Run this instead of calling
 # `pytest` directly to guarantee your local run matches CI behavior.
 #
@@ -116,6 +115,21 @@ if [ -z "$NATIVE_SYSROOT" ]; then
   NATIVE_SYSROOT='C:\Windows'
 fi
 
+# ── SystemDrive for the hermetic env (captured BEFORE env -i) ──────────────
+# env -i drops SystemDrive too, and on Windows `taskkill` HANGS (does not
+# fail) when SystemDrive is missing: it needs the drive to build the job
+# object path. The canonical runner kills every timed-out test file via
+# `taskkill /F /T` in run_tests_parallel._kill_tree, so without SystemDrive
+# each timeout burned the full 10s taskkill timeout instead of ~1s.
+# That silently stretched every timeout by ~10s and pushed CI slices over
+# the job timeout with the offending file never named.
+# Verified deterministically: 5/5 hangs without SystemDrive, 0/5 with it.
+NATIVE_SYSDRIVE="$("$PYTHON" -c 'import os;print(os.environ.get("SystemDrive") or os.environ.get("SYSTEMDRIVE") or "")' 2>/dev/null)"
+if [ -z "$NATIVE_SYSDRIVE" ]; then
+  # Derive it from SystemRoot (usually "C:\Windows" -> "C:") as a fallback.
+  NATIVE_SYSDRIVE="${NATIVE_SYSROOT%%:*}:"
+fi
+
 
 # ── Run in hermetic env ──────────────────────────────────────────────────────
 # env -i: start with empty environment, opt-in only what we need.
@@ -140,6 +154,7 @@ exec env -i \
   ${USERPROFILE:+USERPROFILE="$USERPROFILE"} \
   ${HOMEDRIVE:+HOMEDRIVE="$HOMEDRIVE"} ${HOMEPATH:+HOMEPATH="$HOMEPATH"} \
   SystemRoot="$NATIVE_SYSROOT" \
+  SystemDrive="$NATIVE_SYSDRIVE" \
   TZ=UTC \
   LANG=C.UTF-8 \
   LC_ALL=C.UTF-8 \

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """PTY bridge for `openamer dashboard` chat tab.
 
 Wraps a child process behind a pseudo-terminal so its ANSI output can be

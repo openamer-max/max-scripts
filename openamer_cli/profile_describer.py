@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Profile describer — auto-generate ``description`` for a profile.
 
 Used by ``openamer profile describe <name> --auto`` and the dashboard's

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Migrate OpenAmer' MCP server config and Codex's installed curated plugins
 to the format Codex expects in ~/.codex/config.toml.
 

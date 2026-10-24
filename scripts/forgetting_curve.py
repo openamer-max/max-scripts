@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Memory Forgetting Curve - GRADUAL DECAY + ARCHIVAL (auto-dream inspired).
 =========================================================================

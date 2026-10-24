@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """MCP process lifecycle: stdio child PID tracking and orphan cleanup, graceful
 server shutdown and draining of the background MCP loop."""
 

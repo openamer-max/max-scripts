@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """CJK/wide-character-aware re-alignment of model-emitted markdown tables.
 
 Models pad markdown tables assuming each character occupies one terminal

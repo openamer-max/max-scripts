@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-20T18:42:43.309481+00:00",
+  "updated": "2026-10-23T19:06:00.233937+00:00",
   "skills_dir": "C:\\Users\\damir\\AppData\\Local\\openamer-laptop\\skills",
-  "total": 1185,
+  "total": 1193,
   "skills": {
     "auto-competitor-intelligence-claudepowered-ai": {
       "refs": 0,
@@ -1533,6 +1533,12 @@
       "score": 1.0,
       "missing": []
     },
+    "auto-competitor-intelligence-stack-overflow": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
     "auto-efficiency-learning-ondevice-llm": {
       "refs": 0,
       "ok": 0,
@@ -1606,8 +1612,8 @@
       "missing": []
     },
     "autonomous-execution-discipline": {
-      "refs": 4,
-      "ok": 4,
+      "refs": 2,
+      "ok": 2,
       "score": 1.0,
       "missing": []
     },
@@ -1774,8 +1780,8 @@
       "missing": []
     },
     "autonomous-learning-architecture": {
-      "refs": 5,
-      "ok": 5,
+      "refs": 4,
+      "ok": 4,
       "score": 1.0,
       "missing": []
     },
@@ -2697,6 +2703,12 @@
       "score": 1.0,
       "missing": []
     },
+    "ci-test-hang-triage": {
+      "refs": 1,
+      "ok": 1,
+      "score": 1.0,
+      "missing": []
+    },
     "cpanel-deploy-via-session": {
       "refs": 0,
       "ok": 0,
@@ -2815,6 +2827,12 @@
       "missing": []
     },
     "live-site-audit": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
+    "llm-subscription-provider-integration": {
       "refs": 0,
       "ok": 0,
       "score": 1.0,
@@ -2988,6 +3006,12 @@
       "missing": []
     },
     "github-repo-management": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
+    "pr-branch-assembly": {
       "refs": 0,
       "ok": 0,
       "score": 1.0,
@@ -6245,6 +6269,12 @@
         "linear_mcp.py"
       ]
     },
+    "mcp-server-triage": {
+      "refs": 1,
+      "ok": 1,
+      "score": 1.0,
+      "missing": []
+    },
     "gif-search": {
       "refs": 0,
       "ok": 0,
@@ -6647,6 +6677,18 @@
       "score": 1.0,
       "missing": []
     },
+    "bare-metal-boot-bringup": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
+    "bare-metal-os-kernel-development": {
+      "refs": 1,
+      "ok": 1,
+      "score": 1.0,
+      "missing": []
+    },
     "best-in-world-workflow": {
       "refs": 2,
       "ok": 2,
@@ -6666,8 +6708,8 @@
       "missing": []
     },
     "clean-code-edits": {
-      "refs": 2,
-      "ok": 2,
+      "refs": 3,
+      "ok": 3,
       "score": 1.0,
       "missing": []
     },
@@ -6805,9 +6847,9 @@
       "missing": []
     },
     "github-ci-debugging": {
-      "refs": 5,
-      "ok": 4,
-      "score": 0.8,
+      "refs": 6,
+      "ok": 5,
+      "score": 0.833,
       "missing": [
         "gate.sh"
       ]
@@ -6905,8 +6947,8 @@
       "missing": []
     },
     "openamer-docs-site": {
-      "refs": 1,
-      "ok": 1,
+      "refs": 3,
+      "ok": 3,
       "score": 1.0,
       "missing": []
     },
@@ -7040,6 +7082,12 @@
       "score": 1.0,
       "missing": []
     },
+    "tokenomics-as-executable-arithmetic": {
+      "refs": 0,
+      "ok": 0,
+      "score": 1.0,
+      "missing": []
+    },
     "tool-repair-workflow": {
       "refs": 1,
       "ok": 1,
@@ -7092,8 +7140,8 @@
       "missing": []
     },
     "windows-subprocess-robustness": {
-      "refs": 1,
-      "ok": 1,
+      "refs": 2,
+      "ok": 2,
       "score": 1.0,
       "missing": []
     },

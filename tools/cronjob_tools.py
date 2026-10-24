@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Cron job management tools for OpenAmer Agent.
 

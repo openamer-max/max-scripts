@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Process-wide voice recording + TTS API for the TUI gateway.
 
 Wraps ``tools.voice_mode`` (recording/transcription) and ``tools.tts_tool``

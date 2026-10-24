@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Auto Code Review: Security-Scan + Code-Qualität + Style + Auto-Fix.
 

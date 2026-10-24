@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Interactive prompt callbacks for terminal_tool integration.
 
 These bridge terminal_tool's interactive prompts (clarify, sudo, approval)

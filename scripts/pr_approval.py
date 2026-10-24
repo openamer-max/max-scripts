@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 PR Approval Agent — Automated Pull Request Review & Approval Workflow.
 Reviews open PRs, runs tests, approves or requests changes, auto-merges.

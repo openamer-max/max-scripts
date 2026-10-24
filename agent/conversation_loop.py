@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """The agent conversation loop — extracted from ``run_agent.AIAgent``.
 
 This is the biggest single chunk pulled out of ``run_agent.py``: the

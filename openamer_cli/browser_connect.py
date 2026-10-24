@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared helpers for attaching OpenAmer to a local Chromium-family CDP port."""
 
 from __future__ import annotations

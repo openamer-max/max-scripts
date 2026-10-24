@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared logic for the /codex-runtime slash command.
 
 Toggles `model.openai_runtime` between "auto" (= chat_completions, OpenAmer'

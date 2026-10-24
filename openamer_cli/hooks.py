@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """openamer hooks — inspect and manage shell-script hooks.
 
 Usage::

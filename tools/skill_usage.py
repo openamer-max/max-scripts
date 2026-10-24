@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Skill usage telemetry + provenance tracking for the Curator feature.
 
 Tracks per-skill usage metadata in a sidecar JSON file (~/.openamer/skills/.usage.json)

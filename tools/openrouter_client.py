@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared OpenRouter API client for OpenAmer tools.
 
 Provides a single lazy-initialized AsyncOpenAI client that all tool modules

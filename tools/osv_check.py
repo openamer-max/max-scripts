@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """OSV malware check for MCP extension packages.
 
 Before launching an MCP server via npx/uvx, queries the OSV (Open Source

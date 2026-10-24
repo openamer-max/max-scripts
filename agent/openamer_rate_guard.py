@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Cross-session rate limit guard for OpenAmer Portal.
 
 Writes rate limit state to a shared file so all sessions (CLI, gateway,

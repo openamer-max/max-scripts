@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Backend git operations for the desktop coding rail + Codex-style review pane.
 
 The desktop's git affordances (coding-rail status, worktree lanes, review pane,

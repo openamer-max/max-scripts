@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Auto-generate short session titles from the first user/assistant exchange.
 
 Runs asynchronously after the first response is delivered so it never

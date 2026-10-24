@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Vergleicht Python 3.14 (WSL Ubuntu) vs Python 3.11 (Windows) für OpenAmer-Aufgaben."""
 import time, json, math, statistics
 

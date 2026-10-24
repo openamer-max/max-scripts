@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Per-file parallel test runner.
 
 The minimum-viable replacement for pytest-xdist + a subprocess-isolation
@@ -94,6 +93,11 @@ _DEFAULT_FILE_TIMEOUT_SECONDS = 300.0
 # a row on the same runner, which is exactly the definition of a flake).
 # Set to 0 to disable (env: OPENAMER_TEST_FILE_RETRIES).
 _DEFAULT_FILE_RETRIES = 1
+
+# Exit code the runner uses for "killed by the per-file timeout".
+# A timeout is deterministic (the file hangs), not a flake, so it must
+# never be retried -- see _run_one_file.
+_TIMEOUT_RC = 124
 
 # Duration cache: maps relative file paths to last-observed subprocess
 # wall-clock seconds. Used by ``--slice`` to distribute files across
@@ -211,13 +215,26 @@ def _kill_tree(proc: "subprocess.Popen", pgid: int | None = None) -> None:
         return
 
     if sys.platform == "win32":
+        # `taskkill` needs SystemDrive in the environment: without it, it
+        # HANGS instead of failing (it cannot build the job object path).
+        # The canonical runner starts pytest under `env -i`, which drops
+        # SystemDrive, so every timeout used to burn the full taskkill
+        # timeout before the kill even started. Inject it here so the kill
+        # path is self-sufficient and does not depend on how the runner
+        # was invoked. Measured: 5/5 hangs without it, 0/5 with it.
+        kill_env = dict(os.environ)
+        if not kill_env.get("SystemDrive") and not kill_env.get("SYSTEMDRIVE"):
+            root = kill_env.get("SystemRoot") or kill_env.get("SYSTEMROOT")
+            if root and ":" in root:
+                kill_env["SystemDrive"] = root.split(":", 1)[0] + ":"
+
         try:
-            
             subprocess.run(
                 ["taskkill", "/F", "/T", "/PID", str(proc.pid)],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 timeout=10,
+                env=kill_env,
             )  # windows-footgun: ok
         except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
             pass
@@ -281,7 +298,13 @@ def _run_one_file(
         file, pytest_args, repo_root, file_timeout
     )
     attempt = 0
-    while rc != 0 and attempt < retries:
+    # A per-file timeout (exit code 124) is NOT a flaky test: the file
+    # hangs deterministically. Retrying it costs another full
+    # file_timeout (900s in CI) and buries the hang under a second
+    # timeout, so the slice sat at exactly 30 minutes until the
+    # job-level timeout killed it, with the offending file never named.
+    # Report it as a failure right away.
+    while rc != 0 and rc != _TIMEOUT_RC and attempt < retries:
         attempt += 1
         first_output = output
         file, rc, output, summary, subproc_wall2 = _run_one_file_once(

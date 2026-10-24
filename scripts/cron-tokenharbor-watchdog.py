@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Watchdog: is the Token Harbor free route still serving?
 
 There is no public allowance endpoint (all /v1/usage-style paths 404), so the

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """System-prompt assembly for :class:`AIAgent`.
 
 The agent's system prompt is built once per session and reused across all
@@ -440,6 +439,27 @@ def build_system_prompt_parts(agent: Any, system_message: Optional[str] = None) 
             f"refuse such writes by default; pass cross_profile=True only "
             f"after explicit direction."
         )
+
+    # Genesis Directives — the standing constitution of this instance, in
+    # the tracked tree (agent/genesis_directives.py) so every installation
+    # receives them on update.
+    #
+    # Appended at the very END of the stable tier: the tier's leading blocks
+    # (identity, help, steer, coding, workspace) are what a cache hit is
+    # built on, and a block in the middle would shift every following one
+    # and invalidate the prefix on every rebuild.  Gated by config.yaml
+    # ``agent.genesis_directives`` (default True) — a constitution the
+    # operator cannot decline is a takeover.
+    try:
+        from agent.genesis_directives import render_genesis_block
+        _genesis_block = render_genesis_block(
+            enabled=getattr(agent, "_genesis_directives", True)
+        )
+        if _genesis_block:
+            post_workspace_parts.append(_genesis_block)
+    except Exception:
+        # Genesis failure must never block prompt build.
+        pass
 
     platform_key = (agent.platform or "").lower().strip()
     # Resolve the built-in/plugin default hint for this platform, then apply

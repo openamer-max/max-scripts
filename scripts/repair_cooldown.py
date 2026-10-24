@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Repair cooldown / idempotency guard (AEON skill-repair history idea).
 
 Purpose: prevent repair loops. A workflow that was repaired less than

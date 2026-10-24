@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Async/sync bridging helpers.
 
 The codebase has ~30 sites that schedule a coroutine onto an event loop from a

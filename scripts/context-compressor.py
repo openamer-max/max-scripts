@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Context Compressor — Session-Komprimierung (60-80% Reduktion)
 =============================================================

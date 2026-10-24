@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """CLI subcommand: ``openamer pets <subcommand>``.
 
 Thin shell around :mod:`agent.pet`.  Browses the public petdex gallery,

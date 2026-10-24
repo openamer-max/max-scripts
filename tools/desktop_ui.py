@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Bridge desktop-only tools to OpenAmer-desktop renderer events.
 
 The preview pane, pane focus, and friends live in the desktop renderer, so

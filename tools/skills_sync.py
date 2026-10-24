@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Skills Sync -- Manifest-based seeding and updating of bundled skills.
 

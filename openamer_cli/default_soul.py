@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Default SOUL.md template seeded into OPENAMER_HOME on first run."""
 
 DEFAULT_SOUL_MD = (

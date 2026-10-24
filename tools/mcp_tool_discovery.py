@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Connecting and discovery for tools.mcp_tool: per-server connect cooldown, connect /
 lazy-start / recycled-stdio wake-up, ``register_mcp_servers`` / ``discover_mcp_tools`` and
 the status / probe public API. Origin state (``_servers``, ``_lock``, the loop, patchable

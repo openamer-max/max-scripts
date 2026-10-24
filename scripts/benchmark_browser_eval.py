@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Quick benchmark: subprocess eval vs supervisor-WS eval.
 
 Runs both paths against the same live Chrome and prints a comparison table.

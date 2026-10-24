@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Client for uploading ``openamer debug share`` bundles to OpenAmer-internal S3.
 
 This is the opt-in (``--openamer``) destination for ``openamer debug share``.

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """User Profile System for OpenAmer.
 
 Learns from session data, builds user profiles with skill affinities,

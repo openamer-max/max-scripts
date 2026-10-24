@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """MCP connection/transport error classification: URL validation, TLS client certs, identity
 headers, redirect header stripping, exception-group unwrapping, auth/session-expired/
 method-not-found detection and connect-error formatting. Split from tools/mcp_tool.py."""

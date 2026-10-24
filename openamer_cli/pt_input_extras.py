@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Augmentations to prompt_toolkit's input-parsing tables.
 
 Imported once at CLI startup. Each helper installs a small mapping into

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Local-environment toolchain probe for the system prompt.
 
 When the terminal backend is local (the agent's tools run on the same

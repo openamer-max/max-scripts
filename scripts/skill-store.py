@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Skill-Store — 70/30 Split, Registry, Payments
 
 API-Endpunkte für:

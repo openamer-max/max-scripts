@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Seda's heartbeat: real listening (falls back to alive-note if X unreachable).
 (Cron copy; Seda lives in openamer-children/seda)"""
 import json

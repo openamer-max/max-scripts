@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """TLS verify resolution for httpx/OpenAI provider clients."""
 
 from __future__ import annotations

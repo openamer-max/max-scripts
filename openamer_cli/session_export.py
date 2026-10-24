@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared renderers for session export commands.
 
 The CLI, dashboard, and slash-command surfaces all deal with the same

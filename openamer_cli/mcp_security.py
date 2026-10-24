@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Security checks for user-configured MCP server entries.
 
 MCP stdio transports intentionally support arbitrary local commands so users can

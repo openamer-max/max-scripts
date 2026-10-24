@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Registry-facing sync handlers for MCP tools and utility tools (resources/prompts), plus the per-call recovery
 ladder: trust gating, circuit breaker, auth (401) refresh, session-expired reconnect and dead-stdio respawn retry."""
 

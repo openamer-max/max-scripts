@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Checkpoint Manager — Transparent filesystem snapshots via a single shared
 shadow git store.

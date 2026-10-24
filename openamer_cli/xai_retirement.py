@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Detect xAI models retired on May 15, 2026.
 
 Source: https://docs.x.ai/developers/migration/may-15-retirement

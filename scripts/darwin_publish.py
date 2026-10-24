@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """darwin_publish.py — publish real Darwin data to the website (daily cron).
 
 Collects:

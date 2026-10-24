@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Surface-agnostic core for the Phase 2b Remote Spending screens.
 
 One fetch/parse per concern, consumed identically by the CLI handler

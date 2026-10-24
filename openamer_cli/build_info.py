@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Baked-in build metadata for OpenAmer Agent.
 

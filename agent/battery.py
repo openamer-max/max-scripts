@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """System-battery read-out for the CLI/TUI status bar.
 
 Reads the host battery through ``psutil`` (already a OpenAmer dependency) and

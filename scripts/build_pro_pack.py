@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """build_pro_pack.py — build the OpenAmer Pro Skill Pack (sellable bundle).
 
 Reads reports/skill-validator-latest.json, selects top skills (score >= 70,

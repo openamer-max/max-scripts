@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Interactive setup wizard for OpenAmer Agent.
 

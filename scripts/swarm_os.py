@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Swarm OS - autonomous swarm organization for OpenAmer agents (Phase 20).
 

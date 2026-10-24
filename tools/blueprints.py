@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Blueprints: shareable plain-language automations layered on skills + cron.
 
 A "blueprint" is NOT a new object type. It is an ordinary skill (a SKILL.md the

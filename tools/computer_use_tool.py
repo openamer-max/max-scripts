@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shim for tool discovery. Registers `computer_use` with tools.registry.
 
 The real implementation lives in the `tools/computer_use/` package to keep

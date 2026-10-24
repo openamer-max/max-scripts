@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Auto-Env-Checker — Vollständige Umgebungs-Validierung + Auto-Fix
 

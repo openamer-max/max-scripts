@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Daily Release — bump the version to today's date and publish a GitHub
 release with a compact calendar tag (vYYMMDD).
 

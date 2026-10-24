@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Agent Goal Engine — gives OpenAmer its own wishes and priorities.
 
 Lightweight, file-backed goal system. Goals are loaded from YAML/JSON

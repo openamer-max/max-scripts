@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Tool result persistence -- preserves large outputs instead of truncating.
 
 Defense against context-window overflow operates at three levels:

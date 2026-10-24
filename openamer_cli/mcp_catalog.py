@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """MCP catalog — curated, OpenAmer-approved MCP servers shipped with the repo.
 
 Mirrors the optional-skills/ pattern: each catalog entry lives under

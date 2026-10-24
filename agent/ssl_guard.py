@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Preventive SSL CA certificate checks for OpenAmer Agent.
 
 This module catches broken CA bundle paths before OpenAI/httpx turns them into

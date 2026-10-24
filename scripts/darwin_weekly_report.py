@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Weekly Darwin evolution report -> GitHub issue (or local file fallback).
 Usage:

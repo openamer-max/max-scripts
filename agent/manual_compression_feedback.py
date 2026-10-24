@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """User-facing summaries for manual compression commands."""
 
 from __future__ import annotations

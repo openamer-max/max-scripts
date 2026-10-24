@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Open a URL, dev server, or file in the OpenAmer desktop GUI's preview pane.
 
 Gated on ``OPENAMER_DESKTOP`` (like ``read_terminal`` / ``close_terminal``) so it

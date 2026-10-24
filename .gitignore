@@ -1,4 +1,8 @@
 .DS_Store
+
+# Skill patch backups written by skill_manage/patch runs.
+*.bak
+
 /venv/
 /venv.old/
 /venv.stale.runtime-*/
@@ -85,6 +89,13 @@ openamer_cli/web_dist/
 .web_ui_build.lock
 apps/desktop/build/
 apps/desktop/dist/
+
+# Solidity compiler output. `solc --bin --abi` writes the artifacts into
+# the CURRENT directory, so a compile run from the repo root drops
+# .bin/.abi files here. The generated source (chain/contracts/*.sol) is
+# tracked; its build output never is.
+*.bin
+*.abi
 
 # tsc-emitted artifacts (a stray `tsc -b` compiles into src/, and vite then
 # resolves the stale .js OVER the .tsx — never track these)
@@ -240,3 +251,9 @@ C*Users*damir*AppData*Temp*pytest-of-*
 
 # VS Code extension build artifacts
 apps/vscode/*.vsix
+
+# PowerShell ModuleAnalysisCache written into the repo root by a stray PS session
+/Microsoft/
+
+# scratch worktree copies (wt-*)
+/wt-*/

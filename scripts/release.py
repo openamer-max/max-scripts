@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Agent Release Script
 
 Generates changelogs and creates GitHub releases with CalVer tags.

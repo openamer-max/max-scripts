@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Enforced plan mode — read-only tool gating, not a prompt-level suggestion.
 
 Why a gate and not a skill

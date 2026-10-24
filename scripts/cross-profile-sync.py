@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Cross-Profile Sync — Skills/Cron/Config zwischen OpenAmer-Profilen synchronisieren
 =================================================================================

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Top-level argparse construction for the openamer CLI.
 

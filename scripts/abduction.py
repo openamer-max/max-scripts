@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """abduction.py - from an observed anomaly to ranked hypotheses AND the one test
 that would tell them apart. Abduction + expected information gain + curiosity.
 

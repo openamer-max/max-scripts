@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Cron wrapper for the OpenRouter ranking watchdog.
 
 Why this exists: OpenAmer's scheduler takes the job's `script` field as a bare

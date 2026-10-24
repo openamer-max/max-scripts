@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Import-safe helpers for inspecting a Python interpreter's linked SQLite.
 
 This module intentionally depends only on the standard library.  Installer and

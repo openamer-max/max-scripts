@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Login / checkout form control classifier for vault autofill.
 
 Python port (~170 LOC) of Merit-Systems/OpenInstinct's

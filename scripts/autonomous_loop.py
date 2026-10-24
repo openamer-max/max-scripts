@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Autonomous Loop (Phase 25) - the missing piece that makes the swarm
 truly self-organizing. Closes the last 4 gaps:

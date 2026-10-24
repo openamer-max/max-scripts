@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """MCP server config loading and stdio launch environment: ${VAR}/Cursor-style
 interpolation, hidden-whitespace and suspicious-entry filtering, the filtered
 subprocess env, command resolution, the cached-npx binary shortcut and the shared stderr log."""

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Lightweight skill metadata utilities shared by prompt_builder and skills_tool.
 
 This module intentionally avoids importing the tool registry, CLI config, or any

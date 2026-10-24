@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Nightly test-suite watchdog: run the canonical suite, alert only on failure.
 
 Why this exists: "the system works" is not a state that can be asserted once —

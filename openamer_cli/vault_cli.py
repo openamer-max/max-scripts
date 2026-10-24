@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """``openamer secrets vault`` — manage the local credential vault.
 
 The vault feeds ``browser_vault`` (model-blind browser autofill). Two halves:

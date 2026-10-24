@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Routing helpers for inbound user-attached images.
 
 Two modes:

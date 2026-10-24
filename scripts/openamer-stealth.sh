@@ -1,5 +1,4 @@
 #!/bin/bash
-# max-scripts Mirror — by Amer Sacirovic
 # openamer-stealth.sh — Stealth Browser Service Manager
 # Startet/Stoppt/Prüft den Stealth-Browser-Server
 # 

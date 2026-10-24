@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """``openamer logs`` — view and filter OpenAmer log files.
 
 Supports tailing, following, session filtering, level filtering,

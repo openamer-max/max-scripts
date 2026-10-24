@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """openamer mcp search-tools — find a tool across all installed MCP servers.
 
 Implements the Layer-1 catalog of the 2026 MCP client best-practice pattern

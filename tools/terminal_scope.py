@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Per-turn terminal scope: profile-scoped TERMINAL_* policy.
 
 Multiplexed surfaces (gateway, dashboard/TUI, cron) serve several profiles from one process;

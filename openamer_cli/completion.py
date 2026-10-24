@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shell completion script generation for openamer CLI.
 
 Walks the live argparse parser tree to generate accurate, always-up-to-date

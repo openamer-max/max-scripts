@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Vector Memory Store — unbegrenztes semantisches Gedächtnis für OpenAmer.
 

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Forschungslauf 1: OA_Aktivierungen vs Standard — Backprop mit numerischem Gradient."""
 import math, random
 

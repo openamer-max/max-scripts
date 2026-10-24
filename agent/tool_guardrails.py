@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Pure tool-call loop guardrail primitives.
 
 The controller in this module is intentionally side-effect free: it tracks

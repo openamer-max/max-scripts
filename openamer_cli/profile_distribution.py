@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Profile distributions — shareable, packaged OpenAmer profiles via git.
 
 A distribution is a OpenAmer profile published as a git repository (or

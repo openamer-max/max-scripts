@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Helpers for translating OpenAI-style tool schemas to Gemini's schema subset."""
 
 from __future__ import annotations

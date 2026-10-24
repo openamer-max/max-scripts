@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 LLM Worker Agents (Phase 28) - swarm workers become real LLM agents
 powered by local Ollama (zero cost, zero latency to cloud).

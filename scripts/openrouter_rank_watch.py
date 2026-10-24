@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# max-scripts Mirror — by Amer Sacirovic
 """OpenRouter ranking watchdog for OpenAmer Agent.
 
 Why this exists

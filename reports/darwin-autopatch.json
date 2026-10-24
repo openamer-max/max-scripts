@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-20T20:42:40",
+  "timestamp": "2026-10-23T21:05:51",
   "mode": "apply",
-  "population": 1185,
-  "avg_score": 38.5,
+  "population": 1193,
+  "avg_score": 38.6,
   "kept": [
     {
       "skill": "auto-internet-learning-metas-new",
@@ -54,10 +54,10 @@
       "fixes": []
     },
     {
-      "skill": "auto-latest-research-insight-hybrid",
+      "skill": "auto-multidomain-learning-financial-markets",
       "before": 21,
-      "after": 25,
-      "delta": 4,
+      "after": 28,
+      "delta": 7,
       "fixes": [
         "✅ metadata.openamer Block hinzugefügt",
         "✅ platforms Feld hinzugefügt",
@@ -65,10 +65,10 @@
       ]
     },
     {
-      "skill": "auto-latest-research-insight-training",
+      "skill": "auto-multidomain-learning-medical-diagnosis",
       "before": 21,
-      "after": 25,
-      "delta": 4,
+      "after": 28,
+      "delta": 7,
       "fixes": [
         "✅ metadata.openamer Block hinzugefügt",
         "✅ platforms Feld hinzugefügt",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "skill": "auto-latest-research-insight-understanding",
+      "skill": "auto-multidomain-learning-neural-architecture",
       "before": 21,
       "after": 28,
       "delta": 7,

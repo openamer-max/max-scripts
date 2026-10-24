@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Honest capability scoreboard: OpenAmer vs. the competitors, measured.
 
 WHY THIS EXISTS

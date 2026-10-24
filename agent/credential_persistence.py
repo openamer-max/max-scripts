@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Credential-pool disk-boundary sanitization: strip raw secrets from *borrowed*
 pool entries before they reach ``auth.json``. Deliberately free of
 ``openamer_cli.auth`` imports so the pool model and the auth-store write boundary

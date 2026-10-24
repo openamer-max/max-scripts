@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Helpers for loading OpenAmer .env files consistently across entrypoints."""
 
 from __future__ import annotations

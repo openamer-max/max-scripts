@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared helpers for tool backend selection."""
 
 from __future__ import annotations

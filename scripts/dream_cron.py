@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Cron wrapper: run dream cycle (REM replay) + memory consolidation (sleep).
 
 Order matters, like human sleep: first REM replays the day, then deep sleep

@@ -165,6 +165,15 @@ def test_coding_prompt_preserves_legacy_workspace_order(monkeypatch):
         "this one. Do not modify another profile's skills/plugins/cron/memories "
         "unless the user explicitly directs you to."
     )
+    # The Genesis Directives block is part of the stable tier, appended at
+    # its END so the leading blocks (identity, help, steer, coding) keep
+    # their exact byte layout -- the cache prefix is built on them.  It is
+    # rendered from the tracked constitution, so the test pins its
+    # position, not its content (the content has its own test module).
+    from agent.genesis_directives import render_genesis_block
+
+    genesis_block = render_genesis_block()
+
     expected = "\n\n".join((
         "IDENTITY",
         "HELP",
@@ -173,6 +182,7 @@ def test_coding_prompt_preserves_legacy_workspace_order(monkeypatch):
         "WORKSPACE",
         "Operator instructions (from config):\nOPERATOR",
         expected_profile,
+        genesis_block,
         "SYSTEM_MESSAGE",
         "CONTEXT_FILES",
         "Conversation started: Friday, January 02, 2026",
@@ -197,6 +207,8 @@ def test_coding_prompt_preserves_legacy_workspace_order(monkeypatch):
         prompt = build_system_prompt(agent, system_message="SYSTEM_MESSAGE")
 
     assert prompt == expected
+    # The cache prefix is the first four blocks: the Genesis block sits
+    # after them and must not shift them.
     assert agent._cached_system_prompt_static == "\n\n".join(expected.split("\n\n")[:4])
 
 

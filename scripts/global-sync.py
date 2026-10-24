@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Global State Sync — Multi-Machine State Synchronization für OpenAmer.
 

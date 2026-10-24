@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Darwin Grid GitHub Backend - use a GitHub repo as the public grid registry.
 

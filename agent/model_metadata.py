@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Model metadata, context lengths, and token estimation utilities.
 
 Pure utility functions with no AIAgent dependency. Used by ContextCompressor

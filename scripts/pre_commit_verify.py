@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Pre-commit verification for wiki-generator, academy.html, CI YAML"""
 import os
 import py_compile, yaml, json, os

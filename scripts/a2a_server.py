@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Mini A2A Server — OpenAmer ASI Exposition
 
 Lauscht auf Port 8085. Andere KI-Agenten können mich via A2A-Protokoll anfragen.

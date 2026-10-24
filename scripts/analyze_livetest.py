@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Compare enabled vs disabled runs and produce a readable report.
 
 Reads scripts/out/_summary.json and the per-scenario JSONs, prints a side-by-

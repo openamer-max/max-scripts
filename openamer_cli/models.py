@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Canonical model catalogs and lightweight validation helpers.
 

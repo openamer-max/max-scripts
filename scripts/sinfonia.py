@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Sinfonia - a session-history symphony engine (a world first for agent systems).
 

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """LM Studio reasoning-effort resolution shared by the chat-completions
 transport and run_agent's iteration-limit summary path.
 

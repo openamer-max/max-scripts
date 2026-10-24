@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Write-approval gate + pending store for memory and skill writes.
 
 Background

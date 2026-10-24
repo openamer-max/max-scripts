@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Live, tail-able transcripts for delegated subagents.
 
 Every ``delegate_task`` dispatch creates one append-only, human-readable log

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Sanitize tool JSON schemas for broad LLM-backend compatibility.
 
 Some local inference backends (notably llama.cpp's ``json-schema-to-grammar``

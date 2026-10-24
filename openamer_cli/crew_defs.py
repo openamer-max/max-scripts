@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """JSON Crew Definition system — portable, shareable crew configurations.
 
 Extends the existing crew_orchestrator.py with JSON-serializable crew defs

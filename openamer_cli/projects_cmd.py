@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """``openamer project`` CLI — manage first-class, multi-folder Projects.
 
 A Project is a human-named workspace spanning one or more folders, with one

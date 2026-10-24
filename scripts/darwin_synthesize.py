@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """darwin_synthesize.py — synthesize new skill candidates from trend intelligence.
 
 Phase 2: Darwin no longer only patches weak skills — it BUILDS new ones.

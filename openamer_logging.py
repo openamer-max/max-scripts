@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Centralized logging setup for OpenAmer Agent.
 
 Provides a single ``setup_logging()`` entry point that both the CLI and

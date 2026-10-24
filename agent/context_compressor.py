@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Automatic context window compression for long conversations.
 
 Self-contained class with its own OpenAI client for summarization.

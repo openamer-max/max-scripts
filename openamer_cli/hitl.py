@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Human-in-the-Loop (HITL) approval system for OpenAmer Agent.
 
 This module implements an optional approval gate that pauses agent execution

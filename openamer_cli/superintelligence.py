@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Superintelligence Platform — System Health Dashboard for OpenAmer.
 

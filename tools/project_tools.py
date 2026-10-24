@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Project tools — the agent's INTENTIONAL handle on first-class Projects.
 
 Projects (per-profile ``projects.db``) are the named workspaces the desktop

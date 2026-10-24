@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Helpers for the temporary psutil-on-Android compatibility installer."""
 
 from __future__ import annotations

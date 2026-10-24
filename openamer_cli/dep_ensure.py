@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Lazy dependency bootstrapper for non-Python runtime deps.
 
 Detection and prompting live here in Python — not in install.sh — because:

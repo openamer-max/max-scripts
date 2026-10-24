@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Persistent CDP supervisor for browser dialog + frame detection.
 
 One ``CDPSupervisor`` runs per OpenAmer ``task_id`` that has a reachable CDP

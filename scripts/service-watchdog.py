@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Unified service watchdog for OpenAmer local services.
 
 Services (all simple foreground HTTP servers):

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Contributor Audit Script
 
 Cross-references git authors, Co-authored-by trailers, and salvaged PR

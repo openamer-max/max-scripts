@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Memory entry scoring: importance x recency x references (auto-dream index idea).
 
 MEMORY.md entries are separated by a lone "§" line. auto-dream scores memory

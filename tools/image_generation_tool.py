@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Image generation via FAL.ai (model picked in ``openamer tools``, persisted to ``image_gen.model``).
 
 ``_build_fal_payload()`` / ``_build_fal_edit_payload()`` translate unified inputs into the

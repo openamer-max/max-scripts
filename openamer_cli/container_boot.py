@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Container-boot reconciliation of per-profile gateway s6 services.
 
 Service directories under /run/service/ live on **tmpfs** and are wiped

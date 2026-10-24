@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Full MoA turn trace persistence (opt-in via config ``moa.save_traces``).
 
 When enabled, every Mixture-of-Agents turn that actually runs the reference

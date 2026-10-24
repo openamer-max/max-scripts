@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 openamer fallback — manage the fallback provider chain.
 

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 HTML Export generator for OpenAmer sessions.
 Generates a standalone, beautiful HTML file with all messages embedded.

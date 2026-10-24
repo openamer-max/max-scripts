@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Codex Responses API adapter.
 
 Pure format-conversion and normalization logic for the OpenAI Responses API

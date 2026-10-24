@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """User-initiated edit/delete for journey nodes (learned skills + memories).
 
 The journey graph (``agent.learning_graph``) gives every node a stable id:

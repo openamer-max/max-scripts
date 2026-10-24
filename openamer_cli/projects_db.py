@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Per-profile first-class Project store.
 
 A **Project** is a human-named, multi-folder workspace. Unlike the desktop's

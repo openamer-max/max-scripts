@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 DingTalk Device Flow authorization.
 

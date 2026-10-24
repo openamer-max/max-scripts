@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Cron entry for nightly dream consolidation (circadian.py dream)."""
 import json
 import sys

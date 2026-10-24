@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAI-compatible facade over Google AI Studio's native Gemini API.
 
 OpenAmer keeps ``api_mode='chat_completions'`` for the ``gemini`` provider so the

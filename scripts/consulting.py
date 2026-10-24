@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Consulting Automation — Service-Template + Preise
 
 Ein Agent der Berater-Arbeit automatisiert:

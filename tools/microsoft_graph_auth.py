@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Microsoft Graph app-only authentication helpers."""
 
 from __future__ import annotations

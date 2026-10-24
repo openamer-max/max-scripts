@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Configurable budget constants for tool result persistence.
 
 Per-tool resolution: pinned > config overrides > registry > default.

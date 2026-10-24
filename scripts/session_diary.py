@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Session Diary — the continuity-of-self gap closer.
 
 Every night the dream-cycle summarizes the day's real conversations

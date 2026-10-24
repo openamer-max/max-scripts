@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# max-scripts Mirror — by Amer Sacirovic
 set -euo pipefail
 
 out=${1:?usage: $0 OUTPUT.png [command...]}

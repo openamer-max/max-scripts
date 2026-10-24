@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """openamer webhook — manage dynamic webhook subscriptions from the CLI.
 
 Usage:

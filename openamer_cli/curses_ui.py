@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared curses-based UI components for OpenAmer CLI.
 
 Used by `openamer tools` and `openamer skills` for interactive checklists.

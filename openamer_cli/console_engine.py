@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Safe OpenAmer Console command engine.
 
 This module backs ``openamer console`` and is intentionally narrower than the

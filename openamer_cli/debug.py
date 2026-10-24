@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """``openamer debug`` debug tools for OpenAmer Agent.
 
 Currently supports:

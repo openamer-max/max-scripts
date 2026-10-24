@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Home Assistant tool for controlling smart home devices via REST API.
 
 Registers ``ha_list_entities``, ``ha_get_state``, ``ha_list_services``, ``ha_call_service``.

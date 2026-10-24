@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Skill write-origin provenance — ContextVar for distinguishing agent-sediment skill writes from foreground user-directed writes.
 
 The curator only consolidates/prunes skills it autonomously created via the

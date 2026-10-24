@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Kanban triage specifier — flesh out a one-liner into a real spec.
 
 ``openamer kanban specify [task_id | --all]`` asks the auxiliary LLM for a

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """openamer memory setup|status — configure memory provider plugins.
 
 Auto-detects installed memory providers via the plugin system.

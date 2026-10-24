@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Session-persistent Python kernels for ``execute_code``.
 
 WHY THIS EXISTS

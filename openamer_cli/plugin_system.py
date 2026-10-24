@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 OpenAmer Plugin System — Third-party Plugin Architecture
 =======================================================

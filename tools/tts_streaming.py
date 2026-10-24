@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Provider-agnostic streaming TTS: sentence text → int16 PCM chunk iterator.
 
 The keystone of OpenAmer' conversational voice UX. `stream_tts_to_speaker`

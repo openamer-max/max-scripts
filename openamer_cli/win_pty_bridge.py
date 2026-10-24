@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Windows ConPTY bridge for the `openamer dashboard` chat tab.
 
 Drop-in counterpart to ``openamer_cli.pty_bridge.PtyBridge`` for native

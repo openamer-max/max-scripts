@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Assemble the "learning made visible" graph for desktop.
 
 This graph is intentionally scoped to what a user actually learns over time:

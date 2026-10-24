@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Long-term episodic memory for OpenAmer — local, embedding-based, forever.
 
 Builds a persistent vector index over conversation highlights (user turns +

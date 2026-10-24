@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Skill Validator — 100-Punkte-Qualitätsprüfung für alle OpenAmer Skills.
 

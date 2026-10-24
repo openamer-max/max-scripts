@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Watchdog for the remote GPU worker (frontier_server.py -> :8082 on the GPU PC).
 
 The GPU box's frontier server has no local supervisor, so it stays dead after a

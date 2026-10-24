@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Self-Healing Memory Pipeline — erkennt und repariert korrupte Memories automatisch.
 

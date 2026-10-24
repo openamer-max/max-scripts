@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Coding verification evidence ledger.
 
 This module records what the agent actually proved while working in a code

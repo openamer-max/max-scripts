@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Seda's real work: LISTEN to the swarm's reaction to our posts.
 ==============================================================

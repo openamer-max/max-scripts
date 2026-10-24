@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """openamer claw — OpenClaw migration commands.
 
 Usage:

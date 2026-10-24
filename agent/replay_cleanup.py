@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Replay-history sanitization shared across resume code paths.
 
 When a session's last turn dies mid-tool-loop — the process is killed by a

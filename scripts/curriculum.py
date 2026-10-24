@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 WIS Curriculum Generator - the TRAINING GROUND (SEAgent-inspired).
 =================================================================

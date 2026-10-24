@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Commander v1.0 — Zentrale CLI-Steuerung für OpenAmer
 ====================================================

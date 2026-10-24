@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Read the in-app terminal pane in the OpenAmer desktop GUI.
 
 The embedded terminal's buffer lives in the desktop renderer (xterm.js), so this

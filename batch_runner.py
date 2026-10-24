@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Batch Agent Runner
 
@@ -49,7 +48,7 @@ import fire
 
 from run_agent import AIAgent
 from toolset_distributions import (
-    list_distributions, 
+    list_distributions as _list_distributions,
     sample_toolsets_from_distribution,
     validate_distribution
 )
@@ -606,7 +605,7 @@ class BatchRunner:
         
         # Validate distribution
         if not validate_distribution(distribution):
-            raise ValueError(f"Unknown distribution: {distribution}. Available: {list(list_distributions().keys())}")
+            raise ValueError(f"Unknown distribution: {distribution}. Available: {list(_list_distributions().keys())}")
         
         # Setup output directory
         self.output_dir = Path("data") / run_name
@@ -1157,7 +1156,7 @@ def main(
     num_workers: int = 4,
     resume: bool = False,
     verbose: bool = False,
-    list_distributions_flag: bool = False,
+    list_distributions: bool = False,
     ephemeral_system_prompt: str = None,
     log_prefix_chars: int = 100,
     providers_allowed: str = None,
@@ -1220,13 +1219,13 @@ def main(
         python batch_runner.py --list_distributions
     """
     # Handle list distributions
-    if list_distributions_flag:
+    if list_distributions:
         from toolset_distributions import print_distribution_info
 
         print("📊 Available Toolset Distributions")
         print("=" * 70)
 
-        all_dists = list_distributions()
+        all_dists = _list_distributions()
         for dist_name in sorted(all_dists.keys()):
             print_distribution_info(dist_name)
         

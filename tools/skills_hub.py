@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Skills Hub — Source adapters and hub state management for the OpenAmer Skills Hub.
 
@@ -23,6 +22,7 @@ import shutil
 import subprocess
 import time
 from abc import ABC, abstractmethod
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -555,6 +555,13 @@ def _filter_results_by_provider(
     ]
 
 
+# Concurrency for the per-skill SKILL.md fetches of a GitHub tap. Each
+# request is an independent api.github.com call; 8 keeps the cold index
+# build well inside its CI budget while staying far below GitHub's rate
+# limits.
+TAP_FETCH_WORKERS = 8
+
+
 class GitHubSource(SkillSource):
     """Fetch skills from GitHub repos via the Contents API."""
 
@@ -639,7 +646,10 @@ class GitHubSource(SkillSource):
                 seen[r.identifier] = r
         results = list(seen.values())
 
-        return results[:limit]
+        # limit <= 0 means "no cap" (crawl_skills_sh relies on it); slicing with
+        # [:0] returned an empty list after walking every tap -- 201s of work
+        # thrown away, and the index build got nothing from GitHub at all.
+        return results if limit <= 0 else results[:limit]
 
     def fetch(self, identifier: str) -> Optional[SkillBundle]:
         """
@@ -769,8 +779,15 @@ class GitHubSource(SkillSource):
         if not isinstance(entries, list):
             return []
 
-        skills: List[SkillMeta] = []
-        groupings = self._get_skillsh_groupings(repo)
+        # Collect the candidate skill directories first, then fetch their
+        # SKILL.md metadata concurrently. Every candidate costs one GitHub
+        # API call, and the cold index build has hundreds of them across
+        # 6 taps -- strictly sequential that was ~200s of the build wall
+        # clock, which on its own pushed CI past its job timeout. The
+        # requests are independent, so a small thread pool turns that into
+        # seconds. Result order matches the sequential walk.
+        identifiers: List[str] = []
+        prefix = path.rstrip("/")
         for entry in entries:
             if entry.get("type") != "dir":
                 continue
@@ -779,11 +796,23 @@ class GitHubSource(SkillSource):
             if dir_name.startswith((".", "_")):
                 continue
 
-            prefix = path.rstrip("/")
-            skill_identifier = f"{repo}/{prefix}/{dir_name}" if prefix else f"{repo}/{dir_name}"
-            meta = self.inspect(skill_identifier)
+            identifiers.append(
+                f"{repo}/{prefix}/{dir_name}" if prefix else f"{repo}/{dir_name}"
+            )
+
+        groupings = self._get_skillsh_groupings(repo)
+
+        if identifiers:
+            with ThreadPoolExecutor(max_workers=TAP_FETCH_WORKERS) as pool:
+                inspected = list(pool.map(self.inspect, identifiers))
+        else:
+            inspected = []
+
+        skills: List[SkillMeta] = []
+        for identifier, meta in zip(identifiers, inspected):
             if meta:
                 if groupings:
+                    dir_name = identifier.rsplit("/", 1)[-1]
                     category = groupings.get(meta.name) or groupings.get(dir_name)
                     if category:
                         meta.extra["category"] = category
@@ -2198,6 +2227,11 @@ class ClawHubSource(SkillSource):
     # minutes. Bound it so a slow/large catalog cannot hang the caller.
     CATALOG_WALK_BUDGET_SECONDS = 12
 
+    # How often a single catalog page is retried before the walk gives up.
+    # ClawHub occasionally takes >30s for one page; without a retry the
+    # whole crawl ends there and every later page is lost.
+    CATALOG_PAGE_ATTEMPTS = 4
+
     def source_id(self) -> str:
         return "clawhub"
 
@@ -2537,6 +2571,12 @@ class ClawHubSource(SkillSource):
         hit_deadline = False
         hit_max_items = False
 
+        # A page that times out must not end the crawl: ClawHub answers
+        # most pages in ~2s but occasionally takes >30s, and one slow page
+        # used to cost every remaining page. Retry the same cursor a few
+        # times before giving up on the walk.
+        page_attempts = 0
+        exhausted = False
         for _ in range(max_pages):
             if deadline is not None and time.monotonic() > deadline:
                 hit_deadline = True
@@ -2545,12 +2585,32 @@ class ClawHubSource(SkillSource):
             if cursor:
                 params["cursor"] = cursor
 
-            try:
-                resp = httpx.get(f"{self.BASE_URL}/skills", params=params, timeout=30)
-                if resp.status_code != 200:
+            data: Any = None
+            for attempt in range(self.CATALOG_PAGE_ATTEMPTS):
+                try:
+                    resp = httpx.get(
+                        f"{self.BASE_URL}/skills", params=params, timeout=30
+                    )
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        break
+                    if resp.status_code in (429, 500, 502, 503, 504):
+                        # Transient server-side condition: wait it out.
+                        time.sleep(min(2 ** attempt, 20))
+                        continue
+                    # Any other status is a hard stop (e.g. 400 for a
+                    # malformed cursor) -- retrying would not help.
                     break
-                data = resp.json()
-            except (httpx.HTTPError, json.JSONDecodeError):
+                except (httpx.HTTPError, json.JSONDecodeError):
+                    if attempt + 1 < self.CATALOG_PAGE_ATTEMPTS:
+                        time.sleep(min(2 ** attempt, 20))
+                        continue
+                    break
+
+            if data is None:
+                # The page could not be fetched even after retries: the
+                # walk is incomplete, and the flag keeps it out of the
+                # full-catalog cache.
                 break
 
             items = data.get("items", []) if isinstance(data, dict) else []
@@ -2576,6 +2636,8 @@ class ClawHubSource(SkillSource):
 
             cursor = data.get("nextCursor") if isinstance(data, dict) else None
             if not isinstance(cursor, str) or not cursor:
+                # The cursor ran out: this really is the whole catalog.
+                exhausted = True
                 break
 
             # Browse's cold-start fallback only renders one page, so stop as
@@ -2585,11 +2647,12 @@ class ClawHubSource(SkillSource):
                 hit_max_items = True
                 break
 
-        # Only cache a walk that reached a natural stop (cursor exhausted or
-        # page cap). A walk truncated by the wall-clock budget OR by max_items
-        # is partial, so writing it would poison the shared full-catalog cache
-        # with incomplete data.
-        if not hit_deadline and not hit_max_items:
+        # Only a walk whose cursor actually ran out is the complete catalog.
+        # A walk that ended on a page cap, on the wall-clock budget, on
+        # max_items or on a fetch failure is partial, and caching it would
+        # poison the shared full-catalog cache with incomplete data -- the
+        # next run would then serve the truncated catalog forever.
+        if exhausted and not hit_deadline and not hit_max_items:
             _write_index_cache(cache_key, [_skill_meta_to_dict(s) for s in results])
         return results
 
@@ -3020,7 +3083,19 @@ class BrowseShSource(SkillSource):
         if cached is not None:
             return cached
         try:
-            resp = httpx.get(self.CATALOG_URL, timeout=20)
+            # browse.sh serves this catalog brotli-compressed, and httpx's
+            # optional brotlicffi backend has a streaming-decode bug that
+            # fails on these payloads. Excluding "br" from Accept-Encoding
+            # makes the server fall back to gzip (or identity), which works
+            # on every httpx install. Without this the DecodingError is
+            # swallowed as an httpx.HTTPError and the source contributes 0
+            # skills instead of its full catalog. Same fix as skills.sh
+            # above.
+            resp = httpx.get(
+                self.CATALOG_URL,
+                timeout=20,
+                headers={"Accept-Encoding": "gzip"},
+            )
             if resp.status_code != 200:
                 return []
             data = resp.json()
@@ -3240,7 +3315,9 @@ class OptionalSkillSource(SkillSource):
                 and "__pycache__" not in f.parts
                 and f.suffix != ".pyc"
             ):
-                rel_path = str(f.relative_to(skill_dir))
+                # bundle keys are POSIX-shaped (like .gitignore/.skillignore);
+                # str() would put backslashes on Windows and every lookup misses
+                rel_path = f.relative_to(skill_dir).as_posix()
                 try:
                     files[rel_path] = f.read_bytes()
                 except OSError:
@@ -3577,7 +3654,9 @@ def quarantine_bundle(bundle: SkillBundle) -> Path:
         if isinstance(file_content, bytes):
             file_dest.write_bytes(file_content)
         else:
-            file_dest.write_text(file_content, encoding="utf-8")
+            # newline="" keeps the declared bytes: text mode rewrites "\n" as
+            # "\r\n" on Windows, which breaks the bundle hash comparison.
+            file_dest.write_text(file_content, encoding="utf-8", newline="")
 
     return dest
 

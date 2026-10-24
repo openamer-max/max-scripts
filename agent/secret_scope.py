@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Profile-scoped credential resolution for multi-profile gateway multiplexing.
 
 The multiplexing gateway serves many profiles from one process. Each profile

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Multi-provider authentication system for OpenAmer Agent.
 

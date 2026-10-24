@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Background memory/skill review — fork the agent to evaluate the turn.
 
 After every turn, ``AIAgent.run_conversation`` may call

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Cross-process active chat session leases.
 
 The session database records persisted conversations.  This module records

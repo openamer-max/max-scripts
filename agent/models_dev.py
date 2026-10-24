@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Models.dev registry integration — primary database for providers and models.
 
 Fetches from https://models.dev/api.json — a community-maintained database

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared path validation helpers for tool implementations.
 
 Extracts the ``resolve() + relative_to()`` and ``..`` traversal check

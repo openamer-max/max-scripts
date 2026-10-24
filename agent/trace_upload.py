@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Upload a OpenAmer session transcript to Hugging Face as an agent trace.
 
 OpenAmer stores sessions in its own SQLite store (``openamer_state.SessionDB``),

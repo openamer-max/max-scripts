@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Abstract service manager interface.
 
 Wraps the existing systemd (Linux host), launchd (macOS host), Windows

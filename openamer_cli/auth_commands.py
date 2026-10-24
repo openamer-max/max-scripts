@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Credential-pool auth subcommands."""
 
 from __future__ import annotations

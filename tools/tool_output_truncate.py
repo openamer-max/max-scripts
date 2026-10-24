@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Head/tail truncation for oversized tool output (terminal, execute_code, MCP results).
 
 One algorithm and one notice wording: 40% head (errors surface early) / 60% tail (the most

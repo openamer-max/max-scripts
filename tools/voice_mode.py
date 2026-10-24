@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Voice Mode -- Push-to-talk audio recording and playback for the CLI.
 
 Provides audio capture via sounddevice, WAV encoding via stdlib wave,

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Warn when an in-session model switch will trigger preflight compression on the next turn.
 
 Addresses part of #23767 ("user-facing guardrail when switching from a

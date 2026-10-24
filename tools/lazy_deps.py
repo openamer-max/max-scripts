@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Lazy dependency installer for opt-in OpenAmer Agent backends.
 

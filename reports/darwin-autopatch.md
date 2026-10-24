@@ -1,6 +1,6 @@
-# 🧬 Darwin Auto-Patch Report — 2026-10-20T20:42:40
+# 🧬 Darwin Auto-Patch Report — 2026-10-23T21:05:51
 
-- Population: 1185 skills, avg 38.5
+- Population: 1193 skills, avg 38.6
 - Mode: **apply**
 
 ## Improved (kept)
@@ -12,6 +12,6 @@
 - ✅ `auto-internet-learning-metas-new`: 21 → 31 (+10)
 - ✅ `auto-internet-learning-openai-hacked`: 21 → 31 (+10)
 - ✅ `auto-latest-research-insight-cultural`: 21 → 31 (+10)
-- ✅ `auto-latest-research-insight-hybrid`: 21 → 25 (+4)
-- ✅ `auto-latest-research-insight-training`: 21 → 25 (+4)
-- ✅ `auto-latest-research-insight-understanding`: 21 → 28 (+7)
+- ✅ `auto-multidomain-learning-financial-markets`: 21 → 28 (+7)
+- ✅ `auto-multidomain-learning-medical-diagnosis`: 21 → 28 (+7)
+- ✅ `auto-multidomain-learning-neural-architecture`: 21 → 28 (+7)

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Thinking-timeout detection and user-facing guidance for reasoning models.
 
 When a known reasoning model (NVIDIA Nemotron 3 Ultra, OpenAI o1/o3,

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared utility functions for openamer-agent."""
 
 import errno

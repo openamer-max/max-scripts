@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Graph-based workflow engine for OpenAmer.
 
 Provides a DAG-based workflow execution system with support for task nodes,

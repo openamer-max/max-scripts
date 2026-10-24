@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Abstract base class for pluggable context engines.
 
 A context engine controls how conversation context is managed when

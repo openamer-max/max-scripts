@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Dispatcher and maintenance verbs for ``openamer kanban``: ``dispatch``,
 ``daemon`` (deprecated standalone loop), ``tail``/``watch`` event streaming,
 ``gc`` and ``repair``.

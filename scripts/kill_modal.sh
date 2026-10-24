@@ -1,5 +1,4 @@
 #!/bin/bash
-# max-scripts Mirror — by Amer Sacirovic
 # Kill all running Modal apps (sandboxes, deployments, etc.)
 #
 # Usage:

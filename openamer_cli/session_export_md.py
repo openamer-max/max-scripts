@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Markdown/QMD export helpers for OpenAmer sessions.
 
 This module is intentionally filesystem-only: it formats already-exported

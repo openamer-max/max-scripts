@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 A/B Test Engine — Experimente für Skills + Configs
 ====================================================

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 AST-level deep audit for skill Python files — opt-in diagnostic, not a security gate.
 

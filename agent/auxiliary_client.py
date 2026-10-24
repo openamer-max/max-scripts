@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared auxiliary client router for side tasks.
 
 Provides a single resolution chain so every consumer (context compression,

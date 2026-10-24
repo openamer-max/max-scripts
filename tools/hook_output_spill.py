@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Spill oversized hook-injected context to disk with a preview placeholder.
 
 Ported from openai/codex PR #21069 (``Spill large hook outputs from context``).

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """X Search tool backed by xAI's built-in ``x_search`` Responses API tool.
 
 Authentication

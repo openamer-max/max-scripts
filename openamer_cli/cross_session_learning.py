@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 ``openamer_cli.cross_session_learning`` — Cross-Session Learning für OpenAmer.
 

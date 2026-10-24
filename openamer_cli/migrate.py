@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """CLI handlers for ``openamer migrate ...``.
 
 Currently exposes only ``openamer migrate xai`` — diagnoses and (with --apply)

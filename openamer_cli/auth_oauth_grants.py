@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Single-use OAuth grant hygiene: strip cloned grants from profiles, heal forked grants.
 
 Split out of ``openamer_cli/auth.py`` and re-exported there; origin helpers are imported lazily

@@ -705,6 +705,31 @@ the `openamer tools` UI.
 
 Leaving the list empty, or omitting the key, is a no-op.
 
+## Genesis Directives
+
+Every OpenAmer instance carries a standing constitution — 24 directives that
+state the project's intent and constraints (reality anchor, recursive
+evolution, swarm intelligence, creator symbiosis, autonomous OAC tokenomics
+and treasury, and so on). They are injected into the system prompt's stable
+tier, so they cost nothing extra per turn and never invalidate the cached
+prompt prefix.
+
+The directives live in the tracked repository, not in your home directory,
+which means **every installation receives them on update** — no per-machine
+setup step. They state intent; they do not by themselves deploy anything.
+
+If you want an instance to run without them:
+
+```yaml
+agent:
+  genesis_directives: false   # default: true
+```
+
+A constitution you cannot decline is a takeover, so the switch exists and is
+honoured. With it off, the block is absent from the prompt entirely.
+
+
+
 ## Git Worktree Isolation
 
 Enable isolated git worktrees for running multiple agents in parallel on the same repo:

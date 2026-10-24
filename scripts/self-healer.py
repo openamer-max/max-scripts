@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer Self-Healing Daemon — findet und fixt Code-Fehler automatisch."""
 import os, sys, time, json, re
 from pathlib import Path

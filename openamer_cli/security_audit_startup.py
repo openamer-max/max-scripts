@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Startup security posture audit (warn-on-load, never blocks).
 
 Surfaces dangerous host / deployment posture at process start so operators

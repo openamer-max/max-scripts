@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Agent Builder — create, list, delete, and manage autonomous agents.
 
 An "agent" in OpenAmer is a named system that combines:

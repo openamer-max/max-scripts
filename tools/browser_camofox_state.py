@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """OpenAmer-managed Camofox state helpers.
 
 Provides profile-scoped identity and state directory paths for Camofox

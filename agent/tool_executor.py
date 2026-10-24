@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Tool-call execution — sequential and concurrent dispatch.
 
 Both AIAgent methods (``_execute_tool_calls_sequential`` and

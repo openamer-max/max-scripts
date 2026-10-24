@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Shared base classes for the pluggable-backend provider ABCs.
 
 Every tool-provider ABC shares the same identity + ``openamer tools`` picker surface.

@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Microsoft Entra ID adapter for Microsoft Foundry.
 
 Provides keyless authentication for Microsoft Foundry deployments using the

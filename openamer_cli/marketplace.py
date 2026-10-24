@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Agent Marketplace for OpenAmer — share, discover, and install community agents and skills.
 
 Provides:

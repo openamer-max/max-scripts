@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """Real test suite for the Workflow Immune System (run via `npm test`).
 
 Offline checks (no browser needed):

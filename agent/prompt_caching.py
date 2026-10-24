@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """Anthropic prompt caching strategy.
 
 The default layout uses 4 cache_control breakpoints: the static system

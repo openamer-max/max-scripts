@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# max-scripts Mirror — by Amer Sacirovic
 """
 Log Analyzer — Error-Rate-Tracking + Pattern-Erkennung + Alert-Generation
                + Trend-Analyse + HTML-Dashboard

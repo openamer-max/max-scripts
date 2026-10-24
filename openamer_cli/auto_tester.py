@@ -1,4 +1,3 @@
-# max-scripts Mirror — by Amer Sacirovic
 """
 Autonomous Test Runner — System testet sich selbst im Hintergrund.
 

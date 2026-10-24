@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-22T21:00:01",
+  "timestamp": "2026-10-23T21:05:51",
   "mode": "apply",
-  "population": 1192,
+  "population": 1193,
   "avg_score": 38.6,
   "kept": [
     {
@@ -54,7 +54,7 @@
       "fixes": []
     },
     {
-      "skill": "auto-multidomain-learning-business-automation",
+      "skill": "auto-multidomain-learning-financial-markets",
       "before": 21,
       "after": 28,
       "delta": 7,
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "skill": "auto-multidomain-learning-climate-science",
+      "skill": "auto-multidomain-learning-medical-diagnosis",
       "before": 21,
       "after": 28,
       "delta": 7,
@@ -76,10 +76,10 @@
       ]
     },
     {
-      "skill": "auto-multidomain-learning-financial-market",
+      "skill": "auto-multidomain-learning-neural-architecture",
       "before": 21,
-      "after": 25,
-      "delta": 4,
+      "after": 28,
+      "delta": 7,
       "fixes": [
         "✅ metadata.openamer Block hinzugefügt",
         "✅ platforms Feld hinzugefügt",

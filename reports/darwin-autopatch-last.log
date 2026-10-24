@@ -1,6 +1,6 @@
-[autopatch] validating population (2026-10-22T21:00:01) ...
-[autopatch] population: 1192 skills, avg 38.6
-[autopatch] 10 weak skills: auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-cultural(21), auto-structural-connection-between-tool(21), auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-cultural(21), auto-multidomain-learning-business-automation(21), auto-multidomain-learning-climate-science(21), auto-multidomain-learning-financial-market(21)
+[autopatch] validating population (2026-10-23T21:05:51) ...
+[autopatch] population: 1193 skills, avg 38.6
+[autopatch] 10 weak skills: auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-cultural(21), auto-structural-connection-between-tool(21), auto-internet-learning-metas-new(21), auto-internet-learning-openai-hacked(21), auto-latest-research-insight-cultural(21), auto-multidomain-learning-financial-markets(21), auto-multidomain-learning-medical-diagnosis(21), auto-multidomain-learning-neural-architecture(21)
 [autopatch] ✅ auto-internet-learning-metas-new: 21 → 31
 [autopatch] ✅ auto-internet-learning-openai-hacked: 21 → 31
 [autopatch] ✅ auto-latest-research-insight-cultural: 21 → 31
@@ -8,7 +8,7 @@
 [autopatch] ✅ auto-internet-learning-metas-new: 21 → 31
 [autopatch] ✅ auto-internet-learning-openai-hacked: 21 → 31
 [autopatch] ✅ auto-latest-research-insight-cultural: 21 → 31
-[autopatch] ✅ auto-multidomain-learning-business-automation: 21 → 28
-[autopatch] ✅ auto-multidomain-learning-climate-science: 21 → 28
-[autopatch] ✅ auto-multidomain-learning-financial-market: 21 → 25
+[autopatch] ✅ auto-multidomain-learning-financial-markets: 21 → 28
+[autopatch] ✅ auto-multidomain-learning-medical-diagnosis: 21 → 28
+[autopatch] ✅ auto-multidomain-learning-neural-architecture: 21 → 28
 [autopatch] report → C:\Users\damir\openamer-repo\reports\darwin-autopatch.md

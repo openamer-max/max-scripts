@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-23T21:05:51",
+  "timestamp": "2026-10-25T07:55:46",
   "mode": "apply",
   "population": 1193,
   "avg_score": 38.6,
@@ -54,7 +54,7 @@
       "fixes": []
     },
     {
-      "skill": "auto-multidomain-learning-financial-markets",
+      "skill": "auto-multidomain-learning-neural-duhagery",
       "before": 21,
       "after": 28,
       "delta": 7,
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "skill": "auto-multidomain-learning-medical-diagnosis",
+      "skill": "auto-multidomain-learning-openaiembeddings25-",
       "before": 21,
       "after": 28,
       "delta": 7,
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "skill": "auto-multidomain-learning-neural-architecture",
+      "skill": "auto-multidomain-learning-opensource-medical",
       "before": 21,
       "after": 28,
       "delta": 7,

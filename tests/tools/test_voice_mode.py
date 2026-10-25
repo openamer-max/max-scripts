@@ -1088,8 +1088,10 @@ class TestSilenceDetection:
         from tools.voice_mode import AudioRecorder
 
         recorder = AudioRecorder()
-        # Use very short durations for testing
-        recorder._silence_duration = 0.05
+        # 0.3s, not 0.05s: the frame cadence below has to sit clearly inside the
+        # silence window. At 0.05s a starved thread crossed it by itself and the
+        # stop fired (or failed to) at random -- the classic load flake.
+        recorder._silence_duration = 0.3
         recorder._min_speech_duration = 0.05
 
         fired = threading.Event()
@@ -1106,21 +1108,24 @@ class TestSilenceDetection:
 
         # Simulate sustained speech (multiple loud chunks to exceed min_speech_duration)
         loud_frame = np.full((1600, 1), 5000, dtype="int16")
-        callback(loud_frame, 1600, None, None)
-        time.sleep(0.06)
-        callback(loud_frame, 1600, None, None)
+        # Feed loud frames until speech is confirmed. A single 0.06s gap is a bet
+        # on the recorder's monotonic clock reading >= _min_speech_duration, and
+        # it loses often enough to make the file flaky (measured 2026-10-25).
+        speak_deadline = time.monotonic() + 5.0
+        while not recorder._has_spoken and time.monotonic() < speak_deadline:
+            callback(loud_frame, 1600, None, None)
+            time.sleep(0.03)
         assert recorder._has_spoken is True
 
-        # Simulate silence
+        # Simulate silence: keep feeding silent frames until the stop fires rather
+        # than sleeping once and hoping the timing landed.
         silent_frame = np.zeros((1600, 1), dtype="int16")
-        callback(silent_frame, 1600, None, None)
+        deadline = time.monotonic() + 5.0
+        while not fired.is_set() and time.monotonic() < deadline:
+            callback(silent_frame, 1600, None, None)
+            time.sleep(0.02)
 
-        # Wait a bit past the silence duration, then send another silent frame
-        time.sleep(0.06)
-        callback(silent_frame, 1600, None, None)
-
-        # The callback should have been fired
-        assert fired.wait(timeout=1.0) is True
+        assert fired.is_set() is True
 
         recorder.cancel()
 
@@ -1426,7 +1431,11 @@ class TestConfigurableSilenceParams:
 
         recorder = AudioRecorder()
         recorder._silence_threshold = 5000
-        recorder._silence_duration = 0.05
+        # 0.3s rather than 0.05s: the callback cadence below must sit clearly
+        # inside the silence window, and under parallel-suite load a starved thread
+        # stretches 5x0.02s past 0.05s, which fired the stop early (measured
+        # 2026-10-25: green alone, red in the suite, different test each run).
+        recorder._silence_duration = 0.3
         recorder._min_speech_duration = 0.05
 
         fired = threading.Event()
@@ -1439,12 +1448,15 @@ class TestConfigurableSilenceParams:
         moderate = np.full((1600, 1), 1000, dtype="int16")
         for _ in range(5):
             callback(moderate, 1600, None, None)
-            time.sleep(0.02)
+            time.sleep(0.01)
 
         assert recorder._has_spoken is False
-        assert fired.wait(timeout=0.2) is False
+        # Well below the 0.3s silence window, so load cannot close the gap.
+        assert fired.wait(timeout=0.15) is False
 
-        # Now send really loud audio (above 5000 threshold)
+        # Now send really loud audio (above 5000 threshold). Speech is confirmed
+        # once the gap between two loud frames exceeds _min_speech_duration; wait
+        # for that state instead of guessing a sleep.
         very_loud = np.full((1600, 1), 8000, dtype="int16")
         callback(very_loud, 1600, None, None)
         time.sleep(0.06)

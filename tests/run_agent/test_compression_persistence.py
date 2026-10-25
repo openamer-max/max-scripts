@@ -100,6 +100,7 @@ class TestFlushAfterCompression:
                 f"Compression persistence bug: messages not written to SQLite."
             )
 
+            db.close()  # Windows: unlink fails while the handle is open
     def test_flush_with_stale_history_loses_messages(self):
         """Stale conversation_history no longer causes data loss."""
         from openamer_state import SessionDB
@@ -129,6 +130,7 @@ class TestFlushAfterCompression:
             assert len(rows) == 2
             assert [row["content"] for row in rows] == ["summary", "continuing..."]
 
+            db.close()  # Windows: unlink fails while the handle is open
     def test_in_place_compression_rebaseline_prevents_duplicate_compacted_rows(self):
         """In-place compaction already persisted the compacted transcript.
 
@@ -191,6 +193,7 @@ class TestFlushAfterCompression:
                 "final answer",
             ]
 
+            db.close()  # Windows: unlink fails while the handle is open
     def test_abort_after_in_place_compaction_preserves_flush_baseline(self):
         """An aborted retry must survive flush, restart, and resume."""
         from agent.conversation_compression import (
@@ -661,3 +664,5 @@ class TestStoredPromptCwdDrift:
             assert "Platform: cli" in parts["volatile"], (
                 "Built prompt missing 'Platform: cli' — drift detection cannot read it"
             )
+
+            db.close()  # Windows: unlink fails while the handle is open

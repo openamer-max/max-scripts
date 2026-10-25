@@ -1844,10 +1844,16 @@ def start_proxy(
             f"Refusing to write iron-proxy log {log_path}: {exc}.  "
             "Remove that path manually and retry."
         ) from exc
-    try:
-        os.fchmod(log_fd, 0o600)  # tighten if file pre-existed
-    except OSError:
-        pass
+    if hasattr(os, "fchmod"):
+        # Windows has no os.fchmod at all, so this raised AttributeError --
+        # which the surrounding `except OSError` never caught, killing the
+        # proxy log setup outright on that host. There is no POSIX mode to
+        # tighten there anyway. Guarding the primitive is the same idiom this
+        # function already uses for O_NOFOLLOW and getuid.
+        try:
+            os.fchmod(log_fd, 0o600)  # tighten if file pre-existed
+        except OSError:
+            pass
     # Verify ownership — same st_uid check the pidfile uses.
     try:
         st = os.fstat(log_fd)

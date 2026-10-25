@@ -4080,11 +4080,20 @@ class BasePlatformAdapter(ABC):
             path = _normalize_media_tag_path(match.group("path"))
             if path:
                 try:
-                    media.append((os.path.expanduser(path), has_voice_tag))
+                    expanded = os.path.expanduser(path)
                 except (OSError, RuntimeError, ValueError):
                     # Skip a crafted ~\x00 path rather than aborting extraction
                     # and dropping every other attachment in the response.
                     continue
+                if "\x00" in expanded:
+                    # On POSIX expanduser reaches the filesystem and raises
+                    # ValueError("embedded null byte"), so the guard above used
+                    # to catch it. ntpath.expanduser is pure string work and
+                    # never touches the filesystem, so on Windows the tag
+                    # survived with its null byte intact. Measured 2026-10-25:
+                    # test_extract_media_tolerates_crafted_null_path caught it.
+                    continue
+                media.append((expanded, has_voice_tag))
 
         seen_paths = {p for p, _ in media}
         for match in MEDIA_EXTENSIONLESS_TAG_RE.finditer(scan_content):

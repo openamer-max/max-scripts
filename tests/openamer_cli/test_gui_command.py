@@ -77,7 +77,11 @@ def test_gui_installs_packages_and_launches_desktop_app(tmp_path, monkeypatch):
     assert mock_install.call_args.kwargs["capture_output"] is False
     install_env = mock_install.call_args.kwargs["env"]
     assert install_env is not None and "PATH" in install_env
-    assert mock_run.call_args_list[0].args[0] == ["/usr/bin/npm", "run", "pack"]
+    build_cmd = mock_run.call_args_list[0].args[0]
+    # The resolved npm path is host-shaped (npm.cmd under Program Files on
+    # Windows), so assert which binary ran and every argument exactly.
+    assert Path(build_cmd[0]).name.lower() in {"npm", "npm.cmd", "npm.exe", "npm.bat"}
+    assert build_cmd[1:] == ["run", "pack"]
     assert mock_run.call_args_list[0].kwargs["cwd"] == desktop_dir
     assert mock_run.call_args_list[1].args[0] == [str(packaged_exe)]
     assert mock_run.call_args_list[1].kwargs["cwd"] == desktop_dir
@@ -321,9 +325,14 @@ def test_gui_source_mode_uses_renderer_build_and_electron(tmp_path, monkeypatch)
         cli_main.cmd_gui(_ns(source=True))
 
     assert exc.value.code == 0
-    assert mock_run.call_args_list[0].args[0] == ["/usr/bin/npm", "run", "build"]
+    build_cmd = mock_run.call_args_list[0].args[0]
+    # Host-shaped npm path (npm.cmd on Windows); assert the binary kind + args.
+    assert Path(build_cmd[0]).name.lower() in {"npm", "npm.cmd", "npm.exe", "npm.bat"}
+    assert build_cmd[1:] == ["run", "build"]
     assert mock_run.call_args_list[0].kwargs["cwd"] == desktop_dir
-    assert mock_run.call_args_list[1].args[0] == ["/usr/bin/npm", "exec", "--", "electron", "."]
+    exec_cmd = mock_run.call_args_list[1].args[0]
+    assert Path(exec_cmd[0]).name.lower() in {"npm", "npm.cmd", "npm.exe", "npm.bat"}
+    assert exec_cmd[1:] == ["exec", "--", "electron", "."]
     assert mock_run.call_args_list[1].kwargs["cwd"] == desktop_dir
 
 
@@ -594,7 +603,11 @@ def test_gui_retries_pack_once_after_purging_build_cache(tmp_path, monkeypatch):
     mock_purge.assert_called_once()
     # pack(fail) → repair succeeds → pack(ok) → launch = 3 subprocess.run calls
     assert mock_run.call_count == 3
-    assert mock_run.call_args_list[0].args[0] == ["/usr/bin/npm", "run", "pack"]
+    build_cmd = mock_run.call_args_list[0].args[0]
+    # The resolved npm path is host-shaped (npm.cmd under Program Files on
+    # Windows), so assert which binary ran and every argument exactly.
+    assert Path(build_cmd[0]).name.lower() in {"npm", "npm.cmd", "npm.exe", "npm.bat"}
+    assert build_cmd[1:] == ["run", "pack"]
     assert mock_run.call_args_list[1].args[0] == ["/usr/bin/npm", "run", "pack"]
     assert mock_run.call_args_list[2].args[0] == [str(packaged_exe)]
 

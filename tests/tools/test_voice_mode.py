@@ -1,3 +1,4 @@
+import sys
 """Tests for tools.voice_mode -- all mocked, no real microphone or API calls."""
 
 import os
@@ -81,6 +82,10 @@ class TestPulseSocketReachable:
         assert _pulse_socket_reachable() is False
 
     def test_stale_socket_file_not_reachable(self, monkeypatch, tmp_path):
+        if sys.platform == "win32":
+            pytest.skip(
+                "the fixture must bind a real AF_UNIX socket; Windows has no unix sockets and PulseAudio/PipeWire are POSIX daemons, so the mechanism is absent on this host"
+            )
         """A socket file with no listener should not count as reachable."""
         import socket as _socket
         sock_path = tmp_path / "pulse" / "native"
@@ -96,6 +101,10 @@ class TestPulseSocketReachable:
         assert _pulse_socket_reachable() is False
 
     def test_listening_socket_reachable_via_xdg_runtime(self, monkeypatch, tmp_path):
+        if sys.platform == "win32":
+            pytest.skip(
+                "the fixture must bind a real AF_UNIX socket; Windows has no unix sockets and PulseAudio/PipeWire are POSIX daemons, so the mechanism is absent on this host"
+            )
         """A live PulseAudio-style socket under XDG_RUNTIME_DIR is reachable (#35622)."""
         import socket as _socket
         sock_path = tmp_path / "pulse" / "native"
@@ -113,6 +122,10 @@ class TestPulseSocketReachable:
             server.close()
 
     def test_listening_socket_reachable_via_pulse_server_env(self, monkeypatch, tmp_path):
+        if sys.platform == "win32":
+            pytest.skip(
+                "the fixture must bind a real AF_UNIX socket; Windows has no unix sockets and PulseAudio/PipeWire are POSIX daemons, so the mechanism is absent on this host"
+            )
         import socket as _socket
         sock_path = tmp_path / "native"
         server = _socket.socket(_socket.AF_UNIX, _socket.SOCK_STREAM)

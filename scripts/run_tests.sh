@@ -148,6 +148,17 @@ echo "▶ pre-compiling bytecode cache"
 "$PYTHON" -m compileall -q -j 0 -- $(git ls-files '*.py') >/dev/null 2>&1 || true
 
 echo "▶ launching test runner"
+# PYTHONUTF8=1 is not cosmetic: LANG/LC_ALL are only advisory to CPython on
+# Windows, where the default text encoding comes from the ANSI code page
+# (cp1252 here) no matter what the locale says. On Linux CI the same code runs
+# with a UTF-8 default encoding, so a test that does a bare open("cli.py")
+# passes there and dies here with
+#   UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f
+# the moment the file contains a non-ASCII glyph (→, ✓, —). Measured
+# 2026-10-25: 96 of the 392 failing files read repo sources without
+# encoding=, and every one of them failed on that decode. PEP 540 UTF-8 mode
+# makes this runner reproduce CI's default encoding instead of the host's --
+# which is exactly the promise this script already makes for TZ/LANG/hashseed.
 exec env -i \
   PATH="$PATH" \
   HOME="$HOME" \
@@ -159,6 +170,8 @@ exec env -i \
   LANG=C.UTF-8 \
   LC_ALL=C.UTF-8 \
   PYTHONHASHSEED=0 \
+  PYTHONUTF8=1 \
+  PYTHONIOENCODING=utf-8 \
   ${OPENAMER_RUN_SLOW_PET_TESTS:+OPENAMER_RUN_SLOW_PET_TESTS="$OPENAMER_RUN_SLOW_PET_TESTS"} \
   ${EXTRA_PYTHONPATH:+PYTHONPATH="$EXTRA_PYTHONPATH"} \
   ${EXTRA_PYTEST_PLUGINS:+PYTEST_PLUGINS="$EXTRA_PYTEST_PLUGINS"} \

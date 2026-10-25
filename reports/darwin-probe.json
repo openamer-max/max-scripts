@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T19:06:00.233937+00:00",
+  "updated": "2026-10-25T07:01:21.074764+00:00",
   "skills_dir": "C:\\Users\\damir\\AppData\\Local\\openamer-laptop\\skills",
   "total": 1193,
   "skills": {
@@ -7083,8 +7083,8 @@
       "missing": []
     },
     "tokenomics-as-executable-arithmetic": {
-      "refs": 0,
-      "ok": 0,
+      "refs": 2,
+      "ok": 2,
       "score": 1.0,
       "missing": []
     },

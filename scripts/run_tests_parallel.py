@@ -4,7 +4,8 @@
 The minimum-viable replacement for pytest-xdist + a subprocess-isolation
 plugin. Discovers test files under ``tests/`` (excluding integration/e2e
 unless explicitly requested), then runs one ``python -m pytest <file>``
-subprocess per file, with bounded parallelism (default: ``os.cpu_count()``).
+subprocess per file, with bounded parallelism (default: ``min(cpu_count*2,
+available RAM budget)`` — see ``_default_worker_count``).
 
 Why per-file rather than per-test?
     Per-test spawn overhead (~250ms × 17k tests = 70min CPU minimum)
@@ -31,7 +32,8 @@ Usage:
     a literal ``--`` is also passed through, and stacks with bare flags.
 
 Environment:
-    OPENAMER_TEST_WORKERS  Override worker count (default: os.cpu_count())
+    OPENAMER_TEST_WORKERS  Override worker count (default: RAM-aware, see
+                           _default_worker_count)
     OPENAMER_TEST_PATHS    Override discovery roots (colon-sep, default: 'tests')
 
 Exit code: 0 if every file's pytest exited 0; 1 otherwise.
@@ -71,6 +73,141 @@ _DEFAULT_ROOTS = ["tests"]
 #                        so the build is guaranteed to die in fixture
 #                        setup. The dedicated job sidesteps both costs.
 _SKIP_PARTS = {"integration", "e2e", "docker"}
+
+# ── Worker-count default ────────────────────────────────────────────────────
+# Per-worker memory budget. MEASURED 2026-10-25 on this suite with -j 8: mean
+# RSS 60 MB, observed peak 200 MB per logical worker (each worker is two OS
+# processes because the venv python is a shim onto the base interpreter, so the
+# per-process numbers are half of this). Sizing must use the *peak*, not the
+# mean: the failures this guards against are exactly the moments when a few
+# files (agent imports, gateway fixtures) spike at once. 400 MB is that peak
+# with headroom, and still ~2x tighter than the initial 700 MB estimate that
+# halved throughput.
+_RAM_PER_WORKER_BYTES = 400 * 1024 * 1024
+# Never plan to spend more than this share of the *currently available* RAM on
+# test workers. The box still has to run the agent, a gateway, a desktop app
+# and cron jobs at the same time as the suite.
+_RAM_SHARE_FOR_WORKERS = 0.60
+_MIN_WORKERS = 2
+
+
+def _available_ram_bytes() -> int | None:
+    """Currently available RAM in bytes, or None when it cannot be measured.
+
+    Returns None rather than a guess so the caller can be explicit about the
+    fallback: an unmeasurable machine keeps the CPU-derived default instead of
+    silently inheriting an invented number.
+    """
+    try:
+        import psutil  # local import — psutil is not a hard dep of the runner
+
+        return int(psutil.virtual_memory().available)
+    except Exception:  # ImportError, AccessDenied, platform quirk
+        pass
+    try:
+        if os.name == "nt":
+            import ctypes
+
+            class _MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [
+                    ("dwLength", ctypes.c_ulong),
+                    ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong),
+                    ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong),
+                    ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong),
+                    ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+                ]
+
+            stat = _MEMORYSTATUSEX()
+            stat.dwLength = ctypes.sizeof(_MEMORYSTATUSEX)
+            if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat)):
+                return int(stat.ullAvailPhys)
+            return None
+        with open("/proc/meminfo", encoding="ascii") as fh:
+            for line in fh:
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) * 1024  # kB -> bytes
+    except Exception:
+        pass
+    return None
+
+
+def _default_worker_count() -> int:
+    """Worker default that respects RAM, not only CPU count.
+
+    ``cpu_count() * 2`` is right on a CI runner and wrong on a laptop with a
+    big CPU and a modest amount of memory. Measured 2026-10-25 on a 16-thread /
+    24 GB box: the default was 32 workers, and that single number caused two
+    unrelated-looking symptoms.
+
+      * 33 test files produced NO verdict. Each was SIGKILL'd at the 600s
+        per-file cap while the machine swapped, and a killed file appears in no
+        progress line -- so it is invisible to every failure count built from
+        them. "380 failed" was really "380 failed plus 33 files nobody
+        measured".
+      * Cron jobs sharing the window died on their *own* timeouts
+        (longterm indexer 900s, system snapshot 600s): the suite had taken the
+        RAM they needed to finish.
+
+    So the default becomes ``min(cpu_based, what free RAM can actually hold)``.
+    An explicit ``-j`` or ``OPENAMER_TEST_WORKERS`` still wins, and a CI runner
+    with plenty of RAM keeps its full CPU-derived count -- this only clamps the
+    machine that would swap.
+    """
+    cpu_based = (os.cpu_count() or 4) * 2
+    avail = _available_ram_bytes()
+    if avail is None:
+        return cpu_based
+    ram_based = int(avail * _RAM_SHARE_FOR_WORKERS) // _RAM_PER_WORKER_BYTES
+    return max(_MIN_WORKERS, min(cpu_based, ram_based))
+
+
+def _env_or_default_worker_count() -> int:
+    """``$OPENAMER_TEST_WORKERS`` if it parses, else the measured default."""
+    raw = os.environ.get("OPENAMER_TEST_WORKERS", "")
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        return _default_worker_count()
+
+
+def _split_path_list(raw: str) -> list[str]:
+    """Split a colon-separated path list without breaking Windows drive letters.
+
+    ``C:\\foo`` splits into ``C`` and ``\\foo`` on the ``:`` separator, and
+    ``Path("C")`` is **not** absolute — so a naive split resolved a Windows
+    absolute path to ``repo_root / "C"``. That was fixed for ``--files`` on
+    2026-10-16 but the identical split stayed live on ``--paths``; measured
+    2026-10-25 the runner announced ``Discovered 1 test files under ['C',
+    'C:\\Users\\...']``. Fixing one call site and not its sibling is how the
+    same bug keeps coming back, so both now go through this one function.
+
+    A lone drive letter is reattached to the fragment that follows it; every
+    other ``:`` remains a separator.
+    """
+    parts = [p.strip() for p in raw.split(":")]
+    out: list[str] = []
+    i = 0
+    while i < len(parts):
+        f = parts[i]
+        if not f:
+            i += 1
+            continue
+        if (
+            len(f) == 1
+            and f.isalpha()
+            and i + 1 < len(parts)
+            and parts[i + 1].lstrip().startswith("\\")
+        ):
+            out.append(f + ":" + parts[i + 1].strip())
+            i += 2
+        else:
+            out.append(f)
+            i += 1
+    return out
 
 # Per-file wall-clock cap. Override
 # via --file-timeout or OPENAMER_TEST_FILE_TIMEOUT.
@@ -700,8 +837,11 @@ def main() -> int:
         "-j",
         "--jobs",
         type=int,
-        default=int(os.environ.get("OPENAMER_TEST_WORKERS") or (os.cpu_count() or 4) * 2),
-        help="Parallel worker count (default: $OPENAMER_TEST_WORKERS or cpu_count*2)",
+        default=_env_or_default_worker_count(),
+        help=(
+            "Parallel worker count (default: $OPENAMER_TEST_WORKERS, else "
+            "min(cpu_count*2, free-RAM budget) — see _default_worker_count)"
+        ),
     )
     parser.add_argument(
         "--paths",
@@ -908,28 +1048,7 @@ def main() -> int:
         # ``repo_root / "C"`` -> ``.../openamer-agent/C``. Measured 2026-10-16:
         # that FileNotFoundError was the whole failure.
         files = []
-        parts = args.files.split(":")
-        i = 0
-        while i < len(parts):
-            f = parts[i].strip()
-            if not f:
-                i += 1
-                continue
-            # On Windows the drive letter IS the colon: ``C:\foo`` splits into
-            # ``C`` and ``\foo``, and ``Path("C")`` is not absolute, so the
-            # naive branch resolves to ``repo_root / "C"`` -> .../openamer-agent/C.
-            # Reattach a lone drive letter to the following fragment. Measured
-            # 2026-10-16: this was the whole failure.
-            if (
-                len(f) == 1
-                and f.isalpha()
-                and i + 1 < len(parts)
-                and parts[i + 1].lstrip().startswith("\\")
-            ):
-                f = f + ":" + parts[i + 1].strip()
-                i += 2
-            else:
-                i += 1
+        for f in _split_path_list(args.files):
             p = Path(f)
             files.append(p if p.is_absolute() else repo_root / f)
         roots = []
@@ -939,7 +1058,7 @@ def main() -> int:
         if args.paths_positional:
             roots = [repo_root / p for p in args.paths_positional]
         else:
-            roots = [repo_root / p for p in args.paths.split(":") if p]
+            roots = [repo_root / p for p in _split_path_list(args.paths)]
 
         if args.include_integration:
             # Caller takes responsibility — typically used via explicit -k filter.

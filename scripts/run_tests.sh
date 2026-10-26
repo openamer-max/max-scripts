@@ -116,6 +116,15 @@ NATIVE_SYSROOT="$("$PYTHON" -c 'import os;print(os.environ.get("SystemRoot") or 
 # which turned a documented-default test into KeyError: 'LOCALAPPDATA' under the
 # runner while passing in a normal shell (measured 2026-10-25).
 NATIVE_LOCALAPPDATA="$("$PYTHON" -c 'import os;print(os.environ.get("LOCALAPPDATA") or "")' 2>/dev/null)"
+# PROCESSOR_ARCHITECTURE: platform.machine() returns "" without it on Windows, and
+# platform caches uname() on first call -- so a dashboard arch field read under
+# env -i was empty while passing in a shell (measured 2026-10-25).
+NATIVE_PROCESSOR_ARCH="$("$PYTHON" -c 'import os;print(os.environ.get("PROCESSOR_ARCHITECTURE") or "")' 2>/dev/null)"
+# PATHEXT: without it Windows/PowerShell cannot resolve a bare command name to an
+# .exe, so install.ps1 died with rc=1 and an EMPTY stderr (PowerShell writes the
+# error record to stdout) -- which looked like a broken installer rather than a
+# stripped variable (measured 2026-10-25, reproduced by deleting PATHEXT alone).
+NATIVE_PATHEXT="$("$PYTHON" -c 'import os;print(os.environ.get("PATHEXT") or "")' 2>/dev/null)"
 if [ -z "$NATIVE_SYSROOT" ]; then
   NATIVE_SYSROOT='C:\Windows'
 fi
@@ -172,6 +181,8 @@ exec env -i \
   SystemRoot="$NATIVE_SYSROOT" \
   SystemDrive="$NATIVE_SYSDRIVE" \
   ${NATIVE_LOCALAPPDATA:+LOCALAPPDATA="$NATIVE_LOCALAPPDATA"} \
+  ${NATIVE_PROCESSOR_ARCH:+PROCESSOR_ARCHITECTURE="$NATIVE_PROCESSOR_ARCH"} \
+  ${NATIVE_PATHEXT:+PATHEXT="$NATIVE_PATHEXT"} \
   TZ=UTC \
   LANG=C.UTF-8 \
   LC_ALL=C.UTF-8 \

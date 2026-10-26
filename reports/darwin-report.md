@@ -1,5 +1,5 @@
 # Darwin Engine Report
-_2026-10-25T18:25:17.413428+00:00 — evolutionary skill ecosystem_
+_2026-10-26T00:40:49.236760+00:00 — evolutionary skill ecosystem_
 
 **Population:** 1195 Skills | **Offspring:** 5 | **Competitions:** 33
 
@@ -7,16 +7,16 @@ _2026-10-25T18:25:17.413428+00:00 — evolutionary skill ecosystem_
 
 | Skill | Fitness | Usage | Age (days) | Mutationen W/L |
 |---|---|---|---|---|
-| autonomous-learning-architecture | 2484.0 | 984 | 0 | 829/174 |
-| darwin-cron-guard | 1984.0 | 284 | 0 | 856/25 |
-| darwin-harvested-training-internet-learn-log-jsonl | 1964.0 | 276 | 0 | 848/21 |
+| autonomous-learning-architecture | 2520.0 | 984 | 0 | 847/174 |
+| darwin-cron-guard | 2021.0 | 284 | 0 | 874/25 |
+| darwin-harvested-training-internet-learn-log-jsonl | 2001.0 | 276 | 0 | 866/21 |
 | asi-capability-summary | 1759.97 | 1748 | 31 | 0/0 |
 | a2a-brain-meshlearn-verify | 1720.57 | 1708 | 13 | 0/0 |
 | auto-env-checker | 881.97 | 928 | 31 | 15/88 |
 | cdp-social-posting | 732.6 | 717 | 12 | 0/0 |
-| learning-loop | 673.87 | 663 | 64 | 0/0 |
-| train-from-usage | 482.87 | 474 | 34 | 0/4 |
-| plugin-api | 354.87 | 344 | 64 | 0/0 |
+| learning-loop | 673.83 | 663 | 65 | 0/0 |
+| train-from-usage | 482.83 | 474 | 35 | 0/4 |
+| plugin-api | 354.83 | 344 | 65 | 0/0 |
 
 ## Bottom 5 (selection candidates)
 
@@ -47,28 +47,28 @@ _2026-10-25T18:25:17.413428+00:00 — evolutionary skill ecosystem_
 - ⏳ `auto-env-checker+cdp-social-posting` (0) vs `None` (0)
 - ⏳ `auto-env-checker__mutbroaden_trigger` (881.97) vs `auto-env-checker` (881.97)
 - ⏳ `auto-env-checker__muttighten_trigger` (881.97) vs `auto-env-checker` (881.97)
-- ⏳ `autonomous-learning-architecture__mutbroaden_trigger` (2484.0) vs `autonomous-learning-architecture` (2484.0)
-- ⏳ `autonomous-learning-architecture__muttighten_trigger` (2484.0) vs `autonomous-learning-architecture` (2484.0)
+- ⏳ `autonomous-learning-architecture__mutbroaden_trigger` (2520.0) vs `autonomous-learning-architecture` (2520.0)
+- ⏳ `autonomous-learning-architecture__muttighten_trigger` (2520.0) vs `autonomous-learning-architecture` (2520.0)
 - ⏳ `cdp-social-posting__mutbroaden_trigger` (732.6) vs `cdp-social-posting` (732.6)
 - ⏳ `cdp-social-posting__muttighten_trigger` (732.6) vs `cdp-social-posting` (732.6)
-- ⏳ `darwin-cron-guard__mutbroaden_trigger` (1984.0) vs `darwin-cron-guard` (1984.0)
-- ⏳ `darwin-cron-guard__muttighten_trigger` (1984.0) vs `darwin-cron-guard` (1984.0)
-- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__mutbroaden_trigger` (1964.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (1964.0)
-- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__muttighten_trigger` (1964.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (1964.0)
+- ⏳ `darwin-cron-guard__mutbroaden_trigger` (2021.0) vs `darwin-cron-guard` (2021.0)
+- ⏳ `darwin-cron-guard__muttighten_trigger` (2021.0) vs `darwin-cron-guard` (2021.0)
+- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__mutbroaden_trigger` (2001.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (2001.0)
+- ⏳ `darwin-harvested-training-internet-learn-log-jsonl__muttighten_trigger` (2001.0) vs `darwin-harvested-training-internet-learn-log-jsonl` (2001.0)
 - ⏳ `discord-server-management__mutadd_verification_step` (40.73) vs `discord-server-management` (40.73)
 - ⏳ `discord-server-management__mutbroaden_trigger` (40.73) vs `discord-server-management` (40.73)
 - ⏳ `discord-server-management__muttighten_trigger` (40.73) vs `discord-server-management` (40.73)
-- ⏳ `github-readme-summary__mutbroaden_trigger` (28.53) vs `github-readme-summary` (28.53)
-- ⏳ `github-readme-summary__muttighten_trigger` (28.53) vs `github-readme-summary` (28.53)
-- ⏳ `openamer-plugin-development__muttighten_trigger` (25.57) vs `openamer-plugin-development` (25.57)
-- ⏳ `plugin-api__mutbroaden_trigger` (354.87) vs `plugin-api` (354.87)
-- ⏳ `plugin-api__muttighten_trigger` (354.87) vs `plugin-api` (354.87)
-- ⏳ `train-from-usage__mutadd_pitfall` (482.87) vs `train-from-usage` (482.87)
-- ⏳ `train-from-usage__mutadd_verification_step` (482.87) vs `train-from-usage` (482.87)
-- ⏳ `train-from-usage__mutbroaden_trigger` (482.87) vs `train-from-usage` (482.87)
-- ⏳ `train-from-usage__muttighten_trigger` (482.87) vs `train-from-usage` (482.87)
-- ⏳ `undetectable-browsing__muttighten_trigger` (28.93) vs `undetectable-browsing` (28.93)
-- ⏳ `vscode-extension-scaffold__mutbroaden_trigger` (25.87) vs `vscode-extension-scaffold` (25.87)
+- ⏳ `github-readme-summary__mutbroaden_trigger` (28.5) vs `github-readme-summary` (28.5)
+- ⏳ `github-readme-summary__muttighten_trigger` (28.5) vs `github-readme-summary` (28.5)
+- ⏳ `openamer-plugin-development__muttighten_trigger` (25.53) vs `openamer-plugin-development` (25.53)
+- ⏳ `plugin-api__mutbroaden_trigger` (354.83) vs `plugin-api` (354.83)
+- ⏳ `plugin-api__muttighten_trigger` (354.83) vs `plugin-api` (354.83)
+- ⏳ `train-from-usage__mutadd_pitfall` (482.83) vs `train-from-usage` (482.83)
+- ⏳ `train-from-usage__mutadd_verification_step` (482.83) vs `train-from-usage` (482.83)
+- ⏳ `train-from-usage__mutbroaden_trigger` (482.83) vs `train-from-usage` (482.83)
+- ⏳ `train-from-usage__muttighten_trigger` (482.83) vs `train-from-usage` (482.83)
+- ⏳ `undetectable-browsing__muttighten_trigger` (28.9) vs `undetectable-browsing` (28.9)
+- ⏳ `vscode-extension-scaffold__mutbroaden_trigger` (25.83) vs `vscode-extension-scaffold` (25.83)
 
 ## Evolution Tree
 

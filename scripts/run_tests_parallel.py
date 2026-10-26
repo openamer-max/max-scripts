@@ -649,10 +649,17 @@ def _print_progress(
         time_str = f"{subproc_wall:.1f}s"
     else:
         time_str = f"{dur:.1f}s"
+    # Worker identity. ThreadPoolExecutor names its threads
+    # "ThreadPoolExecutor-<pool>_<n>", so the trailing number is the worker slot.
+    # Without it a load-dependent verdict cannot be bisected: "green alone, red in
+    # the suite" is only diagnosable if the log shows which batch (and in which
+    # order) a worker ran (measured 2026-10-25).
+    _thread_name = threading.current_thread().name
+    _worker = _thread_name.rsplit("_", 1)[-1] if "_" in _thread_name else "-"
     msg = (
         f"[{pct:5.1f}% | {tests_done:>5}/~{approx_total_tests}"
         f" | ✓{tests_passed:>{fw}} | ✗{tests_failed:>{fw}}] "
-        f"{status} {_format_file(file, repo_root)} ({test_str}{time_str})"
+        f"w{_worker} {status} {_format_file(file, repo_root)} ({test_str}{time_str})"
     )
     # Truncate to terminal width if available (no clobbering ANSI lines).
     try:

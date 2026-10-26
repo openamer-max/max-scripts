@@ -32,6 +32,19 @@ from openamer_cli.config import (
 )
 
 
+def _bump_mtime(path: Path, seconds: float = 2.0) -> None:
+    """Move a file's mtime forward so an mtime-keyed cache sees the edit.
+
+    These tests used ``time.sleep(0.05)`` before rewriting a config file to bust
+    the loader's mtime cache. NTFS timestamps are coarse enough that two writes
+    can land in one tick, and under load the sleep can also be too short -- the
+    cache then keeps serving the old file and the test flakes (measured
+    2026-10-25). Bumping the mtime is deterministic and needs no sleep.
+    """
+    st = path.stat()
+    os.utime(path, (st.st_atime, st.st_mtime + seconds))
+
+
 def _posix_shell_roundtrip_available() -> bool:
     """Whether ``env sh -c`` actually runs here.
 
@@ -227,8 +240,8 @@ class TestLoadConfigParseFailure:
             capsys.readouterr()  # discard first warning
 
             # Edit the file (still broken, but different content) — mtime changes
-            time.sleep(0.05)
             (tmp_path / "config.yaml").write_text("\tstill broken differently:\n")
+            _bump_mtime(tmp_path / "config.yaml")
             load_config()
             after_edit = capsys.readouterr().err
             assert "openamer config:" in after_edit, "edited file should re-warn"
@@ -325,8 +338,8 @@ class TestLoadConfigParseFailure:
             capsys.readouterr()
 
             # Corrupt the file (mtime must change to bust the cache)
-            time.sleep(0.05)
             cfg.write_text("approvals:\n  deny: [unclosed\n  :::bad {{{\n")
+            _bump_mtime(cfg)
 
             after = load_config()
             # Last-known-good retained — NOT defaults
@@ -347,12 +360,12 @@ class TestLoadConfigParseFailure:
             cfg.write_text("model:\n  default: test/first\n")
             assert load_config()["model"]["default"] == "test/first"
 
-            time.sleep(0.05)
             cfg.write_text("\tbroken:\n")
+            _bump_mtime(cfg)
             assert load_config()["model"]["default"] == "test/first"
 
-            time.sleep(0.05)
             cfg.write_text("model:\n  default: test/second\n")
+            _bump_mtime(cfg, seconds=4.0)
             assert load_config()["model"]["default"] == "test/second"
 
     def test_fresh_process_still_falls_back_to_defaults(self, tmp_path):

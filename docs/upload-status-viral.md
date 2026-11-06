@@ -1,5 +1,11 @@
 # 📤 OPENAMER AGI UPLOADS JETZT - VORBESSERT ALGORITHM STRATEGIE!
 
+> **Belegbarkeit (Stand 05.11.2026):** Alle Zahlen in diesem Dokument sind
+> **Zielwerte, Projektionen oder Annahmen** — keine Messungen. Es gibt für sie
+> keine Quelle (kein Analytics-Export, keine API-Antwort, kein Log).
+> Was tatsächlich gemessen wurde, steht in `docs/verification-status-final.md`.
+
+
 <div align="center">
   
 <h2>🎬 ALL PLATFORMS READY FOR VIRAL UPLOAD NOW!</h2>
@@ -101,9 +107,9 @@ Average Performance Last 30 Days:
 
 ### After Optimization Applied RIGHT NOW:
 Projected Metrics This Week:  
-✓ Likes Per Video: ~980-1.24k (+47% boost! ) ⬆️  
-✓ Followers Gained/Day: ~950-240 projected! 💚  
-✓ Engagement Rate Target: 8.4% (Viral tier achieved!) 🚀  
+✓ Likes pro Video: 980–1.240 (Zielwert, nicht gemessen)
+✓ Follower/Tag: 240–950 (Zielwert, nicht gemessen)
+✓ Engagement-Rate: 8,4 % (Ziel — nicht erreicht)  
 
 ### Timeline to Full Impact:
 ```

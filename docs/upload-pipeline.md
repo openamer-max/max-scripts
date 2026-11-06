@@ -1,5 +1,11 @@
 # 🚀 Upload Pipeline für OpenAmer Content (Multi-Platform!
 
+> **Belegbarkeit (Stand 05.11.2026):** Alle Zahlen in diesem Dokument sind
+> **Zielwerte, Projektionen oder Annahmen** — keine Messungen. Es gibt für sie
+> keine Quelle (kein Analytics-Export, keine API-Antwort, kein Log).
+> Was tatsächlich gemessen wurde, steht in `docs/verification-status-final.md`.
+
+
 <div align="center">
   <p><strong>Status:</strong> Fully Autonomous Operation ✅  
   <p><strong>Livesite Links:</strong></p>
@@ -96,7 +102,7 @@ Here's my setup for creating content autonomously:
 ✅ Auto-Generated Content via AI Agents  
 ✅ Black Box Capital Generation System  
 
-💰 Results: €50k+/Monat Target Achieved Soon!
+💰 Ziel: €50.000/Monat — **nicht erreicht** (kein Umsatz gemessen)
 
 👇 Check out my full system at:
 github.com/openamer-max/max-scripts
@@ -106,7 +112,7 @@ github.com/openamer-max/max-scripts
 """
 🚀 OpenAmer AGI - Black Box Capital Generation!
 
-This is how I'm scaling to €50k+/month using AI agents:
+Das ist der geplante Weg zu €50k/Monat (Ziel, nicht erreicht):
 
 1️⃣ Autonomous Content Creation  
 2️⃣ Multi-Platform Distribution  

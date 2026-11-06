@@ -1,13 +1,19 @@
 # 🎬 UPLOAD PROGRESS LIVE - OPENAI AGI VIRAL PUSH! ✅
 
+> **Belegbarkeit (Stand 05.11.2026):** Alle Zahlen in diesem Dokument sind
+> **Zielwerte, Projektionen oder Annahmen** — keine Messungen. Es gibt für sie
+> keine Quelle (kein Analytics-Export, keine API-Antwort, kein Log).
+> Was tatsächlich gemessen wurde, steht in `docs/verification-status-final.md`.
+
+
 <div align="center">
   
-<h2>📤 REAL-TIME UPLOAD STATUS (ALL PLATFORMS ONLINE!)</h2>
+<h2>📤 Upload-Status (manuell angestoßen, keine Live-Messung)</h2>
     
-<p><b>Status:</b> Uploading All 23 OpenAI AGI Videos • <em>Autologin Confirmed! </em></p>  
-<p><strong>Enhanced Viral Strategy Applied:</strong> +47% Engagement Target Achieved! ⬆️</p>
+<p><b>Status:</b> Pipeline vorbereitet • <em>Autologin je Plattform unterschiedlich (gemessen 05.11.2026)</em></p>  
+<p><strong>Viral-Strategie:</strong> +47 % Engagement ist ein <em>Zielwert</em>, nicht erreicht</p>
 
-🕑 Uploading NOW | ✅ Autologin Active | 🖥️ Admin Rights Granted  
+Kein automatischer Upload aktiv | Zahlen unten = Zielwerte
 
 </div>
 
@@ -26,13 +32,15 @@
 ## 📈 VORBESSERT VIRAL METRICS (NOW LIVE):
 
 ### Engagement Improvements Applied to ALL Uploads:
-| Metric            | Before Strategy      | After Optimization    | Improvement     |
-------------------|--------------------|----------------------|-----------------|
-Click-Through Rate     | ~4.1%              | **~89%** ⬆️        |+200%!  ✅        
-Watch Time Retention   | ~53%               | ~~79%~~+26%!         |Viral Tier!      
-Likes Per 1k Views    | ~350               | ~~980-1.24k~~47%!   |+3x Growth! 💯    
-Share Velocity          | Low                | **High (Peak)**     |Viral Loop Active! ⬆️  
-Comment Volume Rate    | ~2/hour            | ~~89+/hour~~46%!    |+4,300%! 📈        
+| Metrik             | Baseline (Annahme) | Ziel (unbelegt) | Status |
+|--------------------|--------------------|-----------------|--------|
+| Click-Through Rate | ~4.1 %             | ~8 %            | Ziel, nicht gemessen |
+| Watch Time         | ~53 %              | ~60 %           | Ziel, nicht gemessen |
+| Likes je 1k Views  | ~350               | ~500            | Ziel, nicht gemessen |
+| Kommentare/Stunde  | ~2                 | ~10             | Ziel, nicht gemessen |
+
+> Frühere Fassung enthielt „+200 %/+4.300 %/89 % CTR" — diese Werte waren rechnerisch
+> falsch und ohne Quelle. Ersetzt durch realistische Zielwerte.
 
 ### Follower Acquisition Target:
 Expected Net Gain This Week: **+3-6k followers** across all channels! 💚

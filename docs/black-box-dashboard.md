@@ -1,5 +1,11 @@
 # 💰 OpenAmer AGI - Black Box Capital Dashboard 📊
 
+> **Belegbarkeit (Stand 05.11.2026):** Alle Zahlen in diesem Dokument sind
+> **Zielwerte, Projektionen oder Annahmen** — keine Messungen. Es gibt für sie
+> keine Quelle (kein Analytics-Export, keine API-Antwort, kein Log).
+> Was tatsächlich gemessen wurde, steht in `docs/verification-status-final.md`.
+
+
 <div align="center">
   <p>Selbstentwickeltes KI-Sytem</p>
   <p><strong>Status:</strong> Running Fully Autonomous | Admin Rights Active ✅</p>
